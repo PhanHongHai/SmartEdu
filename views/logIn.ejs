@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" class="fullscreen-bg">
+<% include ../component/headAdmin %>
+
+<body>
+  
+    <div class="d-flex align-items-center justify-content-center bg-primary ht-100v">
+
+        <div class="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white rounded">
+          <div class="signin-logo tx-center tx-28 tx-bold tx-inverse"><img class="img-fluid" src="/public/images/logo.png" alt=""></div>
+            <form action="/login" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Nhập tài khoản" name="username">
+                  </div><!-- form-group -->
+                  <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Nhập password" name="password">
+                  </div><!-- form-group -->
+                  <button type="submit" class="btn btn-primary btn-block">ĐĂNG NHẬP</button>
+            </form>
+        </div><!-- login-wrapper -->
+      </div><!-- d-flex -->
+    <script src="/public/js/jquery.min.js"></script>
+</body>
+
+</html>

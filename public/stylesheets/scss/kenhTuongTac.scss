@@ -1,0 +1,39 @@
+$color-bg: #fff;
+// responsive
+@media (max-width: 575px) {
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  .allPage {
+    .tuongTacBox {
+      .contentTuongTac {
+        img {
+          width: 80%;
+          margin: auto;
+          display: block;
+        }
+        p {
+          padding: 5% !important;
+        }
+        span {
+          padding: 5% !important;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+}
+.allPage {
+  background-color: $color-bg;
+  .tuongTacBox {
+    width: 100%;
+    .contentTuongTac {
+      width: 100%;
+      img {
+        padding: 10%;
+      }
+    }
+  }
+}

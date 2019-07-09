@@ -1,0 +1,245 @@
+<script src="/public/js/jquery.min.js"></script>
+<script src="/public/js/jquery.validate.min.js"></script>
+<script src="/public/js/wow.js"></script>
+<script src="/public/admin/popper.min.js"></script>
+<script src="/public/admin/jquery.slimscroll.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="/public/admin/sidebarmenu.js"></script>
+<!-- bootstap bundle js -->
+
+<!-- validate -->
+<script src="/public/js/jquery.validate.min.js"></script>
+<script src="/public/js/function/validate.js"></script>
+<!--*********************-->
+<script src="/public/js/Toast.js"></script>
+<script src="/public/admin/waves.js"></script>
+<script src="/public/js/jquery-ui.js"></script>
+<!-- main js -->
+<script src="/public/admin/custom.js"></script>
+<script src="/public/js/function/adminJS.js"></script>
+<script src="/public/admin/pagination.min.js"></script>
+<script src="/public/js/axios.js"></script>
+<script src="/public/js/api/apiAdmin.js"></script>
+<script src="/public/admin/DataTables/datatables.min.js"></script>
+<script src="/public/admin/flo/js/froala_editor.pkgd.min.js"></script>
+<script src="/public/admin/flo/plugins/image.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $('#imgNew').change(function (e) {
+            $('#currentImg').attr('src', "/public/uploads/" + e.target.files[0].name);
+        });
+        /*
+        var editor = new FroalaEditor('#myEditor', {
+            imageUploadURL: 'admin/tin-tuc/bai-viet/sendImage',
+            imageUploadMethod: 'POST',
+            // Set max image size to 5MB.
+            imageMaxSize: 5 * 1024 * 1024,
+            // Allow to upload PNG and JPG.
+            imageAllowedTypes: ['jpeg', 'jpg', 'png'],
+            imageUploadParams: {
+                id: 'myEditor'
+            }
+
+        }) */
+        var editor = new FroalaEditor('#myEditor', {
+            language: 'vi',
+            heightMin: 100,
+            heightMax: 500,
+            imageUploadURL: 'upload',
+            imageUploadMethod: 'POST',
+            imageUploadParams: {
+                id: 'my_editor'
+            }
+        });
+        var updateNews = new FroalaEditor('#updateNews', {
+            language: 'vi',
+            heightMin: 100,
+            heightMax: 500,
+            imageUploadURL: '/editer/uploadImg',
+            imageUploadMethod: 'POST',
+            imageUploadParams: {
+                id: 'my_editor'
+            }
+        });
+        $(function () {
+            var date = new Date();
+            $("#datepicker").datepicker({
+                dateFormat: 'd/m/yy',
+                inline: true,
+                minDate:date
+            });
+        });
+        /// ********************************************
+        function simpleTemplating(data) {
+
+            var html = "";
+            $.each(data, function (index, ele) {
+                if (!ele.check) {
+                    html += "<a href='/admin/gop-y/" + ele._id + "' >";
+                    html += " <div class='email-list-item'>";
+                    html += "   <div class='email-list-detail'>";
+                    html += " <span class='date float-right' style='font-size: 13px; font-weight: 800; padding-top: 2%;'>" + ele.ngay + "</span>";
+                    html += "  <span class='from'>" + ele.name + "</span>";
+                    html += " <p class='msg'>" + ele.title + "</p>";
+                    html += " </div></div></a>";
+                }
+                else {
+                    html += " <a href='/admin/gop-y/" + ele._id + "' onclick=updateCheck('" + ele._id + "') >";
+                    html += " <div class='email-list-item email-list-item--unread'>";
+                    html += " <div class='email-list-detail'>";
+                    html += " <span class='date float-right' style='font-size: 13px; font-weight: 800; padding-top: 2%;'>" + ele.ngay + "</span>";
+                    html += "  <span class='from'>" + ele.name + "<img src='/public/images/new.svg' alt='tin mới'  width='50px'></span>";
+                    html += " <p class='msg'>" + ele.title + "</p>";
+                    html += "</div></div></a>";
+                }
+
+            });
+            return html;
+        }
+        function templateViewNew(data) {
+            let body = "";
+            $each(data, function (index, ele) {
+
+            });
+        }
+        $('.btnNews').click(function () {
+            $('.listNews').removeClass('active').addClass('hide');
+            $('.addNews').removeClass('hide').addClass('active');
+        });
+        $('.btnExit').click(function () {
+            $('.addNews').removeClass('active').addClass('hide');
+            $('.listNews').removeClass('hide').addClass('active');
+        });
+
+        /****************************************
+         *       Basic Table                   *
+         ****************************************/
+        $('#zero_config').DataTable({
+            "language": {
+                "lengthMenu": "Hiện _MENU_ trên tổng trang",
+                "zeroRecords": "Không tìm thấy",
+                "info": "Trang_PAGE_ trong _PAGES_",
+                "infoEmpty": "Không có dữ liệu",
+                "infoFiltered": "(Lọc từ _MAX_ tổng dữ liệu)",
+                "search": "Tìm kiếm :",
+                "paginate": {
+                    "first": "Đầu",
+                    "last": "Cuối",
+                    "next": ">",
+                    "previous": "<"
+                },
+            }
+
+        });
+        $('.email-list').pagination({
+            totalNumber: function (done) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/admin/gop-y/getList',
+                    success: function (res) {
+                        done(res.total);
+                    }
+                });
+            },
+            dataSource: function (done) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/admin/gop-y/getList',
+                    success: function (res) {
+                        done(res.data);
+                        console.log(res.data);
+                    }
+                });
+            },
+            pageSize: 7,
+            showNavigator: false,
+            autoHidePrevious: true,
+            autoHideNext: true,
+            className: 'phanTrang',
+            classPrefix: 'email-list',
+            ajax: {
+                beforeSend: function () {
+                    $('.paginationGY').html("<img src='public/images/loading.svg'/>");
+                }
+            },
+            callback: function (data, pagination) {
+                // template method of yourself
+                var html = simpleTemplating(data);
+                $('.paginationGY').html(html);
+            }
+        });
+        $('.news-listasbc').pagination({
+            totalNumber: function (done) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/admin/tin-tuc/bai-viet/getList',
+                    success: function (res) {
+                        done(res.total);
+                    }
+                });
+            },
+            dataSource: function (done) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/admin/tin-tuc/bai-viet/getList',
+                    success: function (res) {
+                        done(res.data);
+                    }
+                });
+            },
+            pageSize: 10,
+            showNavigator: false,
+            autoHidePrevious: true,
+            autoHideNext: true,
+            className: 'phanTrang',
+            classPrefix: 'news-list',
+            ajax: {
+                beforeSend: function () {
+                    $('.paginationGY').html("<img src='public/images/loading.svg'/>");
+                }
+            },
+            callback: function (data, pagination) {
+                // template method of yourself
+                var html = templateViewNew(data);
+                $('.paginationNews').html(html);
+            }
+        });
+        <% if (mess == 1) { %>
+            $.toast({
+                heading: 'Chúc mừng!',
+                text: "<span style='font-size:18px;'> Thao tác thành công </span>",
+                position: 'mid-center',
+                loaderBg: '#5ba035',
+                icon: 'success',
+                hideAfter: 4000,
+                stack: 1
+            });
+            axios.get('/destroyMess')
+                .then(function (res) {
+
+                })
+                .catch(function (err) {
+                    if (err) throw err;
+                })
+                <% }
+        else if (mess == 0) { %>
+            $.toast({
+                heading: 'Thông báo !',
+                text: "<span style=font-size:18px;'> Thao tác thất bại </span>",
+                position: 'mid-center',
+                loaderBg: '#5ba035',
+                icon: 'error',
+                hideAfter: 4000,
+                stack: 1
+            });
+            axios.get('/destroySS')
+                .then(function (res) {
+
+                })
+                .catch(function (err) {
+                    if (err) throw err;
+                })
+                <% } %>
+    })
+</script>

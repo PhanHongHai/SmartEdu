@@ -1,0 +1,73 @@
+const modelBV = require('../Model/BaiViet');
+const modelLV = require('../Model/LinhVuc');
+const dateFormat = require('dateformat');
+const mongoose = require('mongoose');
+module.exports = {
+    loadPage: async (req, res) => {
+        if (req.isAuthenticated()) {
+            let listCate = await modelLV.model.find();
+            modelBV.model.aggregate(
+                [
+                    {
+                        $lookup: {
+                            from: 'linhVuc',
+                            localField: 'idLV',
+                            foreignField: '_id',
+                            as: 'lv'
+                        }
+                    }
+                ], (err, list) => {
+                    if (err) throw err;
+                    res.render('admin', { user: req.user, list: list, cate: listCate, path: 'BaiViet', count: req.session.count, mess: req.session.mess });
+                });
+        }
+        else
+            res.redirect('/logIn');
+    },
+    addBV: (req, res) => {
+        /*
+        data.ngayBVaiGiang=new Date(data.ngayBVaiGiang);
+        dateFormat(data.ngayBVaiGiang,'dd/mm/yyyy');
+        */
+        let date = new Date();
+        let data=null;
+        let postTime = dateFormat(date, "d/mm/yyyy, h:MM tt");
+        if (req.file)
+             data = { ...req.body, banner: req.file.filename, ngayTao: postTime };
+        else
+             data = { ...req.body, ngayTao: postTime };
+        modelBV.method.addBV(data);
+        res.redirect('/admin/bai-viet');
+    },
+    loadUpdate: async (req, res) => {
+        if (req.isAuthenticated()) {
+            let listCate = await modelLV.model.find();
+            let id = mongoose.Types.ObjectId(req.params.idBV);
+            const data = await modelBV.model.aggregate(
+                [
+                    { $match: { _id: id } },
+                    {
+                        $lookup: {
+                            from: 'linhVuc',
+                            localField: 'idLV',
+                            foreignField: '_id',
+                            as: 'lv'
+                        }
+                    }
+                ]);
+            res.render('admin', { user: req.user, list: data, cate: listCate, path: 'updateBV', count: req.session.count, mess: req.session.mess });
+
+        }
+    },
+    updateBV: (req, res) => {
+        let id = mongoose.Types.ObjectId(req.params.idBV);
+        let data = req.body;
+        modelBV.method.updateBV(id, data);
+        res.redirect('/admin/bai-viet');
+    },
+    deleteBV: (req, res) => {
+        let id = mongoose.Types.ObjectId(req.params.idBV);
+        modelBV.method.deleteBV(id);
+        res.redirect('/admin/bai-viet');
+    }
+}

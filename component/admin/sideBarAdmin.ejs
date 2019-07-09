@@ -1,0 +1,36 @@
+
+<!-- ============================================================== -->
+  <!-- Left Sidebar - style you can find in sidebar.scss  -->
+  <!-- ============================================================== -->
+  <aside class="left-sidebar " data-sidebarbg="skin5">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav" class="p-t-30">
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin" aria-expanded="false"><i class="fas fa-columns"></i><span class="hide-menu">Dashboard</span></a></li>
+                <% if(user.role == 1){ %>
+                    <li class="sidebar-item">
+                        <a href="/admin/tai-khoan" class="sidebar-link"><i class="fas fa-address-book"></i><span class="hide-menu">Tài
+                            Khoản</span></a>
+                    </li>
+                    <%} %>
+                    <li class="sidebar-item"> <a href="/admin/bai-viet" class="sidebar-link" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-tasks"></i>
+                        <span class="hide-menu">QL Tin Tức</span></a>
+                    </li>
+                    <li class="sidebar-item"><a href="/admin/linh-vuc" class="sidebar-link"><i class="fas fa-layer-group"></i> <span class="hide-menu">Lĩnh Vực</span></a></li>
+                    <li class="sidebar-item"> <a href="/admin/khoa-hoc" class="sidebar-link"><i class="fab fa-magento"></i> <span class="hide-menu">Khóa học</span></a></li>
+                    <li class="sidebar-item">
+                        <a href="/admin/don-dang-ky" class="sidebar-link"><span ><i class="fas fa-envelope-open-text"></i><span class="hide-menu">Đơn đăng ký</span></span><span id="countGY" style="width: 20px;border-radius: 20px;height: 20px;text-align: center;background-color: red; margin-left: 5%; line-height: 21px;"><%= count %></span></a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/admin/binh-luan" class="sidebar-link"><i class="fas fa-comments"></i> <span class="hide-menu">Bình Luận</a></span>
+                    </li>
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>
+<!-- ============================================================== -->
+<!-- End Left Sidebar - style you can find in sidebar.scss  -->

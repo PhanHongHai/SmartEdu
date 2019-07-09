@@ -1,0 +1,159 @@
+// responsive
+@media (max-width: 575px) {
+  .page-aside {
+    width: 20% !important;
+  }
+  .content {
+    width: 80% !important;
+  }
+  .main-content {
+    width: 100% !important;
+  }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  #main-wrapper {
+    .left-sidebar {
+      //display: none;
+      position: absolute !important;
+      top: 0;
+      left: -39%;
+    }
+    .modal {
+      margin-left: 2% !important ;
+      .detailView {
+        max-width: 650px !important;
+      }
+    }
+    .page-wrapper {
+      margin-left: 0 !important;
+    }
+    .page-aside {
+      width: 20% !important;
+    }
+    .content {
+      width: 80% !important;
+    }
+    .main-content {
+      width: 100% !important;
+    }
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .topbar {
+    .top-navbar {
+      .navbar-header {
+        .navbar-brand {
+          padding: 0 10px 0 0px !important;
+          .logo-icon {
+            padding-left: 0 !important;
+          }
+        }
+      }
+    }
+  }
+  .modal {
+    margin-left: 2% !important ;
+    .detailView {
+      max-width: 650px !important;
+    }
+  }
+  .page-aside {
+    width: 20% !important;
+  }
+  .content {
+    width: 80% !important;
+  }
+  .main-content {
+    width: 100% !important;
+  }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+}
+
+@-webkit-keyframes show {
+  0% {
+    top: 3%;
+    left: -30%;
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    top: 3%;
+    left: 0;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+@-webkit-keyframes hide {
+  0% {
+    top: 3%;
+    left: 0;
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    top: 60%;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+.tinTuc {
+  position: relative;
+  .active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    animation: show 0.5s;
+  }
+  .hide {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    animation: hide 0.5s;
+  }
+  .listNews {
+    position: absolute;
+    top: 3%;
+    left: 0;
+    .btnNews {
+      cursor: pointer;
+    }
+  }
+  .addNews {
+    position: absolute;
+    top: 3%;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+ul#listComment {
+  li {
+    list-style-type: none;
+    margin-bottom: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    .item-comment {
+      width: 80%;
+      background-color: #e6e6e6;
+      border-radius: 10px;
+      padding: 1% 0% 1% 2%;
+      .item-header {
+        span {
+          display: inline-block;
+        }
+      }
+    }
+    button {
+      width: 15%;
+      margin-left: 1%;
+      i {
+        background-color: #ff2f2fa1;
+      }
+    }
+  }
+}
+#main-wrapper {
+  .left-sidebar {
+    position: fixed;
+  }
+}

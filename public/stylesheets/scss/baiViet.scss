@@ -1,0 +1,250 @@
+$color-bg: #fff;
+@font-face {
+  font-family: "oswald";
+  src: url("/public/font/Oswald-Medium.ttf") format("truetype"),
+    url("/public/font/Oswald-Regular.ttf") format("truetype"), url("/public/font/Oswald-Bold.ttf") format("truetype"),
+    url("/public/font/Oswald-Light.ttf") format("truetype");
+}
+// responsive
+@media (max-width: 575px) {
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  body {
+    .allPage {
+      .trending {
+        span {
+          width: 20% !important;
+        }
+        .bodyTrending {
+          width: 80% !important;
+          ul {
+            padding-left: 1%;
+          }
+        }
+      }
+      #bodyPage {
+        .contentBaiViet {
+          margin-bottom: -5% !important;
+          .listComment {
+            article {
+              .outsite-comment {
+                .avartar-comment {
+                  img {
+                    width: 35px !important;
+                    height: 35px !important;
+                  }
+                }
+                .item-comment {
+                  strong {
+                    font-size: 15px;
+                  }
+                  .content-comment {
+                    font-size: 13px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  body {
+    .allPage {
+      .trending {
+        span {
+          width: 15% !important;
+        }
+        .bodyTrending {
+          width: 85% !important;
+          ul {
+            padding-left: 1%;
+          }
+        }
+      }
+      #bodyPage{
+        .contentBaiViet{
+          padding-bottom: 0% !important;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+  body {
+    .allPage {
+      .trending {
+        span {
+          width: 11% !important;
+        }
+        .bodyTrending {
+          width:89% !important;
+          ul {
+            padding-left: 1%;
+          }
+        }
+      }
+    }
+  }
+}
+body {
+  .allPage {
+    box-shadow: 0 9px 0 0 rgba(255, 255, 255, 0), 0 -9px 0 0 rgba(255, 255, 255, 0), 10px 0 30px 0 rgba(0, 0, 0, 0.15),
+      -10px 0 30px 0 rgba(0, 0, 0, 0.15);
+    .trending {
+      width: 100%;
+      height: 45px;
+      background-color: #e5e5e5;
+      span {
+        color: #333232;
+        font-size: 15px;
+        font-weight: 400;
+        font-family: "oswald", sans-serif;
+        float: left;
+        padding: 1%;
+        width: 9%;
+      }
+      .bodyTrending {
+        float: left;
+        width: 91%;
+        height: 46px;
+        ul {
+          padding-top: 1%;
+          li {
+            list-style: none;
+            a {
+              color: #636262db;
+              font-family: "oswald", sans-serif;
+              font-size: 13px;
+              font-weight: 300;
+              letter-spacing: 1px;
+            }
+          }
+        }
+      }
+    }
+    .breadCrumb {
+      background-color: #d2d2d2;
+      color: #424242;
+      height: 35px;
+    }
+    #bodyPage {
+      background-color: #f5f5f5;
+      .headPage {
+        border-bottom: 4px solid #515670;
+      }
+      .titleBaiViet {
+        h2 {
+          padding: 20px 15px 15px;
+          font-size: 30px;
+          font-weight: 500;
+          color: #333;
+          margin: 0;
+          letter-spacing: 1px;
+          text-align: center;
+          font-family: "oswald", sans-serif;
+        }
+      }
+      .timeViet {
+        margin: auto;
+        span {
+          display: block;
+          font-size: 14px;
+          font-weight: 500;
+          text-align: center;
+          font-family: "oswald", sans-serif;
+          letter-spacing: 1px;
+          color: rgb(124, 122, 122);
+        }
+      }
+      .contentBaiViet {
+        background-color: $color-bg;
+        padding-bottom: 5%;
+        p {
+          padding: 10px 0 10px 0;
+        }
+        span {
+          font-size: 13px;
+          display: block;
+          text-align: center;
+          padding: 10px 0 10px 0;
+        }
+        .comment {
+          background-color: #e2e2e2;
+          h3 {
+            color: black;
+            padding-top: 2%;
+            font-weight: 600;
+          }
+          form {
+            textarea {
+              background-color: white;
+
+              &:focus {
+                border: 1px solid #3a3939;
+                outline: 0;
+                box-shadow: none;
+              }
+            }
+            input {
+              height: 50px;
+              background-color: white;
+              &:focus {
+                border: 1px solid #3a3939;
+                outline: 0;
+                box-shadow: none;
+              }
+            }
+            input.btn {
+              background-color: #ff3c36;
+              color: #ffffff;
+              border-color: #ff3c36;
+              &:hover {
+                background: black;
+                transition: 0.4s;
+              }
+            }
+          }
+        }
+        .listComment {
+          h5 {
+            border-bottom: 1px solid gray;
+            padding-bottom: 2%;
+          }
+          article {
+            .outsite-comment {
+              .avartar-comment {
+                float: left;
+                width: 8%;
+                img {
+                  width: 50px;
+                  height: 50px;
+                }
+              }
+              .item-comment {
+                width: 92%;
+                float: left;
+                background: #f7f7f7;
+                padding: 10px;
+                border-radius: 10px;
+                margin-bottom: 1%;
+                span {
+                  display: inline-block;
+                  padding: 0;
+                  float: right;
+                }
+              }
+            }
+          }
+          .paginationjs-pages {
+            width: 0%;
+            margin: auto;
+            float: none;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+@media (min-width: 576px) and (max-width: 767px) {
+  .allPage .tuongTacBox .contentTuongTac img {
+    width: 80%;
+    margin: auto;
+    display: block; }
+  .allPage .tuongTacBox .contentTuongTac p {
+    padding: 5% !important; }
+  .allPage .tuongTacBox .contentTuongTac span {
+    padding: 5% !important; } }
+.allPage {
+  background-color: #fff; }
+  .allPage .tuongTacBox {
+    width: 100%; }
+    .allPage .tuongTacBox .contentTuongTac {
+      width: 100%; }
+      .allPage .tuongTacBox .contentTuongTac img {
+        padding: 10%; }
+
+/*# sourceMappingURL=kenhTuongTac.css.map */

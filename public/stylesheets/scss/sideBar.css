@@ -1,0 +1,79 @@
+@media (min-width: 992px) and (max-width: 1200px) {
+  .contentBaiViet .sideBar-menu .headSideBar {
+    display: inline-block;
+    width: 33% !important; }
+  .contentBaiViet .sideBar-menu .contentSideBar {
+    width: 75%;
+    margin: auto; } }
+.sideBar {
+  padding-top: 10px; }
+  .sideBar .headSideBar {
+    width: 100%;
+    height: 55px;
+    background-color: #191818;
+    border-bottom: 3px solid #689fce; }
+    .sideBar .headSideBar h5 {
+      padding: 3% 0 0 0;
+      color: white; }
+  .sideBar .contentSideBar {
+    background-color: #f2f2f2; }
+    .sideBar .contentSideBar ul {
+      padding: 0; }
+      .sideBar .contentSideBar ul li {
+        list-style: none;
+        border-bottom: 1px solid gainsboro;
+        padding: 5%; }
+        .sideBar .contentSideBar ul li:last-child {
+          border-bottom: 0; }
+        .sideBar .contentSideBar ul li:hover {
+          background-color: darksalmon;
+          transition: 0.4s; }
+          .sideBar .contentSideBar ul li:hover a {
+            color: white; }
+        .sideBar .contentSideBar ul li a {
+          color: gray;
+          text-decoration: none; }
+
+.sideBar-menu .headSideBar {
+  width: 100%;
+  height: 55px;
+  background-color: #191818;
+  border-bottom: 3px solid #689fce; }
+  .sideBar-menu .headSideBar h5 {
+    padding: 3% 0 0 0;
+    color: white;
+    cursor: pointer; }
+.sideBar-menu .contentSideBar {
+  background-color: #f2f2f2; }
+  .sideBar-menu .contentSideBar ul {
+    padding: 0; }
+    .sideBar-menu .contentSideBar ul li {
+      list-style: none;
+      border-bottom: 1px solid gainsboro;
+      padding: 5%; }
+      .sideBar-menu .contentSideBar ul li:last-child {
+        border-bottom: 0; }
+      .sideBar-menu .contentSideBar ul li:hover {
+        background-color: darksalmon;
+        transition: 0.4s; }
+        .sideBar-menu .contentSideBar ul li:hover a {
+          color: white; }
+      .sideBar-menu .contentSideBar ul li a {
+        color: gray;
+        text-decoration: none; }
+
+.sideBar-all {
+  position: relative; }
+  .sideBar-all .sideBar-active {
+    position: fixed;
+    width: 28%;
+    height: 94%;
+    overflow-y: scroll;
+    top: 9%;
+    right: 5.7%; }
+  .sideBar-all .sideBar-active-1 {
+    position: absolute;
+    width: 100%;
+    top: 85%; }
+
+/*# sourceMappingURL=sideBar.css.map */
