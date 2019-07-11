@@ -1,0 +1,139 @@
+<!doctype html>
+<html class="no-js " lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>:: SmartEdu :: Trang cộng tác viên</title>
+    <link rel="Shortcut Icon" href="/public/images/favicon.png"> <!-- Favicon-->
+    <link rel="stylesheet" href="/public/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/lib/jvectormap/jquery-jvectormap-2.0.3.min.css" />
+    <link rel="stylesheet" href="/public/lib/morrisjs/morris.min.css" />
+    <link rel="stylesheet" href="/public/fontawesome/css/all.css">
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/public/stylesheets/main.css">
+    <link rel="stylesheet" href="/public/stylesheets/color_skins.css">
+    <link rel="stylesheet" href="/public/admin/flo/css/froala_editor.pkgd.min.css" />
+    <link rel="stylesheet" href="/public/admin/flo/css/froala_style.min.css" type="text/css" />
+    <link rel="stylesheet" href="/public/js/jquery-ui.css">
+    <link rel="stylesheet" href="/public/lib/sweetalert/sweetalert.css" />
+</head>
+
+<body class="theme-purple">
+
+
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+
+    <!-- Top Bar -->
+    <nav class="top_navbar">
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-12">
+                    <div class="navbar-logo">
+                        <a href="javascript:void(0);" class="bars"></a>
+                        <a class="navbar-brand" href="/partner"><img src="/public/images/logo-white.png" width="150"
+                                alt="infinity"><span class="m-l-10"></span></a>
+                    </div>
+
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown notifications">
+                        <% if(count !== null){ %>
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
+                                role="button"><i class="far fa-bell"></i><span class="label-count"><%= count %></span></a>
+                        <%} %>
+                            
+                        </li>
+                        <li class="dropdown profile">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                                <img class="rounded-circle" src="/public/images/profile.jpg" alt="User">
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="user-info">
+                                        <% if(user.tenDV != null){%>
+                                        <h6 class="user-name m-b-0">
+                                            <%= user.tenDV%>
+                                        </h6>
+                                        <%}%>
+                                    </div>
+                                </li>
+                                <li><a href="/partner/ho-so"><i class="far fa-user"></i> <span>Thông tin tài khoản </span>
+                                </a></li>
+                                <hr>
+                                <li><a href="/logout-partner"><i class="fas fa-power-off"></i><span>Đăng xuất</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <% include ../component/partner/header %>
+                                        <!-- Main Content -->
+                                        <%- include('../component/partner/'+path,{}) %>
+                                        <!-- Jquery Core Js -->
+                                        <script src="/public/js/jquery.min.js"></script>
+                                        <script src="/public/admin/popper.min.js"></script>
+                                        <script src="/public/lib/bootstrap/js/bootstrap.min.js"></script>
+                                        <script src="/public/lib/bundles/libscripts.bundle.js"></script>
+                                        <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+                                        <script src="/public/lib/bundles/vendorscripts.bundle.js"></script>
+                                        <!-- slimscroll, waves Scripts Plugin Js -->
+
+                                        <script src="/public/lib/morrisscripts.bundle.js"></script>
+                                        <!-- Morris Plugin Js -->
+                                        <script src="/public/lib/jvectormap.bundle.js"></script>
+                                        <!-- JVectorMap Plugin Js -->
+                                        <script src="/public/lib/knob.bundle.js"></script> <!-- Jquery Knob-->
+
+                                        <script src="/public/lib/mainscripts.bundle.js"></script>
+                                        <script src="/public/lib/widgets/infobox/infobox-1.js"></script>
+                                        <script src="/public/lib/index.js"></script>
+                                        <script src="/public/js/mainscripts.bundle.js"></script><!-- Custom Js -->
+                                        <script src="/public/admin/flo/js/froala_editor.pkgd.min.js"></script>
+                                        <script src="/public/admin/flo/plugins/image.min.js"></script>
+                                        <script src="/public/js/jquery-ui.js"></script>
+                                        <script src="/public/js/axios.js"></script>
+                                        <script src="/public/js/function/main.js"></script>
+                                        <script src="/public/lib/sweetalert/sweetalert.min.js"></script>
+                                        <!-- SweetAlert Plugin Js -->
+                                        <script src="/public/lib/ui/dialogs.js"></script>
+                                        <script type="text/javascript">
+                                            $(document).ready(function () {
+                                                var editor = new FroalaEditor('#myEditor', {
+                                                    language: 'vi',
+                                                    heightMin: 100,
+                                                    heightMax: 500,
+                                                    imageUploadURL: 'upload',
+                                                    imageUploadMethod: 'POST',
+                                                    imageUploadParams: {
+                                                        id: 'my_editor'
+                                                    }
+                                                });
+                                                var update = new FroalaEditor('#update', {
+                                                    language: 'vi',
+                                                    heightMin: 100,
+                                                    heightMax: 500,
+                                                    imageUploadURL: '/editer/uploadImg',
+                                                    imageUploadMethod: 'POST',
+                                                    imageUploadParams: {
+                                                        id: 'my_editor'
+                                                    }
+                                                });
+                                                $(function () {
+                                                    var date = new Date();
+                                                    $("#datepicker").datepicker({
+                                                        dateFormat: 'd/m/yy',
+                                                        inline: true,
+                                                        minDate: date
+                                                    });
+                                                });
+                                            })
+
+                                        </script>
+</body>
+
+</html>

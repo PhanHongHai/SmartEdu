@@ -1,0 +1,170 @@
+<section class="content">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="body block-header">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <h2>Quản lý khóa học</h2>
+                                <ul class="breadcrumb p-l-0 p-b-0 ">
+                                    <li class="breadcrumb-item"><a href="/partner"><i class="fas fa-home"></i></a>
+                                    </li>
+                                    <li class="breadcrumb-item">Trang chủ</li>
+                                    <li class="breadcrumb-item active">Quản lý khóa học</li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 col-md-4 col-sm-12 text-right">
+                                <button class="btn btn-primary btn-round btn-simple float-right hidden-xs m-l-10"
+                                    data-toggle="modal" data-target="#largeModal">Thêm
+                                    mớii</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content-->
+        <div class="row clearfix">
+            <% if(list != null){ let i=1; %>
+            <% list.forEach(function(ele){ %>
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong> Ngày khai giảng </strong><small><%= ele.ngayKhaiGiang %></small></h2>
+                        <ul class="header-dropdown">
+                            <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle"
+                                    data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i
+                                        class="fas fa-ellipsis-h"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right js-sweetalert">
+                                    <li><a href="javascript:void(0);">Xem</a></li>
+                                    <li><a href="javascript:void(0);">Cập nhật</a></li>
+                                    <% if(ele.trangThai != 1){ %>
+                                    <li><a href="javascript:void(0);" data-type="ajax-loader"
+                                            onclick="openCourse('<%= ele._id%>')">Mở khóa
+                                            học</a></li>
+                                    <% } %>
+                                    <li><a href="javascript:void(0);" class="boxs-close">Delete</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        <h6 class="m-b-15"><%= ele.tenKH %>
+                            <% if(ele.trangThai == 1){ %>
+                            <span class="badge badge-success float-right">
+                                Mở
+                            </span>
+                            <% } else{ %>
+                            <span class="badge badge-warning float-right">
+                                Đóng
+                            </span>
+                            <% }%>
+                        </h6>
+                        <img class="img-fluid" src="/public/uploads/<%= ele.banner%>" alt="">
+                        <%= ele.gioiThieu.slice(0,100) %>
+                        <div class="row">
+                            <div class="col-7">
+                                <h6>Học phí: <%= ele.hocPhi%> VNĐ</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% i++; }) %>
+            <% } %>
+        </div>
+    </div>
+</section>
+<!-- Large Size  -->
+<!-- them khoa hoc -->
+<div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Thêm mới khóa học</strong></h2>
+                    </div>
+                    <div class="body">
+                        <form action="/partner/khoa-hoc" method="post" enctype="multipart/form-data">
+                            <h2 class="card-inside-title">Tên </h2>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="tenKH"
+                                            placeholder="Tên khóa học" />
+                                    </div>
+                                </div>
+                            </div>
+                            <h2 class="card-inside-title">Giới thiệu</h2>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <textarea rows="4" class="form-control no-resize"
+                                                placeholder="Giới thiệu khóa học" name="gioiThieu"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <h2 class="card-inside-title">Nội dung khóa học </h2>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="form-line">
+                                        <textarea name="noiDung" id="myEditor"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <h2 class="card-inside-title">Học phí </h2>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" placeholder="Học phí khóa học"
+                                            name="hocPhi" />
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" value="<%= user[0]._id %>" name="idDV">
+                            <h2 class="card-inside-title">Lĩnh vực </h2>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <select class="form-control show-tick" name="idLV">
+                                        <% if(linhVuc){ %>
+                                        <% linhVuc.forEach(function(ele){ %>
+                                        <option value="<%=ele._id%>"><%= ele.ten %></option>
+                                        <%}) %>
+                                        <% } %>
+                                    </select>
+                                </div>
+                            </div>
+                            <h2 class="card-inside-title">Ngày khai giảng </h2>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control form-control-sm" id="datepicker"
+                                        name="ngayKhaiGiang">
+                                </div>
+                            </div>
+                            <h2 class="card-inside-title">Ảnh </h2>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <input type="file" class="form-control form-control-sm" name="banner">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-round waves-effect">Xác nhận</button>
+                                <button type="button" class="btn btn-danger btn-simple btn-round waves-effect"
+                                    data-dismiss="modal">Hủy</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

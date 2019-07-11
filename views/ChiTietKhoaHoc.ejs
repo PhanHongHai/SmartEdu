@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<% include ../component/home/head %>
+
+<body class="">
+    <div id="wrapper" class="clearfix">
+        <!-- preloader -->
+        <% include ../component/home/header %>
+        <!-- Start main-content -->
+        <div class="main-content">
+
+            <section class="inner-header divider parallax layer-overlay overlay-dark-5"
+                data-bg-img="http://placehold.it/1920x1280">
+                <div class="container pt-70 pb-20">
+                    <!-- Section Content -->
+                    <div class="section-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="title text-white">Chi tiết khóa học</h2>
+                                <ol class="breadcrumb text-left text-black mt-10">
+                                    <li><a href="#">Trang chủ</a></li>
+                                    <li><a href="#">Khóa học</a></li>
+                                    <li class="active text-gray-silver">Chi tiết</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 blog-pull-right">
+                            <% if(detail !== null){%>
+                            <% detail.forEach(function(ele){%>  
+                            <div class="single-service">
+                                <img src="/public/uploads/<%=ele.banner%>" alt="" width="100%" height="350px">
+                                <h3 class="text-theme-colored line-bottom text-theme-colored"><%=ele.tenKH%>
+                                </h3>
+                                <h4 class="mt-0"><span class="text-theme-color-2">Hoc phi :</span> <%=ele.hocPhi%> VND </h4>
+                                <h4 class="mt-0"><span class="text-theme-color-2">Ngay khai giang :</span> <%=ele.ngayKhaiGiang%>  </h4>
+                              
+                                 <%-ele.noiDung%>
+                           
+                                 <h4 class="line-bottom mt-20 mb-20 text-theme-colored">Dang ky tai day</h4>
+                                 <div class="widget">
+                                        <h4 class="widget-title line-bottom">Thong tin <span class="text-theme-color-2"> ban than </span></h4>
+                                        <form id="quick_contact_form_sidebar" name="footer_quick_contact_form" class="quick-contact-form" action="" method="post">
+                                          <div class="form-group">
+                                            <input name="form_email" id="email" class="form-control" type="text" required="" placeholder="Nhap email">
+                                          </div>
+                                          <div class="form-group">
+                                                <input name="form_email"  id="ten" class="form-control" type="text" required="" placeholder="Nhap ho ten">
+                                          </div>
+                                          <div class="form-group">
+                                                <input name="form_email" id="sdt" class="form-control" type="number" required="" placeholder="Nhap so dien thoai">
+                                          </div>
+                                          <div class="form-group">
+                                               <a class="btn btn-colored btn-flat bg-theme-color-2 text-white font-14 bs-modal-ajax-load mt-0 p-25 pr-15 pl-15"  style="cursor: pointer;" onclick="dangKyKH('<%=ele._id%>')">Dang ky </a>
+                                          </div>
+                                        </form>
+                        
+                                     
+                                      
+                                      </div>
+                             
+                            </div>
+                            <% })}%>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <div class="sidebar sidebar-left mt-sm-30 ml-40">
+                                <div class="widget">
+                                    <h4 class="widget-title line-bottom">Lĩnh vực </h4>
+                                    <div class="services-list">
+                                        <ul class="list list-border angle-double-right">
+                                            <% if(listLV !== null){%>
+                                                <% listLV.forEach(function(ele){%>
+                                                <li><a href="/linh-vuc/<%=ele._id%>"><%=ele.ten%></a></li>
+
+                                            <%})}%>
+                                           
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="widget">
+                                    <h4 class="widget-title line-bottom">Giới thiệu</h4>
+                                    <div class="opening-hours">
+                                        <ul class="list-border">
+                                            <li class="clearfix"> <span> Mon - Tues : </span>
+                                                <div class="value pull-right"> 6.00 am - 10.00 pm </div>
+                                            </li>
+                                            <li class="clearfix"> <span> Wednes - Thurs :</span>
+                                                <div class="value pull-right"> 8.00 am - 6.00 pm </div>
+                                            </li>
+                                            <li class="clearfix"> <span> Fri : </span>
+                                                <div class="value pull-right"> 3.00 pm - 8.00 pm </div>
+                                            </li>
+                                            <li class="clearfix"> <span> Sun : </span>
+                                                <div class="value pull-right"> Colosed </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                             
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+            <!-- end main-content -->
+        </div>
+
+        <!-- Footer -->
+        <% include ../component/home/footer %>
+        <% include ../component/home/script %>
+
+        <a class="scrollToTop" href="#"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <!-- end wrapper -->
+
+    <!-- Footer Scripts -->
+
+
+</body>
+
+</html>

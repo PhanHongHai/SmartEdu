@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<% include ../component/home/head %>
+
+<body class="">
+    <div id="wrapper" class="clearfix">
+        <!-- preloader -->
+        <% include ../component/home/header %>
+        <!-- Start main-content -->
+        <div class="main-content">
+            <section class="inner-header divider parallax layer-overlay overlay-dark-5"
+                data-bg-img="/public/images/bg3.jpg">
+                <div class="container pt-70 pb-20">
+                    <!-- Section Content -->
+                    <div class="section-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="title text-white">Chi tiết bài viết</h2>
+                                <ol class="breadcrumb text-left text-black mt-10">
+                                    <li><a href="/">Trang chủ</a></li>
+                                    <li><a href="#">Tin tức</a></li>
+                                    <li class="active text-gray-silver"></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Blog -->
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 blog-pull-right">
+                            <div class="blog-posts single-post">
+                                <article class="post clearfix mb-0">
+                                <% if(detail !== null){ %>
+                                <% detail.forEach(function(ele){ %>
+                                    <div class="entry-header">
+                                        <div class="post-thumb thumb"> <img src="/public/uploads/<%= ele.banner %>" alt=""
+                                                class="img-responsive img-fullwidth"> </div>
+                                    </div>
+                                    <div class="entry-title pt-10 pl-15">
+                                        <h4><a class="text-uppercase" href="#"><%= ele.tieuDe %></a></h4>
+                                    </div>
+                                    <div class="entry-meta pl-15">
+                                        <ul class="list-inline">
+                                            <li>Ngày đăng: <span class="text-theme-color-2"><%= ele.ngayTao %></span></li>                                      
+                                        </ul>
+                                    </div>
+                                    <div class="entry-content mt-10 fr-view">
+                                            <%- ele.noiDung %>
+                                    </div>
+                                <% })} %>
+                                </article>
+                                <div class="comments-area">
+                                    <h5 class="comments-title">Bình luận</h5>
+                                    <ul class="comment-list">
+                                        <li>
+                                            <div class="media comment-author"> <a class="media-left pull-left flip"
+                                                    href="#"><img class="img-thumbnail" src="http://placehold.it/75x75"
+                                                        alt=""></a>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading comment-heading">John Doe says:</h5>
+                                                    <div class="comment-date">23/06/2014</div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                                        eiusmod tempor incididunt ut labore et dolore magna et sed
+                                                        aliqua. Ut enim ea commodo consequat...</p>
+                                                    
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="comment-box">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h5>Để lại bình luận</h5>
+                                            <div class="row">
+                                                <form role="form" id="comment-form">
+                                                    <div class="col-sm-6 pt-0 pb-0">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" required
+                                                                name="contact_name" id="contact_name"
+                                                                placeholder="Nhập tên">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="text" required class="form-control"
+                                                                name="contact_email2" id="contact_email2"
+                                                                placeholder="Nhập email">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <textarea class="form-control" required
+                                                                name="contact_message2" id="contact_message2"
+                                                                placeholder="Nhập nội dung" rows="7"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit"
+                                                                class="btn btn-dark btn-flat pull-right m-0"
+                                                                data-loading-text="Please wait...">Gửi</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-3">
+                            <div class="sidebar sidebar-left mt-sm-30">
+
+                                <div class="widget">
+                                    <h5 class="widget-title line-bottom">Lĩnh vực</h5>
+                                    <div class="categories">
+                                        <ul class="list list-border angle-double-right">
+                                            <% if(listLV !== null){ %>
+                                            <% listLV.forEach(function(ele){ %>
+                                            <li><a href="/tin-tuc/<% ele._id %>"><%= ele.ten %></a></li>
+                                            <% })} %>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="widget">
+                                    <h5 class="widget-title line-bottom">Tin liên quan</h5>
+                                    <div class="latest-posts">
+                                    <% if(tinLQ !== null){ %>
+                                    <% tinLQ.forEach(function(ele){ %>
+                                        <article class="post media-post clearfix pb-0 mb-10">
+                                            <a class="post-thumb" href="/tin-tuc/chi-tiet/<%= ele._id %>"><img src="/public/uploads/<%= ele.banner %>"
+                                                    alt=""></a>
+                                            <div class="post-right">
+                                                <h5 class="post-title mt-0"><a href="/tin-tuc/chi-tiet/<%= ele._id %>"><%= ele.tieuDe %></a>
+                                                </h5>
+                                                <p class="fr-view"><%- ele.noiDung.slice(0,50) %></p>
+                                            </div>
+                                        </article>
+                                    <% })} %>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <% include ../component/home/footer %>
+            <% include ../component/home/script %>
+
+            <a class="scrollToTop" href="#"><i class="fas fa-angle-up"></i></a>
+        </div>
+        <!-- end wrapper -->
+
+        <!-- Footer Scripts -->
+
+
+</body>
+
+</html>
