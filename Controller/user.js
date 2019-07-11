@@ -1,13 +1,10 @@
 const modelUser = require('../Model/User');
-const modelLV = require('../Model/LinhVuc');
-const modelPartner = require('../Model/Partner');
-const modelKH = require('../Model/KhoaHoc');
-const modelDK = require('../Model/DonDangKy');
 
 
 module.exports = {
     //user
     getAccount: async (username, password, done) => {
+
         let tk = await modelUser.model.find({username:username});
         if (tk.length != 0) {
             tk = { ...tk, password: password };

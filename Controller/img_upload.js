@@ -1,7 +1,7 @@
 var Busboy = require("busboy");
 var path = require("path");
 var fs = require("fs");
-var sha1 = require("sha1");
+
 
 // Gets a filename extension.
 function getExtension(filename) {
@@ -74,8 +74,8 @@ function upload (req, callback) {
 
     // Generate path where the file will be saved.
     var appDir = path.dirname(require.main.filename);
-    var realDir=appDir.substr(0, appDir.length-3);
-    saveToPath = path.join(realDir, link);
+    //var realDir=appDir.substr(0, appDir.length-3);
+    saveToPath = path.join(appDir, link);
 
     // Pipe reader stream (file from client) into writer stream (file from disk).
     file.on("error", handleStreamError);

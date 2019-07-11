@@ -3,7 +3,9 @@ const http=require('http');
 const app=express();
 const port=process.env.PORT || 5000;
 const mongoose=require('mongoose');
-
+const routeAD=require('./routes/routeAd');
+const routePartner=require('./routes/routePartner');
+const routeHome=require('./routes/routeHome');
 // connect mongodb
 mongoose.connect('mongodb://localhost/tuyensinh',{useNewUrlParser: true,useFindAndModify: false})
 .then(
@@ -24,9 +26,10 @@ app.use((req,res,next) => {
     next();
   })
 
-app.get('/',(req,res) => {
-    res.send("hello");
-})
+  // route
+  app.use(routeAD);
+  app.use(routePartner);
+  app.use(routeHome);
 const server=http.createServer(app);
 server.listen(port,() => {
     console.log(`Server is running ${port}`);

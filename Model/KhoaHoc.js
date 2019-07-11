@@ -11,9 +11,13 @@ var khoahoc=new mongoose.Schema({
         type:"ObjectID",
         ref:"linhVuc"
     },
+    idDV:{
+        type:"ObjectID",
+        ref:"congTacVien"
+    },
     banner:String,
     trangThai:{
-        type:Number,
+        type:Number,  // 0 - close  //  1 - open // 
         default:0
     },
     hocPhi:{
@@ -63,6 +67,14 @@ var method={
     deleteKH:(id) => {
         return new Promise((resolve,reject) => {
             model.findByIdAndDelete(id,(err) => {
+                if(err) return reject(err);
+                return resolve(1);
+            });
+        });
+    },
+    changeStatus:(id) => {
+        return new Promise((resolve,reject) => {
+            model.findByIdAndUpdate(id,{trangThai:1},(err) => {
                 if(err) return reject(err);
                 return resolve(1);
             });

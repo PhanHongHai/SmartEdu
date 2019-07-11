@@ -8,14 +8,26 @@ var dondk=new mongoose.Schema({
         type:String,
         required:true
     },
-    email:String,
+    email:{
+        type:String,
+        unique:true
+    },
     sdt:Number,
-    ngayDK:Date
+    ngayDK:String
 },{collection:'donDangKy'});
 var model=mongoose.model('donDangKy',dondk);
 var method={
     getList:(id) => {
         
+    },
+    addDK:(data) => {
+        return new Promise((resolve,reject) => {
+            let dk=new model(data);
+            dk.save((err) => {
+                if(err) return reject(err);
+                return resolve(1);
+            });
+        })
     }
 };
 module.exports={

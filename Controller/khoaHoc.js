@@ -1,11 +1,13 @@
 const modelKH = require('../Model/KhoaHoc');
 const modelLV = require('../Model/LinhVuc');
+const modelQ = require('../Model/Queue');
 const dateFormat = require('dateformat');
-const mongoose=require('mongoose');
+const modelTB = require('../Model/ThongBao');
+const mongoose = require('mongoose');
 module.exports = {
-    loadPage:async (req, res) => {
+    loadPageQLKH: async (req, res) => {
         if (req.isAuthenticated()) {
-            let listCate = await modelLV.model.find();
+            let lv = await modelLV.model.find();
             modelKH.model.aggregate(
                 [
                     {
@@ -18,22 +20,45 @@ module.exports = {
                     }
                 ], (err, list) => {
                     if (err) throw err;
-                    res.render('admin', { user: req.user, list: list, cate: listCate, path: 'khoaHoc', count: req.session.count, mess: req.session.mess });
+                    res.render('partner', { path: "khoaHoc", linhVuc: lv, list: list, user: req.user, path: 'khoaHoc' });
                 });
         }
         else
-            res.redirect('/logIn');
+            res.redirect('/login-partner');
     },
-    addKH:(req,res) => {
+    loadPageIndex: async (req, res) => {
+        if (req.session.count == null)
+            req.session.count = 0;
+        if (req.isAuthenticated()) {
+            let listQ = await modelQ.model.aggregate([
+                {
+                    $lookup: {
+                        from: 'khoaHoc',
+                        localField: 'idKH',
+                        foreignField: '_id',
+                        as: 'kh'
+                    }
+                },
+                {
+                    $sort: { ngay: -1 }
+                }
+            ]);
+            res.render('admin', { user: req.user, listQ, path: 'empty', count: req.session.count, mess: req.session.mess });
+        }
+        else
+            res.redirect('/login');
+    },
+    addKH: (req, res) => {
+        console.log(req.body);
         /*
         data.ngayKhaiGiang=new Date(data.ngayKhaiGiang);
         dateFormat(data.ngayKhaiGiang,'dd/mm/yyyy');
         */
-        let data = { ...req.body, banner: req.file.filename};
+        let data = { ...req.body, banner: req.file.filename };
         modelKH.method.addKH(data);
-        res.redirect('/admin/khoa-hoc');
+        res.redirect('/partner/khoa-hoc');
     },
-    loadUpdate:async (req,res) => {
+    loadUpdate: async (req, res) => {
         if (req.isAuthenticated()) {
             let listCate = await modelLV.model.find();
             let id = mongoose.Types.ObjectId(req.params.idKH);
@@ -49,19 +74,66 @@ module.exports = {
                         }
                     }
                 ]);
-            res.render('admin', {user: req.user, list: data, cate: listCate, path: 'UpdateKH', count: req.session.count, mess: req.session.mess });
+            res.render('partner', { user: req.user, list: data, cate: listCate, path: 'updateKhoaHoc' });
 
         }
     },
-    updateKH:(req,res) => {
+    updateKH: (req, res) => {
         let id = mongoose.Types.ObjectId(req.params.idKH);
-        let data=req.body;
-        modelKH.method.updateKH(id,data);
+        let data = req.body;
+        modelKH.method.updateKH(id, data);
         res.redirect('/admin/khoa-hoc');
     },
-    deleteKH:(req,res) => {
+    deleteKH: (req, res) => {
         let id = mongoose.Types.ObjectId(req.params.idKH);
         modelKH.method.deleteKH(id);
         res.redirect('/admin/khoa-hoc');
+    },
+    yeuCau: async (req, res) => {
+        let dateNow = new Date();
+        dateNow = dateFormat(dateNow, "d/mm/yyyy, h:MM tt");
+        let data = {
+            idKH: req.params.idKH,
+            ngay: dateNow,
+            idDV:req.user[0]._id
+        };
+        let kt = await modelQ.method.addQ(data);
+        if (kt == 1)
+            res.status(200).send({ mess: 1 });
+        else
+            res.status(500).send({ mess: 0 });
+    },
+    thayDoiKhoaHoc: async (req, res) => {
+        let idKH=mongoose.Types.ObjectId(req.body.idKH);
+        let idDV=mongoose.Types.ObjectId(req.body.idDV);
+        let idQ=mongoose.Types.ObjectId(req.body.idQ);
+        let kt = await modelKH.method.changeStatus(idKH);
+        if (kt == 1) {
+            let dlTB={
+                idDV,
+                noiDung:"Yêu cầu đăng khóa học được chấp nhận !"
+            }
+            //let result = await modelTB.method.addTB(dlTB);
+            let resultQ = await modelQ.method.deleteQ(idQ);
+            if (resultQ == 1)
+                res.status(200).send({ mess: 1 });
+            else
+                res.status(500).send({ mess: 0 });
+        }
+     
+    },
+    huyYeuCau: async (req, res) => {
+        let kt = await modelQ.method.deleteQ(req.params.idQ);
+        if (kt == 1)
+            res.status(200).send({ mess: 1 });
+        else
+            res.status(500).send({ mess: 0 });
+    },
+    changeStatusTP:async (req, res) => {
+        let kt = await modelTB.method.changeStatusTP(req.params.idTB);
+        if (kt == 1)
+            res.status(200).send({ mess: 1 });
+        else
+            res.status(500).send({ mess: 0 });
     }
 }
