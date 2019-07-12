@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>:: SmartEdu :: Trang cộng tác viên</title>
     <link rel="Shortcut Icon" href="/public/images/favicon.png"> <!-- Favicon-->
-    <link rel="stylesheet" href="/public/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/partner/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/lib/jvectormap/jquery-jvectormap-2.0.3.min.css" />
     <link rel="stylesheet" href="/public/lib/morrisjs/morris.min.css" />
     <link rel="stylesheet" href="/public/fontawesome/css/all.css">
@@ -77,7 +77,7 @@
                                         <!-- Jquery Core Js -->
                                         <script src="/public/js/jquery.min.js"></script>
                                         <script src="/public/admin/popper.min.js"></script>
-                                        <script src="/public/lib/bootstrap/js/bootstrap.min.js"></script>
+                                        <script src="/public/partner/bootstrap/js/bootstrap.min.js"></script>
                                         <script src="/public/lib/bundles/libscripts.bundle.js"></script>
                                         <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
                                         <script src="/public/lib/bundles/vendorscripts.bundle.js"></script>
@@ -103,6 +103,10 @@
                                         <script src="/public/lib/ui/dialogs.js"></script>
                                         <script type="text/javascript">
                                             $(document).ready(function () {
+                                                $('.bars').click(function(){
+                                                    $("body").addClass('overlay-open');
+                                                    $(".overlay").css('display','block');
+                                                });
                                                 var editor = new FroalaEditor('#myEditor', {
                                                     language: 'vi',
                                                     heightMin: 100,

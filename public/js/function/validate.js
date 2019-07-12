@@ -1,64 +1,39 @@
-$(function () {
-    $('#formGY').validate({
-        errorClass: "invalid",
+$(document).ready(function () {
+    $('#formDK').validate({
         rules: {
-            name: {
+            ten: {
                 required: true,
                 minlength: 5,
-                maxlength: 20
+                maxlength: 30
             },
             email: {
                 required: true,
                 email: true
             },
-            adress: {
-                minlength: 5
-            },
-            phone: {
+            sdt: {
+                required: true,
                 digits: true,
                 minlength: 10,
                 maxlength: 10,
             },
-            title: {
-                required: true,
-                minlength: 5
-            },
-            content: {
-                required: true,
-                minlength: 5
-            },
-            file: "required"
         },
         messages: {
-            name: {
+            ten: {
                 required: 'Vui lòng nhập họ tên',
                 minlength: 'Nhập tối thiểu 5 ký tự',
-                maxlength: 'Nhập tối đa 20 ký tự'
+                maxlength: 'Nhập tối đa 30 ký tự'
             },
             email: {
                 required: 'Vui lòng nhập email',
                 email: 'Email không hợp lệ'
             },
-            title: {
-                required: 'Vui long nhap tiêu đề',
-                minlength: 'Nhập tối thiểu 5 ký tự'
-            },
-            adress: {
-                required: 'Vui lòng nhập địa chỉ',
-                minlength: 'Nhập tối thiểu 5 ký tự',
-            },
-            phone: {
+            sdt: {
+                required: 'Vui lòng nhập số điện thoại',
                 digits: 'Vui lòng nhập ký tự là số',
                 minlength: 'Nhập tối thiểu 10 số',
                 maxlength: 'Nhập tối đa 10 số'
             },
-            content: {
-                required: 'Vui lòng nhập nội dung',
-                minlength: 'Nhập tối thiểu 5 ký tự'
-            },
-            file: 'Yêu cầu gửi file'
-        },
-
+        }
     });
     // loai tai khoan
     $('#addAcc').validate({
@@ -73,7 +48,7 @@ $(function () {
                 required: true,
                 minlength: 3,
             },
-            role:"required"
+            role: "required"
         },
         messages: {
             username: {
@@ -85,10 +60,10 @@ $(function () {
                 required: 'Vui lòng nhập thông tin',
                 minlength: 'Nhập tối thiểu 3 ký tự',
             },
-            role:{required:'Vui lòng nhập thông tin'}
+            role: { required: 'Vui lòng nhập thông tin' }
         },
-    }); 
-     // loai danh muc
+    });
+    // loai danh muc
     $('#addCateType').validate({
         errorClass: "invalid",
         rules: {
@@ -105,7 +80,7 @@ $(function () {
                 maxlength: 'Nhập tối đa 50 ký tự'
             }
         },
-    }); 
+    });
     $('#editCateType').validate({
         errorClass: "invalid",
         rules: {
@@ -122,7 +97,7 @@ $(function () {
                 maxlength: 'Nhập tối đa 50 ký tự'
             }
         },
-    }); 
+    });
     // danh muc
     $('#addCate').validate({
         errorClass: "invalid",
@@ -132,7 +107,7 @@ $(function () {
                 minlength: 5,
                 maxlength: 50
             },
-            typeCate:"required"
+            typeCate: "required"
         },
         messages: {
             nameCate: {
@@ -140,9 +115,9 @@ $(function () {
                 minlength: 'Nhập tối thiểu 5 ký tự',
                 maxlength: 'Nhập tối đa 50 ký tự'
             },
-            typeCate:{required:"Vui lòng chọn loại danh mục"}
+            typeCate: { required: "Vui lòng chọn loại danh mục" }
         },
-    }); 
+    });
     $('#editCate').validate({
         errorClass: "invalid",
         rules: {
@@ -151,7 +126,7 @@ $(function () {
                 minlength: 5,
                 maxlength: 50
             },
-            typeCate:"required"
+            typeCate: "required"
         },
         messages: {
             nameCate: {
@@ -159,9 +134,9 @@ $(function () {
                 minlength: 'Nhập tối thiểu 5 ký tự',
                 maxlength: 'Nhập tối đa 50 ký tự'
             },
-            typeCate:{required:"Vui lòng chọn loại danh mục"}
+            typeCate: { required: "Vui lòng chọn loại danh mục" }
         },
-    }); 
+    });
     // co quan ban hanh
     $('#addAgen').validate({
         errorClass: "invalid",
@@ -179,7 +154,7 @@ $(function () {
                 maxlength: 'Nhập tối đa 50 ký tự'
             },
         },
-    }); 
+    });
     // linh vuc
     $('#addField').validate({
         errorClass: "invalid",
@@ -197,12 +172,12 @@ $(function () {
                 maxlength: 'Nhập tối đa 40 ký tự'
             },
         },
-    }); 
+    });
     // thu tuc hanh chinh
     $('#addTTHC').validate({
-        errorClass:"invalid",
-        rules:{
-            titleAP:{
+        errorClass: "invalid",
+        rules: {
+            titleAP: {
                 required: true,
                 minlength: 5,
                 maxlength: 200
@@ -218,18 +193,18 @@ $(function () {
     });
     // comment
     $('.formComment').validate({
-        errorClass:"invalid",
-        rules:{
-            userName:{
+        errorClass: "invalid",
+        rules: {
+            userName: {
                 required: true,
                 minlength: 5,
                 maxlength: 50
             },
-            email:{
+            email: {
                 required: true,
                 email: true
             },
-            content:{
+            content: {
                 required: true,
                 maxlength: 300
             }
@@ -240,14 +215,14 @@ $(function () {
                 minlength: 'Nhập tối thiểu 5 ký tự',
                 maxlength: 'Nhập tối đa 50 ký tự'
             },
-            email:{
-                required:'Vui lòng nhập email',
-                email:'Email không xác định'
+            email: {
+                required: 'Vui lòng nhập email',
+                email: 'Email không xác định'
             },
-            content:{
-                required:'Vui lòng nhập nội dung',
-                maxlength:'Nhập tối đa 300 ký tự'
+            content: {
+                required: 'Vui lòng nhập nội dung',
+                maxlength: 'Nhập tối đa 300 ký tự'
             }
-        } 
+        }
     })
 })

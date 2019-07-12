@@ -28,6 +28,14 @@ var method={
                 return resolve(1);
             });
         })
+    },
+    deleteDK:(id) => {
+        return new Promise((resolve,reject) => {
+            model.deleteMany({idKH:id},(err) => {
+                if(err) return reject(err);
+                return resolve(1);
+            })
+        })
     }
 };
 module.exports={

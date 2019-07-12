@@ -1,79 +1,66 @@
 
-function openCourse(id) {
-    swal({
-        title: "Thông báo",
-        text: "Bạn có muốn đăng khóa học này không ?",
-        showCancelButton: "Hủy",
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Xác nhận",
-        closeOnConfirm: false
-    },
-        function (isConfirm) {
-            if (isConfirm) {
-                axios.get(`/mo-khoa-hoc/${id}`)
-                    .then((res) => {
-                        if (res.data.mess == 1)
-                            swal("Thông báo", "Đã gửi yêu cầu lên hệ thống !", "success");
-                        else
-                            swal("Thông báo", "Gửi yêu cầu thất bại !", "error");
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-            }
-        })
-}
-function changeCourse(idKH,idQ,idDV){
-    var data={
-        idKH,
-        idQ,
-        idDV
+    function openCourse(id) {
+        swal({
+            title: "Thông báo",
+            text: "Bạn có muốn đăng khóa học này không ?",
+            showCancelButton: "Hủy",
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Xác nhận",
+            closeOnConfirm: false
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+                    axios.get(`/mo-khoa-hoc/${id}`)
+                        .then((res) => {
+                            if (res.data.mess == 1)
+                                swal("Thông báo", "Đã gửi yêu cầu lên hệ thống !", "success");
+                            else
+                                swal("Thông báo", "Gửi yêu cầu thất bại !", "error");
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                }
+            })
     }
-    axios.post('/change-course',data)
-    .then((res) => {
-        console.log(res.data);
-        location.reload(true);
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-}
-function cancelCourse(id){
-    axios.get(`/cancel-course/${id}`)
-    .then((res) => {
-        console.log(res.data);
-        location.reload(true);
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-}
-function dangKyKH(id){
-
-    var email=document.getElementById('email').value;
-    var hoTen=document.getElementById('ten').value;
-    var sdt=document.getElementById('sdt').value;
-    var data={
-        email,
-        sdt,
-        hoTen,
-        idKH:id
+    function changeCourse(idKH,idQ,idDV){
+        var data={
+            idKH,
+            idQ,
+            idDV
+        }
+        axios.post('/change-course',data)
+        .then((res) => {
+            console.log(res.data);
+            location.reload(true);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+    function cancelCourse(id){
+        axios.get(`/cancel-course/${id}`)
+        .then((res) => {
+            console.log(res.data);
+            location.reload(true);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+    function deleteKH(id){
+        axios.delete(`/khoa-hoc/xoa/${id}`)
+        .then((res) => {
+            location.reload(true);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+        
     };
-    axios.post('/don-dang-ky',data)
-    .then((res) => {
-        if(res.data.mess == 1){
-           
-              swal("Chuc mung", "Dang ky thanh cong !", "success");
-        }
-        else{
 
-              swal("Thông báo", "Dang ky that bai !", "error");
-        }
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-}
+
+
 
 
 

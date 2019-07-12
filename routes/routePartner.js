@@ -11,8 +11,8 @@ var fs = require("fs");
 var multer = require('multer');
 const upload_img = require('../Controller/img_upload');
 // CONTROLLER
-const ctrlPN=require('../Controller/partner');
-const ctrlKH=require('../Controller/khoaHoc');
+const ctrlPN = require('../Controller/partner');
+const ctrlKH = require('../Controller/khoaHoc');
 const store = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'public/uploads')
@@ -44,7 +44,11 @@ router.use(passPort.session());
 
 router.route('/login-partner')
     .get((req, res) => {
-        res.render('logInPartner');
+        if (req.isAuthenticated()) {
+            res.redirect('/partner');
+        }
+        else
+            res.render('logInPartner');
     })
     .post(passPort.authenticate('partner', { failureRedirect: '/login-partner', successRedirect: '/partner' }))
 passPort.use('partner', new passPortLocal(ctrlPN.getAccount));
@@ -54,20 +58,24 @@ passPort.serializeUser((tk, done) => {
 passPort.deserializeUser(ctrlPN.checkPartner);
 router.route('/signup-partner')
     .get((req, res) => {
-        res.render('signUpPartner');
+        if (req.isAuthenticated()) {
+            res.redirect('/partner');
+        }
+        else
+            res.render('signUpPartner');
     })
     .post(ctrlPN.addPartner)
 
-router.get('/partner',ctrlPN.loadIndex)
-router.get('/logout-partner',(req,res) => {
+router.get('/partner', ctrlPN.loadIndex)
+router.get('/logout-partner', (req, res) => {
     req.logout();
     res.redirect('/login-partner');
 })
 // ql khoa hoc
 router.route('/partner/khoa-hoc')
-.get(ctrlPN.loadPageQLKH)
-.post(upload.single('banner'), ctrlKH.addKH)
-router.get('/mo-khoa-hoc/:idKH',ctrlKH.yeuCau);
+    .get(ctrlPN.loadPageQLKH)
+    .post(upload.single('banner'), ctrlKH.addKH)
+router.get('/mo-khoa-hoc/:idKH', ctrlKH.yeuCau);
 router.post('/partner/upload', (req, res) => {
     upload_img(req, function (err, data) {
         console.log(data);
@@ -77,6 +85,7 @@ router.post('/partner/upload', (req, res) => {
         res.send(data);
     });
 });
+router.delete('/khoa-hoc/xoa/:idKH', ctrlKH.deleteKH);
 router.post('/partner/uploadImg', (req, res) => {
     upload_img(req, function (err, data) {
         if (err) {
@@ -93,5 +102,6 @@ if (!fs.existsSync(filesDir)) {
 };
 // ql dang ky
 router.route('/partner/don-dang-ky')
-.get(ctrlPN.loadPageQLDK)
+    .get(ctrlPN.loadPageQLDK)
+
 module.exports = router;

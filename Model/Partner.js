@@ -79,14 +79,15 @@ var method = {
             })
         });
     },
-    addPN: (user, pass, email) => {
+    addPN: (user, pass, email,tenDV) => {
         return new Promise((resolve, reject) => {
             bcrypt.genSalt(saltRounds, (err, salt) => {
                 bcrypt.hash(pass, salt, (err, hash) => {
                     let data = {
                         username: user,
                         password: hash,
-                        email: email
+                        email: email,
+                        tenDV:tenDV
                     };
                     let pn = new model(data);
                     pn.save((err) => {

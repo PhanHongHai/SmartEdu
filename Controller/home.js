@@ -7,7 +7,7 @@ const modelTB = require('../Model/ThongBao');
 const modelDK = require('../Model/DonDangKy');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
-const config=require('../constants/config');
+const config = require('../constants/config');
 
 const option = {
     service: 'gmail',
@@ -20,7 +20,7 @@ var transporter = nodemailer.createTransport(option);
 
 module.exports = {
     loadIndex: async (req, res) => {
-        let listLV=await modelLV.model.find({});
+        let listLV = await modelLV.model.find({});
         let listBV = await modelBV.model.aggregate([
             {
                 $lookup: {
@@ -31,15 +31,15 @@ module.exports = {
                 }
             },
             {
-                $sort:{ngayTao:-1}
+                $sort: { ngayTao: -1 }
             },
             {
-                $limit:3
+                $limit: 3
             }
         ]);
-        let listKH=await modelKH.model.aggregate([
+        let listKH = await modelKH.model.aggregate([
             {
-                $lookup:{
+                $lookup: {
                     from: 'congTacVien',
                     localField: 'idDV',
                     foreignField: '_id',
@@ -47,7 +47,7 @@ module.exports = {
                 }
             },
             {
-                $lookup:{
+                $lookup: {
                     from: 'linhVuc',
                     localField: 'idLV',
                     foreignField: '_id',
@@ -55,22 +55,22 @@ module.exports = {
                 }
             },
             {
-                $match:{trangThai:1}
+                $match: { trangThai: 1 }
             },
             {
-                $sort:{ngayKhaiGiang:-1}
-            },{
-                $limit:20
+                $sort: { ngayKhaiGiang: -1 }
+            }, {
+                $limit: 20
             }
         ]);
-        res.render('home',{listBV,listLV,listKH});
+        res.render('home', { listBV, listLV, listKH });
     },
-    detailBV:async (req,res) => {
-        let id=mongoose.Types.ObjectId(req.params.idBV);
-        let listLV=await modelLV.model.find({});
-        let detail=await modelBV.model.aggregate([
+    detailBV: async (req, res) => {
+        let id = mongoose.Types.ObjectId(req.params.idBV);
+        let listLV = await modelLV.model.find({});
+        let detail = await modelBV.model.aggregate([
             {
-                $lookup:{
+                $lookup: {
                     from: 'linhVuc',
                     localField: 'idLV',
                     foreignField: '_id',
@@ -78,12 +78,12 @@ module.exports = {
                 }
             },
             {
-                $match:{_id:id}
+                $match: { _id: id }
             }
         ]);
-        let tinLQ=await modelBV.model.aggregate([
+        let tinLQ = await modelBV.model.aggregate([
             {
-                $lookup:{
+                $lookup: {
                     from: 'linhVuc',
                     localField: 'idLV',
                     foreignField: '_id',
@@ -91,20 +91,20 @@ module.exports = {
                 }
             },
             {
-                $match:{_id:{$ne:id}}
+                $match: { _id: { $ne: id } }
             },
             {
-                $limit:4
+                $limit: 4
             }
         ]);
-        res.render('ChiTietBaiViet',{listLV,tinLQ,detail});
+        res.render('ChiTietBaiViet', { listLV, tinLQ, detail });
     },
-    detailKH:async (req,res) => {
-        let id=mongoose.Types.ObjectId(req.params.idKH);
-        let listLV=await modelLV.model.find({});
-        let detail=await modelKH.model.aggregate([
+    detailKH: async (req, res) => {
+        let id = mongoose.Types.ObjectId(req.params.idKH);
+        let listLV = await modelLV.model.find({});
+        let detail = await modelKH.model.aggregate([
             {
-                $lookup:{
+                $lookup: {
                     from: 'linhVuc',
                     localField: 'idLV',
                     foreignField: '_id',
@@ -112,7 +112,7 @@ module.exports = {
                 }
             },
             {
-                $lookup:{
+                $lookup: {
                     from: 'congTacVien',
                     localField: 'idDV',
                     foreignField: '_id',
@@ -120,13 +120,13 @@ module.exports = {
                 }
             },
             {
-                $match:{_id:id}
+                $match: { _id: id }
             }
         ]);
 
-        let khLQ=await modelBV.model.aggregate([
+        let khLQ = await modelBV.model.aggregate([
             {
-                $lookup:{
+                $lookup: {
                     from: 'linhVuc',
                     localField: 'idLV',
                     foreignField: '_id',
@@ -134,7 +134,7 @@ module.exports = {
                 }
             },
             {
-                $lookup:{
+                $lookup: {
                     from: 'congTacVien',
                     localField: 'idDV',
                     foreignField: '_id',
@@ -142,46 +142,51 @@ module.exports = {
                 }
             },
             {
-                $match:{_id:{$ne:id}}
+                $match: { _id: { $ne: id } }
             },
             {
-                $limit:4
+                $limit: 4
             }
         ]);
-        res.render('ChiTietKhoaHoc',{listLV,khLQ,detail});
+        res.render('ChiTietKhoaHoc', { listLV, khLQ, detail });
     },
-    dangKy:async (req,res) => {
-        let id=mongoose.Types.ObjectId(req.body.idKH);
-        let dateNow =new Date();
-        let data={...req.body,idKH:id,ngayDK:dateFormat(dateNow,"dd-mm-yyyy")};
-        let kt=await modelDK.method.addDK(data);
-        if(kt == 1){
-            transporter.verify(function(error, success) {
-                // Nếu có lỗi.
-                if (error) {
-                    console.log(error);
-                } else { //Nếu thành công.
-                    console.log('Kết nối mail thành công!');
-                    var mail = {
-                        from: 'phanhonghai97@gmail.com', 
-                        to: req.body.email, 
-                        subject: 'Thông báo đăng ký khóa học', // Tiêu đề mail
-                        text: 'Chuc mung ban dang ky thanh cong', // Nội dung mail dạng text
-                        html:`<h3></h3>`
-                    };
-                    //Tiến hành gửi email
-                    transporter.sendMail(mail, function(error, info) {
-                        if (error) { // nếu có lỗi
-                            console.log(error);
-                        } else { //nếu thành công
-                            console.log('Email sent: ' + info.response);
-                        }
-                    });
-                }
-            });
-            res.status(201).send({mess:1});
+    dangKy: async (req, res) => {
+        let id = mongoose.Types.ObjectId(req.body.idKH);
+        let checkEmail = await modelDK.model.find({ email: req.body.email }).countDocuments();
+        if (checkEmail == 0) {
+            let dateNow = new Date();
+            let data = { ...req.body, idKH: id, ngayDK: dateFormat(dateNow, "dd-mm-yyyy") };
+            let kt = await modelDK.method.addDK(data);
+            if (kt == 1) {
+                transporter.verify(function (error, success) {
+                    // Nếu có lỗi.
+                    if (error) {
+                        console.log(error);
+                    } else { //Nếu thành công.
+                        console.log('Kết nối mail thành công!');
+                        var mail = {
+                            from: 'phanhonghai97@gmail.com',
+                            to: req.body.email,
+                            subject: 'Thông báo đăng ký khóa học', // Tiêu đề mail
+                            text: 'Chuc mung ban dang ky thanh cong', // Nội dung mail dạng text
+                            html: `<h3></h3>`
+                        };
+                        //Tiến hành gửi email
+                        transporter.sendMail(mail, function (error, info) {
+                            if (error) { // nếu có lỗi
+                                console.log(error);
+                            } else { //nếu thành công
+                                console.log('Email sent: ' + info.response);
+                            }
+                        });
+                    }
+                });
+                res.status(201).send({ mess: 1 });
+            }
+            else
+                res.status(500).send({ mess: 0 });
         }
         else
-            res.status(500).send({mess:0});
+            res.status(500).send({ mess: 0 });
     }
 }

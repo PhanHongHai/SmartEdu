@@ -42,26 +42,23 @@
                               
                                  <%-ele.noiDung%>
                            
-                                 <h4 class="line-bottom mt-20 mb-20 text-theme-colored">Dang ky tai day</h4>
+                                 <h4 class="line-bottom mt-20 mb-20 text-theme-colored">Đăng ký tại đây</h4>
                                  <div class="widget">
-                                        <h4 class="widget-title line-bottom">Thong tin <span class="text-theme-color-2"> ban than </span></h4>
-                                        <form id="quick_contact_form_sidebar" name="footer_quick_contact_form" class="quick-contact-form" action="" method="post">
+                                        <form id="formDK" class="quick-contact-form">
+                                            <input type="hidden" id="id" value="<%= ele._id %>">
                                           <div class="form-group">
-                                            <input name="form_email" id="email" class="form-control" type="text" required="" placeholder="Nhap email">
+                                            <input name="email" id="email" class="form-control" type="text"  placeholder="Nhap email">
                                           </div>
                                           <div class="form-group">
-                                                <input name="form_email"  id="ten" class="form-control" type="text" required="" placeholder="Nhap ho ten">
+                                                <input name="ten"  id="ten" class="form-control" type="text"  placeholder="Nhap ho ten">
                                           </div>
                                           <div class="form-group">
-                                                <input name="form_email" id="sdt" class="form-control" type="number" required="" placeholder="Nhap so dien thoai">
+                                                <input name="sdt" id="sdt" class="form-control" type="number" placeholder="Nhap so dien thoai">
                                           </div>
                                           <div class="form-group">
-                                               <a class="btn btn-colored btn-flat bg-theme-color-2 text-white font-14 bs-modal-ajax-load mt-0 p-25 pr-15 pl-15"  style="cursor: pointer;" onclick="dangKyKH('<%=ele._id%>')">Dang ky </a>
+                                               <a id="dkSubmit" class="btn btn-colored btn-flat bg-theme-color-2 text-white font-14 bs-modal-ajax-load mt-0 p-25 pr-15 pl-15 ">Đăng ký </a>
                                           </div>
                                         </form>
-                        
-                                     
-                                      
                                       </div>
                              
                             </div>
