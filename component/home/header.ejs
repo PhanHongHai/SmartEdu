@@ -67,11 +67,19 @@
                     </ul>
                     <ul class="pull-right flip hidden-sm hidden-xs">
                         <li>
+                            <% if(typeof user == "undefined"){ %>
                             <!-- Modal: donate now Starts -->
                             <a class="btn btn-colored btn-flat bg-theme-color-2 text-white font-14 font-14 bs-modal-ajax-load mt-0 p-25 pr-15 pl-15"
                                 href="/login-partner">Đăng nhập cộng
                                 tác viên</a>
                             <!-- Modal: donate now End -->
+                            <% } else{%>
+                            <% user.forEach(function(ele,i){ %>
+                            <a class="btn btn-colored btn-flat bg-theme-color-2 text-white font-14 font-14 bs-modal-ajax-load mt-0 p-25 pr-15 pl-15"
+                                href="/partner">Xin chào ! <%= ele.tenDV %>
+                                <small class="display-block">Nhấm vào để vào trang đối tác</small>
+                                </a>
+                            <% })} %>
                         </li>
                     </ul>
 

@@ -6,7 +6,7 @@ const dateFormat = require('dateformat');
 const modelTB = require('../Model/ThongBao');
 const modelDK = require('../Model/DonDangKy');
 const modelBL = require('../Model/BinhLuan');
-const modelDV=require('../Model/Partner');
+const modelDV = require('../Model/Partner');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 const config = require('../constants/config');
@@ -22,7 +22,7 @@ var transporter = nodemailer.createTransport(option);
 
 module.exports = {
     loadIndex: async (req, res) => {
-        let listLV = await modelLV.model.find({});
+        let listLV = await modelLV.model.find({}).limit(5);
         let listBV = await modelBV.model.aggregate([
             {
                 $lookup: {
@@ -65,11 +65,13 @@ module.exports = {
                 $limit: 20
             }
         ]);
-        let countDV=await modelKH.model.find().countDocuments();
-        let countDK=await modelKH.model.find().countDocuments();
-        let countKH=await modelKH.model.find({trangThai:1}).countDocuments();
-        let countBL=await modelBL.model.find().countDocuments();
-        res.render('home', { listBV, listLV, listKH,countDV,countDK,countBL,countKH });
+        console.log(listKH);
+        let countDV = await modelKH.model.find().countDocuments();
+        let countDK = await modelKH.model.find().countDocuments();
+        let countKH = await modelKH.model.find({ trangThai: 1 }).countDocuments();
+        let countBL = await modelBL.model.find().countDocuments();
+       
+        res.render('home', { listBV, listLV, listKH, countDV, countDK, countBL, countKH, user: req.user });
     },
     loadBaiVietByLV: async (req, res) => {
         let listLV = await modelLV.model.find();
@@ -95,7 +97,7 @@ module.exports = {
                 $match: { _id: id }
             }
         ]);
-        let binhLuan=await modelBL.model.find({idBV:id}).sort({thoiGian:-1}).limit(4);
+        let binhLuan = await modelBL.model.find({ idBV: id }).sort({ thoiGian: -1 }).limit(4);
         let tinLQ = await modelBV.model.aggregate([
             {
                 $lookup: {
@@ -112,7 +114,7 @@ module.exports = {
                 $limit: 4
             }
         ]);
-        res.render('ChiTietBaiViet', { listLV, tinLQ, detail,binhLuan });
+        res.render('ChiTietBaiViet', { listLV, tinLQ, detail, binhLuan });
     },
     detailKH: async (req, res) => {
         let id = mongoose.Types.ObjectId(req.params.idKH);
@@ -206,11 +208,11 @@ module.exports = {
     },
     binhLuan: async (req, res) => {
         let dateNow = new Date();
-        let thoiGian=dateFormat(dateNow, "dd-mm-yyyy");
-        let data = { ...req.body, thoiGian};
+        let thoiGian = dateFormat(dateNow, "dd-mm-yyyy");
+        let data = { ...req.body, thoiGian };
         let kt = await modelBL.method.addBL(data);
         if (kt == 1) {
-            res.status(201).send({ mess: 1,thoiGian});
+            res.status(201).send({ mess: 1, thoiGian });
         }
         else
             res.status(500).send({ mess: 0 });
