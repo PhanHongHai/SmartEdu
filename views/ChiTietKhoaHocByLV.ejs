@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<% include ../component/home/head %>
+
+<body class="">
+    <div id="wrapper" class="clearfix">
+        <!-- preloader -->
+        <% include ../component/home/header %>
+        <!-- Start main-content -->
+        <div class="main-content">
+
+            <section class="inner-header divider parallax layer-overlay overlay-dark-5"
+                data-bg-img="http://placehold.it/1920x1280">
+                <div class="container pt-70 pb-20">
+                    <!-- Section Content -->
+                    <div class="section-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="title text-white">Chi tiết khóa học</h2>
+                                <ol class="breadcrumb text-left text-black mt-10">
+                                    <li><a href="#">Trang chủ</a></li>
+                                    <li><a href="#">Khóa học</a></li>
+                                    <li class="active text-gray-silver">Danh sách theo lĩnh vực</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="container mt-30 mb-30 pt-30 pb-30">
+                    <div class="row">
+                        <div class="col-md-9 pull-right flip sm-pull-none">
+                            <div class="kh-posts">
+                                <div class="col-md-12">
+                                    <div class="row list-dashed listBV">
+                                        <% if(idLV != null){ %>
+                                        <input type="hidden" id="idLV" value="<%= idLV%>">
+                                        <% } %>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="sidebar sidebar-right mt-sm-30">
+                                <div class="widget">
+                                    <h5 class="widget-title line-bottom">Lĩnh vực <span class="text-theme-color-2">Khóa
+                                            học</span></h5>
+                                    <ul class="list-divider list-border list check">
+                                        <% if(listLV != null){ %>
+                                        <% listLV.forEach(function(ele){ %>
+                                        <li><a href="/khoa-hoc/linh-vuc/<%= ele._id %>"><%= ele.ten %></a></li>
+                                        <% })} %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+            <!-- end main-content -->
+        </div>
+
+        <!-- Footer -->
+        <% include ../component/home/footer %>
+        <% include ../component/home/script %>
+
+        <a class="scrollToTop" href="#"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <!-- end wrapper -->
+
+    <!-- Footer Scripts -->
+
+    <script>
+        $(document).ready(function () {
+            function showListKH(data) {
+                var html = "";
+                $.each(data, function (index, ele) {
+                    html += "<div class='row mb-15'>";
+                    html += "<div class='col-sm-6 col-md-4'>";
+                    html += `<div class="thumb"> <img alt="featured project" src="/public/uploads/${ele.banner}"></div>`;
+                    html += "</div> <div class='col-sm-6 col-md-8'>";
+                    html += `<h4 class="line-bottom mt-0 mt-sm-20">${ele.tenKH}</h4>`;
+                    html += "<ul class='review_text list-inline'>";
+                    html += `<li><h4 class="mt-0"><span class="text-theme-color-2">Học phí :</span> ${ele.hocPhi} VNĐ</h4></li>`;
+                    html += "</ul>";
+                    html += `<p class="fr-view">${ele.gioiThieu.slice(0, 65)}</p>`;
+                    html += `<a class='btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10' href='/khoa-hoc/chi-tiet/${ele._id}'>Xem chi tiết</a>`;
+                    html += "</div>";
+                    html += "</div>";
+                });
+                return html;
+            };
+
+            $('.kh-posts').pagination({
+                totalNumber: function (done) {
+                    var id = $('#idLV').val();
+                    $.ajax({
+                        type: 'GET',
+                        url: '/khoa-hoc/linh-vuc/getList/' + id,
+                        success: function (res) {
+                            console.log(res.total);
+                            done(res.total);
+                        }
+                    });
+                },
+                dataSource: function (done) {
+                    var id = $('#idLV').val();
+                    $.ajax({
+                        type: 'GET',
+                        url: '/khoa-hoc/linh-vuc/getList/' + id,
+                        success: function (res) {
+                            done(res.list);
+                        }
+                    });
+                },
+                pageSize: 5,
+                showNavigator: false,
+                autoHidePrevious: true,
+                autoHideNext: true,
+                className: '',
+                classPrefix: 'pagination theme-colored xs-pull-center m-0',
+                ajax: {
+                    beforeSend: function () {
+
+                    }
+                },
+                callback: function (data, pagination) {
+                    // template method of yourself
+                    var html = showListKH(data);
+                    $('.listBV').html(html);
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>

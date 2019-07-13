@@ -35,32 +35,36 @@ $(document).ready(function () {
             },
         }
     });
-    // loai tai khoan
-    $('#addAcc').validate({
-        errorClass: "invalid",
+    $('#formBL').validate({
         rules: {
-            username: {
+            ten: {
+                required: true,
+                minlength: 5,
+                maxlength: 30
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            noiDung: {
                 required: true,
                 minlength: 3,
-                maxlength: 20
-            },
-            password: {
-                required: true,
-                minlength: 3,
-            },
-            role: "required"
+            }
         },
         messages: {
-            username: {
-                required: 'Vui lòng nhập thông tin',
-                minlength: 'Nhập tối thiểu 3 ký tự',
-                maxlength: 'Nhập tối đa 20 ký tự'
+            ten: {
+                required: 'Vui lòng nhập tên',
+                minlength: 'Nhập tối thiểu 5 ký tự',
+                maxlength: 'Nhập tối đa 30 ký tự'
             },
-            password: {
-                required: 'Vui lòng nhập thông tin',
+            email: {
+                required: 'Vui lòng nhập email',
+                email: 'Email không hợp lệ'
+            },
+            noiDung: {
+                required: 'Vui lòng nhập nội dung',
                 minlength: 'Nhập tối thiểu 3 ký tự',
             },
-            role: { required: 'Vui lòng nhập thông tin' }
         },
     });
     // loai danh muc

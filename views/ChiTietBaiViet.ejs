@@ -34,42 +34,42 @@
                         <div class="col-md-9 blog-pull-right">
                             <div class="blog-posts single-post">
                                 <article class="post clearfix mb-0">
-                                <% if(detail !== null){ %>
-                                <% detail.forEach(function(ele){ %>
+                                    <% if(detail !== null){ %>
+                                    <% detail.forEach(function(ele){ %>
                                     <div class="entry-header">
-                                        <div class="post-thumb thumb"> <img src="/public/uploads/<%= ele.banner %>" alt=""
-                                                class="img-responsive img-fullwidth"> </div>
+                                        <div class="post-thumb thumb"> <img src="/public/uploads/<%= ele.banner %>"
+                                                alt="" class="img-responsive img-fullwidth"> </div>
                                     </div>
                                     <div class="entry-title pt-10 pl-15">
                                         <h4><a class="text-uppercase" href="#"><%= ele.tieuDe %></a></h4>
                                     </div>
                                     <div class="entry-meta pl-15">
                                         <ul class="list-inline">
-                                            <li>Ngày đăng: <span class="text-theme-color-2"><%= ele.ngayTao %></span></li>                                      
+                                            <li>Ngày đăng: <span class="text-theme-color-2"><%= ele.ngayTao %></span>
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="entry-content mt-10 fr-view">
-                                            <%- ele.noiDung %>
+                                        <%- ele.noiDung %>
                                     </div>
-                                <% })} %>
                                 </article>
                                 <div class="comments-area">
                                     <h5 class="comments-title">Bình luận</h5>
                                     <ul class="comment-list">
+                                        <% if(binhLuan != null){ %>
+                                        <% binhLuan.forEach(function(ele){ %>
                                         <li>
                                             <div class="media comment-author"> <a class="media-left pull-left flip"
-                                                    href="#"><img class="img-thumbnail" src="http://placehold.it/75x75"
+                                                    href="#"><img class="img-thumbnail" src="/public/images/profile.jpg"
                                                         alt=""></a>
                                                 <div class="media-body">
-                                                    <h5 class="media-heading comment-heading">John Doe says:</h5>
-                                                    <div class="comment-date">23/06/2014</div>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                                        eiusmod tempor incididunt ut labore et dolore magna et sed
-                                                        aliqua. Ut enim ea commodo consequat...</p>
-                                                    
+                                                    <h5 class="media-heading comment-heading"><%= ele.ten %>:</h5>
+                                                    <div class="comment-date"><%= ele.thoiGian%></div>
+                                                    <p><%= ele.noiDung%></p>
                                                 </div>
                                             </div>
                                         </li>
+                                        <%})} %>
                                     </ul>
                                 </div>
                                 <div class="comment-box">
@@ -77,29 +77,27 @@
                                         <div class="col-sm-12">
                                             <h5>Để lại bình luận</h5>
                                             <div class="row">
-                                                <form role="form" id="comment-form">
+                                                <form id="formBL" action="" method="POST">
                                                     <div class="col-sm-6 pt-0 pb-0">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" required
-                                                                name="contact_name" id="contact_name"
+                                                            <input type="text" class="form-control" id="ten" name="ten"
                                                                 placeholder="Nhập tên">
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="text" required class="form-control"
-                                                                name="contact_email2" id="contact_email2"
-                                                                placeholder="Nhập email">
+                                                            <input type="email" class="form-control" name="email"
+                                                                id="email" placeholder="Nhập email">
                                                         </div>
                                                     </div>
+                                                    <input type="hidden" id="id" value="<%= ele._id %>">
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
-                                                            <textarea class="form-control" required
-                                                                name="contact_message2" id="contact_message2"
+                                                            <textarea class="form-control" id="noiDung" name="noiDung"
                                                                 placeholder="Nhập nội dung" rows="7"></textarea>
                                                         </div>
                                                         <div class="form-group">
-                                                            <button type="submit"
+                                                            <a style="cursor: pointer;" id="binhLuan"
                                                                 class="btn btn-dark btn-flat pull-right m-0"
-                                                                data-loading-text="Please wait...">Gửi</button>
+                                                                data-loading-text="Please wait...">Gửi</a>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -107,6 +105,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <% })} %>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-3">
@@ -118,7 +117,7 @@
                                         <ul class="list list-border angle-double-right">
                                             <% if(listLV !== null){ %>
                                             <% listLV.forEach(function(ele){ %>
-                                            <li><a href="/tin-tuc/<% ele._id %>"><%= ele.ten %></a></li>
+                                            <li><a href="/bai-viet/linh-vuc/<%=ele._id %>"><%= ele.ten %></a></li>
                                             <% })} %>
                                         </ul>
                                     </div>
@@ -126,18 +125,19 @@
                                 <div class="widget">
                                     <h5 class="widget-title line-bottom">Tin liên quan</h5>
                                     <div class="latest-posts">
-                                    <% if(tinLQ !== null){ %>
-                                    <% tinLQ.forEach(function(ele){ %>
+                                        <% if(tinLQ !== null){ %>
+                                        <% tinLQ.forEach(function(ele){ %>
                                         <article class="post media-post clearfix pb-0 mb-10">
-                                            <a class="post-thumb" href="/tin-tuc/chi-tiet/<%= ele._id %>"><img src="/public/uploads/<%= ele.banner %>"
-                                                    alt=""></a>
+                                            <a class="post-thumb" href="/tin-tuc/chi-tiet/<%= ele._id %>"><img
+                                                    src="/public/uploads/<%= ele.banner %>" alt=""></a>
                                             <div class="post-right">
-                                                <h5 class="post-title mt-0"><a href="/tin-tuc/chi-tiet/<%= ele._id %>"><%= ele.tieuDe %></a>
+                                                <h5 class="post-title mt-0"><a
+                                                        href="/tin-tuc/chi-tiet/<%= ele._id %>"><%= ele.tieuDe %></a>
                                                 </h5>
                                                 <p class="fr-view"><%- ele.noiDung.slice(0,50) %></p>
                                             </div>
                                         </article>
-                                    <% })} %>
+                                        <% })} %>
                                     </div>
                                 </div>
 

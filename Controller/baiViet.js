@@ -24,6 +24,14 @@ module.exports = {
         else
             res.redirect('/logIn');
     },
+    getListBV:async (req,res) => {
+        let id=req.params.idLV.toString();
+        id=mongoose.Types.ObjectId(req.params.idLV)
+        let list=await modelBV.model.find({idLV:id});
+        let total=await modelBV.model.find({idLV:id}).countDocuments();
+        total = total / 5;
+        res.status(200).json({total:total,list:list});
+    },
     addBV: (req, res) => {
         /*
         data.ngayBVaiGiang=new Date(data.ngayBVaiGiang);

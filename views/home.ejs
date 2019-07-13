@@ -516,34 +516,33 @@
     <section class="divider parallax layer-overlay overlay-theme-colored-9" data-bg-img="/public/images/bnn1.jpg" data-parallax-ratio="0.7">
       <div class="container">
         <div class="row">
+          <% if(countDK != null && countKH != null && countDV != null && countBL != null){ %>
           <div class="col-xs-12 col-sm-6 col-md-3 mb-md-50">
-            <div class="funfact text-center">
-             
-              <h2 data-animation-duration="2000" data-value="5248" class="animate-number text-white mt-0 font-38 font-weight-500">0</h2>
-              <h5 class="text-white text-uppercase mb-0">Hoc vien</h5>
+            <div class="text-center">
+              <h2 data-animation-duration="2000" data-value="<%= countDK %>" class="animate-number text-white mt-0 font-38 font-weight-500">0</h2>
+              <h5 class="text-white text-uppercase mb-0">Lượt đăng ký</h5>
             </div>
           </div>
           <div class="col-xs-12 col-sm-6 col-md-3 mb-md-50">
             <div class="funfact text-center">
-          
-              <h2 data-animation-duration="2000" data-value="675" class="animate-number text-white mt-0 font-38 font-weight-500">0</h2>
-              <h5 class="text-white text-uppercase mb-0">Khoa hoc</h5>
+              <h2 data-animation-duration="2000" data-value="<%=countKH %>" class="animate-number text-white mt-0 font-38 font-weight-500">0</h2>
+              <h5 class="text-white text-uppercase mb-0">Khóa học</h5>
             </div>
           </div>
           <div class="col-xs-12 col-sm-6 col-md-3 mb-md-50">
             <div class="funfact text-center">
            
-              <h2 data-animation-duration="2000" data-value="248" class="animate-number text-white mt-0 font-38 font-weight-500">0</h2>
-              <h5 class="text-white text-uppercase mb-0">Doi tac</h5>
+              <h2 data-animation-duration="2000" data-value="<%= countDV %>" class="animate-number text-white mt-0 font-38 font-weight-500">0</h2>
+              <h5 class="text-white text-uppercase mb-0">Đối tác</h5>
             </div>
           </div>
           <div class="col-xs-12 col-sm-6 col-md-3 mb-md-0">
             <div class="funfact text-center">
-     
-              <h2 data-animation-duration="2000" data-value="24" class="animate-number text-white mt-0 font-38 font-weight-500">0</h2>
-              <h5 class="text-white text-uppercase mb-0">Thanh tuu</h5>
+              <h2 data-animation-duration="2000" data-value="<%= countBL %>" class="animate-number text-white mt-0 font-38 font-weight-500">0</h2>
+              <h5 class="text-white text-uppercase mb-0">Lượt tương tác</h5>
             </div>
           </div>
+          <% } %>
         </div>
       </div>
     </section>
@@ -555,54 +554,54 @@
           <div class="row">
             <div class="col-md-6">
 
-              <h2 class="mt-0 mb-0 text-uppercase line-bottom text-white font-28">Happy Student<span class="font-30 text-theme-color-2">.</span></h2>
+              <h2 class="mt-0 mb-0 text-uppercase line-bottom text-white font-28">Cảm nhận của <span class="font-30 text-theme-color-2">học viên</span></h2>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12 mb-10">
-            <div class="owl-carousel-2col boxed" data-dots="true">
+            <div class="tuongTac">
               <div class="item">
                 <div class="testimonial pt-10">
-                  <div class="thumb pull-left mb-0 mr-0 pr-20">
-                    <img width="75" class="img-circle" alt="" src="http://placehold.it/100x100">
+                  <div class=" mb-0 mr-0 pr-20">
+                    <img width="75" class="img-circle" alt="" src="/public/images/profile.jpg">
                   </div>
                   <div class="ml-100 ">
-                    <h4 class="text-white mt-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas vel sint, ut. Quisquam doloremque minus possimus eligendi dolore ad.</h4>
-                    <p class="author mt-20">- <span class="text-theme-color-2">Catherine Grace,</span> <small><em class="text-gray-lightgray">CEO apple.inc</em></small></p>
+                    <h4 class="text-white mt-0">Khả năng tiếng Anh của mình tiến bộ rõ rệt là nhờ chương trình Tiếng Anh Giao tiếp Quốc tế và sự nhiệt tình của các thầy cô tại trung tâm. Đầu tiên, mình được hướng dẫn cách làm quen với ngôn ngữ này một cách tự nhiên nhất. Sự tâm huyết, hài hước của các thầy cô người nước ngoài làm cho giờ học thật thoải mái và dễ tiếp thu.</h4>
+                    <p class="author mt-20">- <span class="text-theme-color-2">Nguyễn Trọng Hưng  -</span> <small><em class="text-gray-lightgray">KHÓA HỌC NGOẠI NGỮ</em></small></p>
                   </div>
                 </div>
               </div>
               <div class="item">
                 <div class="testimonial pt-10">
-                  <div class="thumb pull-left mb-0 mr-0 pr-20">
-                    <img width="75" class="img-circle" alt="" src="http://placehold.it/100x100">
+                  <div class=" mb-0 mr-0 pr-20">
+                    <img width="75" class="img-circle" alt="" src="/public/images/profile.jpg">
                   </div>
                   <div class="ml-100 ">
-                    <h4 class="text-white mt-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas vel sint, ut. Quisquam doloremque minus possimus eligendi dolore ad.</h4>
-                    <p class="author mt-20">- <span class="text-theme-color-2">Catherine Grace,</span> <small><em class="text-gray-lightgray">CEO apple.inc</em></small></p>
+                    <h4 class="text-white mt-0">Khóa học chỉ diễn ra có hai ngày nhưng đã mang đến nhiều điều tốt đẹp, nhiều kiến thức bổ ích và giá trị thiết thực cho những người tham gia. Chắc chắn Cuộc Sống Đúng Nghĩa là một đối tác đào tạo dài hạn cho chúng Tôi trong thời gian sắp tới. Tôi tin với sự giúp đỡ của Cuộc Sống Đúng Nghĩa, đội ngũ nhân viên của chúng Tôi sẽ ngày càng phát triển và hoàn thiện chính mình để đáp ứng cho những ngày càng cao trong công việc.</h4>
+                    <p class="author mt-20">- <span class="text-theme-color-2">Lê Huyền Ngọc -</span> <small><em class="text-gray-lightgray">Kỹ năng sống</em></small></p>
                   </div>
                 </div>
               </div>
               <div class="item">
                 <div class="testimonial pt-10">
-                  <div class="thumb pull-left mb-0 mr-0 pr-20">
-                    <img width="75" class="img-circle" alt="" src="http://placehold.it/100x100">
+                  <div class=" mb-0 mr-0 pr-20">
+                    <img width="75" class="img-circle" alt="" src="/public/images/profile.jpg">
                   </div>
                   <div class="ml-100 ">
-                    <h4 class="text-white mt-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas vel sint, ut. Quisquam doloremque minus possimus eligendi dolore ad.</h4>
-                    <p class="author mt-20">- <span class="text-theme-color-2">Catherine Grace,</span> <small><em class="text-gray-lightgray">CEO apple.inc</em></small></p>
+                    <h4 class="text-white mt-0">Tôi đánh giá rất cao tính ứng dụng thực tế từ các Chương trình đào tạo của Cuộc Sống Đúng Nghĩa. Các nhân viên sau khi tham gia khóa học đều có sự thay đổi về tư duy cách hành động và hiệu quả công việc được tăng lên đang kể</h4>
+                    <p class="author mt-20">- <span class="text-theme-color-2">Nguyễn Hoàng Nhã -</span> <small><em class="text-gray-lightgray">Kỹ năng sống</em></small></p>
                   </div>
                 </div>
               </div>
               <div class="item">
                 <div class="testimonial pt-10">
-                  <div class="thumb pull-left mb-0 mr-0 pr-20">
-                    <img width="75" class="img-circle" alt="" src="http://placehold.it/100x100">
+                  <div class=" mb-0 mr-0 pr-20">
+                    <img width="75" class="img-circle" alt="" src="/public/images/profile.jpg">
                   </div>
                   <div class="ml-100 ">
-                    <h4 class="text-white mt-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas vel sint, ut. Quisquam doloremque minus possimus eligendi dolore ad.</h4>
-                    <p class="author mt-20">- <span class="text-theme-color-2">Catherine Grace,</span> <small><em class="text-gray-lightgray">CEO apple.inc</em></small></p>
+                    <h4 class="text-white mt-0">Khả năng tiếng Anh của mình tiến bộ rõ rệt là nhờ chương trình Quốc tế và sự nhiệt tình của các thầy cô tại trung tâm. Đầu tiên, mình được hướng dẫn cách làm quen với ngôn ngữ này một cách tự nhiên nhất.</h4>
+                    <p class="author mt-20">- <span class="text-theme-color-2">Nguyễn Thị Mai Hoa</span> <small><em class="text-gray-lightgray">TIN HỌC VĂN PHÒNG</em></small></p>
                   </div>
                 </div>
               </div>
@@ -649,7 +648,7 @@
                     </div>
                   </div>
                   <p class="mt-10 fr-view"><%- ele.noiDung.slice(0,100) %></p>
-                  <a href="/tin-tuc/chi-tiet/<%= ele._id %>" class="btn-read-more">Xem thêm</a>
+                  <a href="/tin-tuc/chi-tiet/<%= ele._id %>" class="btn btn-info">Xem thêm<i class="fas fa-chevron-circle-down" style="padding-left: 13%;"></i></a>
                   <div class="clearfix"></div>
                 </div>
               </article>

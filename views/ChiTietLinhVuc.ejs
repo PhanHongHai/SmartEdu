@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<% include ../component/home/head %>
+
+<body class="">
+    <div id="wrapper" class="clearfix">
+        <!-- preloader -->
+        <% include ../component/home/header %>
+        <!-- Start main-content -->
+        <div class="main-content">
+
+            <section class="inner-header divider parallax layer-overlay overlay-dark-5"
+                data-bg-img="http://placehold.it/1920x1280">
+                <div class="container pt-70 pb-20">
+                    <!-- Section Content -->
+                    <div class="section-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="title text-white">Chi tiết khóa học</h2>
+                                <ol class="breadcrumb text-left text-black mt-10">
+                                    <li><a href="#">Trang chủ</a></li>
+                                    <li><a href="#">Khóa học</a></li>
+                                    <li class="active text-gray-silver">Chi tiết</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="container mt-30 mb-30 pt-30 pb-30">
+                    <div class="row">
+                        <div class="col-md-9 pull-right flip sm-pull-none">
+                            <div class="blog-posts">
+                                <div class="col-md-12">
+                                    <div class="row list-dashed listBV">
+                                    <% if(idLV != null){ %>
+                                    <input type="hidden" id="idLV" value="<%= idLV%>">
+                                    <% } %>
+
+                                    </div>
+                                </div>
+                              
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="sidebar sidebar-right mt-sm-30">
+                                <div class="widget">
+                                        <h5 class="widget-title line-bottom">Lĩnh vực<span class="text-theme-color-2">Tin tức </span></h5>
+                                    <ul class="list-divider list-border list check">
+                                        <% if(listLV != null){ %>
+                                        <% listLV.forEach(function(ele){ %>
+                                        <li><a href="/khoa-hoc/linh-vuc/<%= ele._id %>"><%= ele.ten %></a></li>
+                                     <% })} %>
+                                    </ul>
+                                </div>           
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+            <!-- end main-content -->
+        </div>
+
+        <!-- Footer -->
+        <% include ../component/home/footer %>
+        <% include ../component/home/script %>
+
+        <a class="scrollToTop" href="#"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <!-- end wrapper -->
+
+    <!-- Footer Scripts -->
+
+
+</body>
+
+</html>

@@ -1,5 +1,5 @@
 $(document).ready(function () {
- 
+
   $(".owl-avcde").owlCarousel({
     animateOut: 'fadeOutLeft',
     animateIn: 'fadeInDown',
@@ -16,28 +16,41 @@ $(document).ready(function () {
     navText: ''
   });
 
-  $('.myCarousel').owlCarousel({
-    loop: true,
-    margin: 10, 
+  $('.tuongTac').slick({
+    slidesToShow: 2,
+    slidesToScroll: 1,
     autoplay: true,
-    loop: true,
-    autoplayTimeout: 6000,
-    responsiveClass: true,
-    responsive: {
-      0: {
-        items: 1,
-        nav: true
+    autoplaySpeed: 2000,
+    infinite: false,
+    speed: 300,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
       },
-      600: {
-        items: 3,
-        nav: false
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
       },
-      1000: {
-        items: 5,
-        nav: true,
-        loop: false
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
       }
-    }
+      // You can unslick at a given breakpoint now by adding:
+      // settings: "unslick"
+      // instead of a settings object
+    ]
   });
 
   $('.owl-next').click(function () {

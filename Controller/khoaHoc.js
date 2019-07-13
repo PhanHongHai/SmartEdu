@@ -57,6 +57,26 @@ module.exports = {
         else
             res.redirect('/login');
     },
+    getListKH:async (req,res) => {
+        let id=req.params.idLV.toString();
+        id=mongoose.Types.ObjectId(id);
+        let list=await modelKH.model.aggregate([
+            {
+                $lookup:{
+                    from:'congTacVien',
+                    localField:'idDV',
+                    foreignField:'id',
+                    as:'dv'
+                }
+            },
+            {
+                $match:{idLV:id}
+            }
+        ]);
+        let total=await modelKH.model.find({idLV:id}).countDocuments();
+        total=total /5;
+        res.status(200).send({list:list,total:total});
+    },
     addKH: (req, res) => {
         console.log(req.body);
         /*

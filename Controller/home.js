@@ -5,6 +5,8 @@ const modelQ = require('../Model/Queue');
 const dateFormat = require('dateformat');
 const modelTB = require('../Model/ThongBao');
 const modelDK = require('../Model/DonDangKy');
+const modelBL = require('../Model/BinhLuan');
+const modelDV=require('../Model/Partner');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 const config = require('../constants/config');
@@ -63,7 +65,19 @@ module.exports = {
                 $limit: 20
             }
         ]);
-        res.render('home', { listBV, listLV, listKH });
+        let countDV=await modelKH.model.find().countDocuments();
+        let countDK=await modelKH.model.find().countDocuments();
+        let countKH=await modelKH.model.find({trangThai:1}).countDocuments();
+        let countBL=await modelBL.model.find().countDocuments();
+        res.render('home', { listBV, listLV, listKH,countDV,countDK,countBL,countKH });
+    },
+    loadBaiVietByLV: async (req, res) => {
+        let listLV = await modelLV.model.find();
+        res.render('ChiTietLinhVuc', { listLV, idLV: req.params.idLV });
+    },
+    loadKhoaHocByLV: async (req, res) => {
+        let listLV = await modelLV.model.find();
+        res.render('ChiTietKhoaHocByLV', { listLV, idLV: req.params.idLV });
     },
     detailBV: async (req, res) => {
         let id = mongoose.Types.ObjectId(req.params.idBV);
@@ -81,6 +95,7 @@ module.exports = {
                 $match: { _id: id }
             }
         ]);
+        let binhLuan=await modelBL.model.find({idBV:id}).sort({thoiGian:-1}).limit(4);
         let tinLQ = await modelBV.model.aggregate([
             {
                 $lookup: {
@@ -97,7 +112,7 @@ module.exports = {
                 $limit: 4
             }
         ]);
-        res.render('ChiTietBaiViet', { listLV, tinLQ, detail });
+        res.render('ChiTietBaiViet', { listLV, tinLQ, detail,binhLuan });
     },
     detailKH: async (req, res) => {
         let id = mongoose.Types.ObjectId(req.params.idKH);
@@ -185,6 +200,17 @@ module.exports = {
             }
             else
                 res.status(500).send({ mess: 0 });
+        }
+        else
+            res.status(500).send({ mess: 0 });
+    },
+    binhLuan: async (req, res) => {
+        let dateNow = new Date();
+        let thoiGian=dateFormat(dateNow, "dd-mm-yyyy");
+        let data = { ...req.body, thoiGian};
+        let kt = await modelBL.method.addBL(data);
+        if (kt == 1) {
+            res.status(201).send({ mess: 1,thoiGian});
         }
         else
             res.status(500).send({ mess: 0 });
