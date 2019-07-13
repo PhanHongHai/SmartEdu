@@ -6,7 +6,7 @@ const mongoose=require('mongoose');
 const routeAD=require('./routes/routeAd');
 const routePartner=require('./routes/routePartner');
 const routeHome=require('./routes/routeHome');
-const dbHost='mongodb+srv://honghai:<honghai>@tuyensinh-fpy5k.mongodb.net/test?retryWrites=true&w=majority';
+const dbHost='mongodb://honghai:<honghai>@tuyensinh-fpy5k.mongodb.net/test?retryWrites=true&w=majority';
 // connect mongodb
 mongoose.connect(dbHost,{useNewUrlParser: true,useFindAndModify: false})
 .then(
