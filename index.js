@@ -6,13 +6,15 @@ const mongoose=require('mongoose');
 const routeAD=require('./routes/routeAd');
 const routePartner=require('./routes/routePartner');
 const routeHome=require('./routes/routeHome');
-const dbHost='mongodb://honghai:<honghai>@tuyensinh-fpy5k.mongodb.net/test?retryWrites=true&w=majority';
+const dbHost='mongodb+srv://honghai:honghai@tuyensinh-fpy5k.mongodb.net';
 // connect mongodb
-mongoose.connect(dbHost,{useNewUrlParser: true,useFindAndModify: false})
+mongoose.connect(dbHost,{dbName:'tuyensinh',useNewUrlParser: true,useFindAndModify: false})
 .then(
     () => {console.log('connected mongodb')},
-    err =>{throw err;}
-);
+)
+.catch((err) => {
+    console.log(err);
+});
 mongoose.set('useCreateIndex', true);
 //#####################################
 app.set('view engine', 'ejs');
