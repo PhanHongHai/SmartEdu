@@ -2,6 +2,7 @@ const modelBV = require('../Model/BaiViet');
 const modelLV = require('../Model/LinhVuc');
 const dateFormat = require('dateformat');
 const mongoose = require('mongoose');
+const modelBL=require('./binhLuan');
 module.exports = {
     loadPage: async (req, res) => {
         if (req.isAuthenticated()) {
@@ -80,7 +81,7 @@ module.exports = {
     deleteBV: (req, res) => {
         let id = mongoose.Types.ObjectId(req.params.idBV);
         modelBV.method.deleteBV(id);
-        modelBL.method.deleteBL(id);
+      //  modelBL.method.deleteBL(id);
         res.redirect('/admin/bai-viet');
     }
 }

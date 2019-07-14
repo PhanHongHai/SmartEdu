@@ -54,7 +54,7 @@ $(document).ready(function () {
             html += "<h4 class='entry-title text-white text-uppercase m-0 mt-5'>";
             html += `<a href="/tin-tuc/chi-tiet/${ele._id}">${ele.tieuDe}</a></h4>`;
             html += "</div></div></div>";
-            html += `<p class="mt-10 fr-view">${ele.noiDung.slice(0, 100)}</p>`;
+            html += `<p class="mt-10 fr-view">${ele.noiDung.slice(30,250)}</p>`;
             html += `<a href='/tin-tuc/chi-tiet/${ele._id}' class='btn btn-info'>Đọc thêm<i class="fas fa-info-circle pl-5"></i></a>`;
             html += "<div class='clearfix'></div>";
             html += "</div> </article>";
