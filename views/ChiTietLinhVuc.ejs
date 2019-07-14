@@ -34,26 +34,29 @@
                             <div class="blog-posts">
                                 <div class="col-md-12">
                                     <div class="row list-dashed listBV">
-                                    <% if(idLV != null){ %>
-                                    <input type="hidden" id="idLV" value="<%= idLV%>">
-                                    <% } %>
+                                        <% if(idLV != null){ %>
+                                        <input type="hidden" id="idLV" value="<%= idLV%>">
+                                        <% }else{ %>
+                                        <h4>Không có bài viết</h4>
+                                        <% }%> %>
 
                                     </div>
                                 </div>
-                              
+
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="sidebar sidebar-right mt-sm-30">
                                 <div class="widget">
-                                        <h5 class="widget-title line-bottom">Lĩnh vực<span class="text-theme-color-2">Tin tức </span></h5>
+                                    <h5 class="widget-title line-bottom">Lĩnh vực<span class="text-theme-color-2">Tin
+                                            tức </span></h5>
                                     <ul class="list-divider list-border list check">
-                                        <% if(listLV != null){ %>
+                                        <% if(listLV.length != 0){ %>
                                         <% listLV.forEach(function(ele){ %>
-                                        <li><a href="/khoa-hoc/linh-vuc/<%= ele._id %>"><%= ele.ten %></a></li>
-                                     <% })} %>
+                                        <li><a href="/bai-viet/linh-vuc/<%= ele._id %>"><%= ele.ten %></a></li>
+                                        <% })} %>
                                     </ul>
-                                </div>           
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -37,6 +37,16 @@ module.exports = {
             },
             {
                 $limit: 3
+            },
+            {
+                $project:{
+                    tieuDe:"$tieuDe",
+                    banner:"$banner",
+                    ngayTao:"$ngayTao",
+                    noiDung:"$noiDung",
+                    lv:"$lv",
+                    numberCM:{$size:'$lv'}
+                }
             }
         ]);
         let listKH = await modelKH.model.aggregate([
@@ -65,12 +75,10 @@ module.exports = {
                 $limit: 20
             }
         ]);
-        console.log(listKH);
         let countDV = await modelKH.model.find().countDocuments();
-        let countDK = await modelKH.model.find().countDocuments();
+        let countDK = await modelDK.model.find().countDocuments();
         let countKH = await modelKH.model.find({ trangThai: 1 }).countDocuments();
         let countBL = await modelBL.model.find().countDocuments();
-       
         res.render('home', { listBV, listLV, listKH, countDV, countDK, countBL, countKH, user: req.user });
     },
     loadBaiVietByLV: async (req, res) => {
@@ -185,7 +193,7 @@ module.exports = {
                             from: 'phanhonghai97@gmail.com',
                             to: req.body.email,
                             subject: 'Thông báo đăng ký khóa học', // Tiêu đề mail
-                            text: 'Chuc mung ban dang ky thanh cong', // Nội dung mail dạng text
+                            text: 'Bạn sẽ nhận được thông báo từ đơn vị khóa học sớm nhất', // Nội dung mail dạng text
                             html: `<h3></h3>`
                         };
                         //Tiến hành gửi email

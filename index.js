@@ -1,14 +1,14 @@
 const express=require('express');
 const http=require('http');
 const app=express();
+const config =require('./constants/config');
 const port=process.env.PORT || 5000;
 const mongoose=require('mongoose');
 const routeAD=require('./routes/routeAd');
 const routePartner=require('./routes/routePartner');
 const routeHome=require('./routes/routeHome');
-const url=process.env.MONGODB_URI || 'mongodb+srv://honghai:honghai@tuyensinh-fpy5k.mongodb.net';
 // connect mongodb
-mongoose.connect(url,{dbName:'tuyensinh',useNewUrlParser: true,useFindAndModify: false})
+mongoose.connect(config.urlDB,{dbName:'tuyensinh',useNewUrlParser: true,useFindAndModify: false})
 .then(
     () => {console.log('connected mongodb')},
 )
