@@ -131,8 +131,10 @@ module.exports = {
             idDV: req.user[0]._id
         };
         let kt = await modelQ.method.addQ(data);
-        if (kt == 1)
+        if (kt == 1){
+           let rs= modelKH.method.choYC(req.params.idKH);
             res.status(200).send({ mess: 1 });
+        }
         else
             res.status(500).send({ mess: 0 });
     },

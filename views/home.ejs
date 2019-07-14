@@ -495,7 +495,7 @@
                     </div>
                     <div class="content text-left flip p-25 pt-0">
                       <h4 class="line-bottom mb-10"><%= ele.tenKH %></h4>
-                      <p class="fr-view"><%- ele.noiDung.slice(0,140) %></p>
+            
                       <div class="display-flex flex-wrap">
                           <a class="btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10" href="/khoa-hoc/chi-tiet/<%=ele._id%>">Chi tiết</a>
                           <small style="font-size: 10px; color: red; padding-left: 6%;"><%= ele.ctv[0].tenDV%></small>
@@ -641,7 +641,7 @@
                     <div class="entry-date media-left text-center flip bg-theme-colored pt-5 pr-15 pb-5 pl-15">
                       <p class="font-16 text-white font-weight-600 border-bottom"><%= ele.ngayTao.slice(0,11) %></p>
                       <p class="font-12 text-white text-uppercase"><%= ele.ngayTao.slice(11,ele.ngayTao.length) %></p>
-                      <p class="font-16 text-white text-uppercase"><i class="far fa-comment-dots" style="padding-right: 4%;"></i><%= ele.numberCM %></p>
+                      <p class="font-16 text-white text-uppercase"><i class="far fa-comment-dots" style="padding-right: 4%;"></i><%= ele.numberCM-1 %></p>
                     </div>
                     <div class="media-body pl-15">
                       <div class="event-content pull-left flip">
@@ -650,7 +650,7 @@
                       </div>
                     </div>
                   </div>
-                  <p class="mt-10 fr-view"><%- ele.noiDung.slice(0,100) %></p>
+                  <p class="mt-10 fr-view"><%- ele.noiDung.slice(30,150)%>...</p>
                   <a href="/tin-tuc/chi-tiet/<%= ele._id %>" class="btn btn-info">Xem thêm<i class="fas fa-chevron-circle-down" style="padding-left: 13%;"></i></a>
                   <div class="clearfix"></div>
                 </div>

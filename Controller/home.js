@@ -75,7 +75,7 @@ module.exports = {
                 $limit: 20
             }
         ]);
-        let countDV = await modelKH.model.find().countDocuments();
+        let countDV = await modelDV.model.find().countDocuments();
         let countDK = await modelDK.model.find().countDocuments();
         let countKH = await modelKH.model.find({ trangThai: 1 }).countDocuments();
         let countBL = await modelBL.model.find().countDocuments();

@@ -60,15 +60,19 @@
                     </div>
                     <div class="body">
                         <h6 class="m-b-15"><%= ele.tenKH %>
-                            <% if(ele.trangThai == 1){ %>
+                            <% if(ele.trangThai == 1){ %>f
                             <span class="badge badge-success float-right">
                                 Mở
                             </span>
-                            <% } else{ %>
+                            <% } else if(ele.trangThai == 0){ %>
                             <span class="badge badge-warning float-right">
-                                Đóng
+                                Chờ
                             </span>
-                            <% }%>
+                            <% } else if(ele.trangThai == -1){ %>
+                                <span class="badge badge-danger float-right">
+                                    Đóng
+                                </span>
+                                <% } %>  
                         </h6>
                         <img class="img-fluid" src="/public/uploads/<%= ele.banner%>" alt="">
                         <%= ele.gioiThieu.slice(0,100) %>
@@ -112,11 +116,12 @@
                                                     phí: <%= ele.hocPhi %> VNĐ</p>
                                                 <p class="text-muted m-b-0">
                                                     <% if(ele.trangThai == 0){ %>
-                                                    <i class="fas fa-toggle-off pr-2"></i>
-                                                    <% }else{ %>
-                                                    <i class="fas fa-toggle-on pr-2"></i>
-                                                    <% }%>
-                                                    Trạng thái: <%= ele.trangThai %>
+                                                    <i class="fas fa-toggle-off pr-2"></i>  Trạng thái: Chờ
+                                                    <% }else if(ele.trangThai==-1){ %>
+                                                        <i class="fas fa-toggle-off pr-2"></i> Trạng thái: Đóng
+                                                    <% } else{%>
+                                                        <i class="fas fa-toggle-on pr-2"></i> Trạng thái: Mở
+                                                            <% } %>  
                                                 </p>
                                             </div>
                                         </div>

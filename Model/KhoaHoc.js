@@ -17,8 +17,8 @@ var khoahoc=new mongoose.Schema({
     },
     banner:String,
     trangThai:{
-        type:Number,  // 0 - close  //  1 - open // 
-        default:0
+        type:Number,  // -1  -  close  // 0 - wait  //  1 - open // 
+        default:-1
     },
     hocPhi:{
         type:Number,
@@ -79,6 +79,15 @@ var method={
                 return resolve(1);
             });
         });
+    },
+    choYC:(id) => {
+        return new Promise((resolve,reject) => {
+            model.findByIdAndUpdate(id,{trangThai:0},(err) => {
+                if(err) return reject(err);
+                return resolve(1);
+            });
+        });
+
     }
 };
 module.exports={

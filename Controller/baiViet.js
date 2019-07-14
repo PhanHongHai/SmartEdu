@@ -24,13 +24,13 @@ module.exports = {
         else
             res.redirect('/logIn');
     },
-    getListBV:async (req,res) => {
-        let id=req.params.idLV.toString();
-        id=mongoose.Types.ObjectId(req.params.idLV)
-        let list=await modelBV.model.find({idLV:id});
-        let total=await modelBV.model.find({idLV:id}).countDocuments();
+    getListBV: async (req, res) => {
+        let id = req.params.idLV.toString();
+        id = mongoose.Types.ObjectId(req.params.idLV)
+        let list = await modelBV.model.find({ idLV: id });
+        let total = await modelBV.model.find({ idLV: id }).countDocuments();
         total = total / 5;
-        res.status(200).json({total:total,list:list});
+        res.status(200).json({ total: total, list: list });
     },
     addBV: (req, res) => {
         /*
@@ -38,12 +38,12 @@ module.exports = {
         dateFormat(data.ngayBVaiGiang,'dd/mm/yyyy');
         */
         let date = new Date();
-        let data=null;
+        let data = null;
         let postTime = dateFormat(date, "d/mm/yyyy, h:MM tt");
         if (req.file)
-             data = { ...req.body, banner: req.file.filename, ngayTao: postTime };
+            data = { ...req.body, banner: req.file.filename, ngayTao: postTime };
         else
-             data = { ...req.body, ngayTao: postTime };
+            data = { ...req.body, ngayTao: postTime };
         modelBV.method.addBV(data);
         res.redirect('/admin/bai-viet');
     },
@@ -69,7 +69,11 @@ module.exports = {
     },
     updateBV: (req, res) => {
         let id = mongoose.Types.ObjectId(req.params.idBV);
-        let data = req.body;
+        let data = null;
+        if (req.file)
+            data = { ...req.body, banner: req.file.filename};
+        else
+            data = { ...req.body};
         modelBV.method.updateBV(id, data);
         res.redirect('/admin/bai-viet');
     },

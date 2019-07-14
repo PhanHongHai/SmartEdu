@@ -17,7 +17,7 @@ const upload_img = require('../Controller/img_upload');
 const ctrlLV = require('../Controller/linhVuc');
 const store = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'server/public/uploads')
+        cb(null, 'public/uploads')
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname)
