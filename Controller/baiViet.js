@@ -80,6 +80,7 @@ module.exports = {
     deleteBV: (req, res) => {
         let id = mongoose.Types.ObjectId(req.params.idBV);
         modelBV.method.deleteBV(id);
+        modelBL.method.deleteBL(id);
         res.redirect('/admin/bai-viet');
     }
 }

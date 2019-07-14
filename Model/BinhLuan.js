@@ -28,9 +28,9 @@ var method={
             });
         });
     },
-    deleteBV:(id) => {
+    deleteBL:(id) => {
         return new Promise((resolve,reject) => {
-            model.findByIdAndRemove(id,(err) => {
+            model.deleteMany({idBV:id},(err) => {
                 if(err) return reject(err);
                 return resolve(1);
             });

@@ -23,6 +23,8 @@ $(document).ready(function () {
     autoplaySpeed: 2000,
     infinite: false,
     speed: 300,
+    arrows:false,
+    dots:true,
     responsive: [
       {
         breakpoint: 1024,
