@@ -344,7 +344,45 @@
           </div>
         </div>
       </section>
+      <!-- Divider: Funfact -->
+      <section class="divider parallax layer-overlay overlay-theme-colored-9" data-bg-img="/public/images/bnn1.jpg"
+        data-parallax-ratio="0.7">
+        <div class="container">
+          <div class="row">
+            <% if(countDK != null && countKH != null && countDV != null && countBL != null){ %>
+            <div class="col-xs-12 col-sm-6 col-md-3 mb-md-50">
+              <div class="text-center">
+                <h2 data-animation-duration="2000" data-value="<%= countDK %>"
+                  class="animate-number text-white mt-0 font-38 font-weight-500">0</h2>
+                <h5 class="text-white text-uppercase mb-0">Lượt đăng ký</h5>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 mb-md-50">
+              <div class="funfact text-center">
+                <h2 data-animation-duration="2000" data-value="<%=countKH %>"
+                  class="animate-number text-white mt-0 font-38 font-weight-500">0</h2>
+                <h5 class="text-white text-uppercase mb-0">Khóa học</h5>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 mb-md-50">
+              <div class="funfact text-center">
 
+                <h2 data-animation-duration="2000" data-value="<%= countDV %>"
+                  class="animate-number text-white mt-0 font-38 font-weight-500">0</h2>
+                <h5 class="text-white text-uppercase mb-0">Đối tác</h5>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 mb-md-0">
+              <div class="funfact text-center">
+                <h2 data-animation-duration="2000" data-value="<%= countBL %>"
+                  class="animate-number text-white mt-0 font-38 font-weight-500">0</h2>
+                <h5 class="text-white text-uppercase mb-0">Lượt tương tác</h5>
+              </div>
+            </div>
+            <% } %>
+          </div>
+        </div>
+      </section>
       <!-- Section: COURSES -->
       <section id="gallery" class="bg-lighter">
         <div class="container">
@@ -391,7 +429,7 @@
                             <div class="display-flex flex-wrap">
                               <a class="btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10"
                                 href="/khoa-hoc/chi-tiet/<%=ele._id%>">Chi tiết</a>
-                           
+
                             </div>
 
                           </div>
@@ -408,45 +446,6 @@
               </div>
             </div>
           </div>
-      </section>
-      <!-- Divider: Funfact -->
-      <section class="divider parallax layer-overlay overlay-theme-colored-9" data-bg-img="/public/images/bnn1.jpg"
-        data-parallax-ratio="0.7">
-        <div class="container">
-          <div class="row">
-            <% if(countDK != null && countKH != null && countDV != null && countBL != null){ %>
-            <div class="col-xs-12 col-sm-6 col-md-3 mb-md-50">
-              <div class="text-center">
-                <h2 data-animation-duration="2000" data-value="<%= countDK %>"
-                  class="animate-number text-white mt-0 font-38 font-weight-500">0</h2>
-                <h5 class="text-white text-uppercase mb-0">Lượt đăng ký</h5>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 mb-md-50">
-              <div class="funfact text-center">
-                <h2 data-animation-duration="2000" data-value="<%=countKH %>"
-                  class="animate-number text-white mt-0 font-38 font-weight-500">0</h2>
-                <h5 class="text-white text-uppercase mb-0">Khóa học</h5>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 mb-md-50">
-              <div class="funfact text-center">
-
-                <h2 data-animation-duration="2000" data-value="<%= countDV %>"
-                  class="animate-number text-white mt-0 font-38 font-weight-500">0</h2>
-                <h5 class="text-white text-uppercase mb-0">Đối tác</h5>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 mb-md-0">
-              <div class="funfact text-center">
-                <h2 data-animation-duration="2000" data-value="<%= countBL %>"
-                  class="animate-number text-white mt-0 font-38 font-weight-500">0</h2>
-                <h5 class="text-white text-uppercase mb-0">Lượt tương tác</h5>
-              </div>
-            </div>
-            <% } %>
-          </div>
-        </div>
       </section>
 
       <!-- Divider: testimonials -->
@@ -465,11 +464,16 @@
           <div class="row">
             <div class="col-md-12 mb-10">
               <div class="tuongTac">
-                      <div class="item" style="padding-right: 2%;"> <a href="#"><img src="/public/images/anh.jpg" alt=""></a></div>
-                      <div class="item pr-3" style="padding-right: 2%;"> <a href="#"><img src="/public/images/anh.jpg" alt=""></a></div>
-                      <div class="item pr-3" style="padding-right: 2%;"> <a href="#"><img src="/public/images/anh.jpg" alt=""></a></div>
-                      <div class="item pr-3" style="padding-right: 2%;"> <a href="#"><img src="/public/images/anh.jpg" alt=""></a></div>
-                      <div class="item pr-3" style="padding-right: 2%;"> <a href="#"><img src="/public/images/anh.jpg" alt=""></a></div>
+                <div class="item" style="padding-right: 2%;"> <a href="#"><img src="/public/images/anh.jpg" alt=""></a>
+                </div>
+                <div class="item pr-3" style="padding-right: 2%;"> <a href="#"><img src="/public/images/anh.jpg"
+                      alt=""></a></div>
+                <div class="item pr-3" style="padding-right: 2%;"> <a href="#"><img src="/public/images/anh.jpg"
+                      alt=""></a></div>
+                <div class="item pr-3" style="padding-right: 2%;"> <a href="#"><img src="/public/images/anh.jpg"
+                      alt=""></a></div>
+                <div class="item pr-3" style="padding-right: 2%;"> <a href="#"><img src="/public/images/anh.jpg"
+                      alt=""></a></div>
               </div>
             </div>
           </div>
@@ -539,17 +543,17 @@
 
   <!-- Footer Scripts -->
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-  (function(){
-  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-  s1.async=true;
-  s1.src='https://embed.tawk.to/5d2d8c3fbfcb827ab0cbfdab/default';
-  s1.charset='UTF-8';
-  s1.setAttribute('crossorigin','*');
-  s0.parentNode.insertBefore(s1,s0);
-  })();
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/5d2d8c3fbfcb827ab0cbfdab/default';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode.insertBefore(s1, s0);
+    })();
   </script>
   <!--End of Tawk.to Script-->
 </body>

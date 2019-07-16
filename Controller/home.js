@@ -84,7 +84,7 @@ module.exports = {
     loadTuyenSinh:async (req,res) => {
         let listLV = await modelLV.model.find({}).limit(5);
           
-        res.render('tuyenSinh', { listBV, listLV, user: req.user });
+        res.render('tuyenSinh', { listLV, user: req.user });
     },
     loadBaiVietByLV: async (req, res) => {
         let listLV = await modelLV.model.find();
