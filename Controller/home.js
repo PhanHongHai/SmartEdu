@@ -79,8 +79,12 @@ module.exports = {
         let countDK = await modelDK.model.find().countDocuments();
         let countKH = await modelKH.model.find({ trangThai: 1 }).countDocuments();
         let countBL = await modelBL.model.find().countDocuments();
-        console.log(req.user);
         res.render('home', { listBV, listLV, listKH, countDV, countDK, countBL, countKH, user: req.user });
+    },
+    loadTuyenSinh:async (req,res) => {
+        let listLV = await modelLV.model.find({}).limit(5);
+          
+        res.render('tuyenSinh', { listBV, listLV, user: req.user });
     },
     loadBaiVietByLV: async (req, res) => {
         let listLV = await modelLV.model.find();

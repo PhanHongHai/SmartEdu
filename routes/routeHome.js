@@ -22,6 +22,7 @@ router.use(bodyParser.json({ limit: '50mb' }));
 
 
 router.get('/',ctrlHome.loadIndex)
+router.get('/tuyen-sinh',ctrlHome.loadTuyenSinh)
 router.get('/tin-tuc/chi-tiet/:idBV',ctrlHome.detailBV);
 router.get('/khoa-hoc/chi-tiet/:idKH',ctrlHome.detailKH);
 router.get('/khoa-hoc/linh-vuc/getList/:idLV',ctrlKH.getListKH);
