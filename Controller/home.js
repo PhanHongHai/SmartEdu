@@ -7,6 +7,7 @@ const modelTB = require('../Model/ThongBao');
 const modelDK = require('../Model/DonDangKy');
 const modelBL = require('../Model/BinhLuan');
 const modelDV = require('../Model/Partner');
+const modelDT = require('../Model/tinDaoTao');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 const config = require('../constants/config');
@@ -83,8 +84,13 @@ module.exports = {
     },
     loadTuyenSinh:async (req,res) => {
         let listLV = await modelLV.model.find({}).limit(5);
-          
-        res.render('tuyenSinh', { listLV, user: req.user });
+        let nganHan=await modelDT.model.find({danhMuc:1});
+        let trungCap=await modelDT.model.find({danhMuc:2}).sort({ngayTao:-1}).limit(1);
+        let caoDang=await modelDT.model.find({danhMuc:3}).sort({ngayTao:-1}).limit(1);
+        let daiHoc=await modelDT.model.find({danhMuc:4}).sort({ngayTao:1}).limit(4);
+        let daoTao=await modelDT.model.find({danhMuc:5}).sort({ngayTao:-1}).limit(2);
+        let duHoc=await modelDT.model.find({danhMuc:6}).sort({ngayTao:-1}).limit(4);
+        res.render('tuyenSinh', { listLV ,nganHan,trungCap,caoDang,daiHoc,duHoc,daoTao});
     },
     loadBaiVietByLV: async (req, res) => {
         let listLV = await modelLV.model.find();

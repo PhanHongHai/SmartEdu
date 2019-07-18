@@ -36,9 +36,8 @@ module.exports = {
             res.redirect('/login-partner');
     },
     loadPageIndex: async (req, res) => {
-        if (req.session.count == null)
-            req.session.count = 0;
-        if (req.isAuthenticated()) {
+        console.log(req.user);
+        if (req.isAuthenticated() && (req.user.role == 1 || req.user.role == 0 )) {
             let listQ = await modelQ.model.aggregate([
                 {
                     $lookup: {
@@ -52,7 +51,7 @@ module.exports = {
                     $sort: { ngay: -1 }
                 }
             ]);
-            res.render('admin', { user: req.user, listQ, path: 'empty', count: req.session.count, mess: req.session.mess });
+            res.render('admin', { user: req.user, listQ, path: 'index' });
         }
         else
             res.redirect('/login');

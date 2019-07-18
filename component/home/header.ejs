@@ -93,23 +93,6 @@
                         <li><a href="/bai-viet/linh-vuc/5d21a5a28ae8350a5088f73f">Tin tức</a></li>
                         <li><a href="/thong-bao">Thông báo</a></li>
                     </ul>
-                    <ul class="pull-right flip hidden-sm hidden-xs">
-                        <li>
-                            <% if(typeof user == "undefined"){ %>
-                            <!-- Modal: donate now Starts -->
-                            <a class="btn btn-colored btn-flat bg-theme-color-2 text-white font-14 font-14 bs-modal-ajax-load mt-0 p-25 pr-15 pl-15"
-                                href="/login-partner">Đăng nhập cộng
-                                tác viên</a>
-                            <!-- Modal: donate now End -->
-                            <% } else{%>
-                            <% user.forEach(function(ele,i){ %>
-                            <a class="btn btn-colored btn-flat bg-theme-color-2 text-white font-14 font-14 bs-modal-ajax-load mt-0 p-25 pr-15 pl-15"
-                                href="/partner">Xin chào ! <%= ele.tenDV %>
-                                <small class="display-block">Nhấm vào để vào trang đối tác</small>
-                            </a>
-                            <% })} %>
-                        </li>
-                    </ul>
 
 
                 </nav>

@@ -5,24 +5,24 @@ const modelLV = require('../Model/LinhVuc');
 const modelKH = require('../Model/KhoaHoc');
 const modelQ = require('../Model/Queue');
 const modelDK = require('../Model/DonDangKy');
+const modelDT = require('../Model/tinDaoTao');
 const mongoose = require('mongoose');
+const dateFormat=require('dateformat');
 module.exports = {
     loadIndex: async (req, res) => {
-        if (req.isAuthenticated()) {
+        if (req.isAuthenticated() && req.user[0].role == 3) {
             let idDV = mongoose.Types.ObjectId(req.user[0]._id)
             let listTB = await modelTB.model.find({ _id: idDV });
             let count = await modelTB.model.find({ _id: idDV, status: 0 }).countDocuments();
-            res.render('partner', { user: req.user, path: 'home', listTB, count });
+            res.render('congTacVien', { user: req.user, path: 'index', listTB, count,kt:0 });
         }
         else
             res.redirect('/login-partner');
     },
     loadPageQLKH: async (req, res) => {
-        if (req.isAuthenticated()) {
+        if (req.isAuthenticated() && req.user[0].role == 3) {
             let lv = await modelLV.model.find();
             let idDV = mongoose.Types.ObjectId(req.user[0]._id);
-            let listTB = await modelTB.model.find({ _id: idDV, status: 0 });
-            let count = await modelTB.model.find({ _id: idDV, status: 0 }).countDocuments();
             modelKH.model.aggregate(
                 [
                     {
@@ -41,13 +41,20 @@ module.exports = {
                             as: 'dk'
                         }
                     },
+                    {
+                        $match:{idDV:idDV}
+                    }
                 ], (err, list) => {
                     if (err) throw err;
-                    res.render('partner', { path: "khoaHoc", listTB, count: count, linhVuc: lv, list: list, user: req.user, path: 'khoaHoc' });
+                    res.render('congTacVien', { path: "khoaHoc", linhVuc: lv, listKH: list, user: req.user ,kt:1});
                 });
         }
         else
             res.redirect('/login-partner');
+    },
+    loadPageQLBV:async (req,res) => {
+        let listBV=await modelDT.model.find({idDV:req.user[0]._id});
+        res.render('congTacVien',{user:req.user,list:listBV,path:'BaiViet',kt:2});
     },
     loadPageQLDK: async (req, res) => {
         if (req.isAuthenticated()) {
@@ -74,8 +81,7 @@ module.exports = {
                     $match: { idDV: idDV }
                 }
             ]);
-            let count = await modelTB.model.find({ _id: idDV, status: 0 }).countDocuments();
-            res.render('partner', { user: req.user, path: 'dangKy', count, listDK });
+            res.render('congTacVien', { user: req.user, path: 'dangKy', listDK,kt:3 });
         }
         else
             res.redirect('/login-partner');
@@ -116,6 +122,15 @@ module.exports = {
             req.session.mess = 0;
             res.status(500).json({ mess: 'fail' })
         }
+
+    },
+    addBV:(req,res) => {
+        let date = new Date();
+        let data = null;
+        let postTime = dateFormat(date, "d/mm/yyyy, h:MM tt");
+        data = { ...req.body, ngayTao: postTime };
+        modelDT.method.addBV(data);
+        res.redirect('/partner/bai-viet');
 
     }
 

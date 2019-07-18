@@ -94,7 +94,10 @@ router.post('/partner/uploadImg', (req, res) => {
         res.send(data);
     });
 });
-
+// ql bai viet
+router.route('/partner/bai-viet')
+    .get(ctrlPN.loadPageQLBV)
+    .post(upload.single('banner'),ctrlPN.addBV)
 var filesDir = path.join(path.dirname(require.main.filename), "/public/");
 
 if (!fs.existsSync(filesDir)) {

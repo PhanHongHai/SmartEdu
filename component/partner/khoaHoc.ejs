@@ -1,337 +1,263 @@
-<section class="content">
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="body block-header">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-8 col-sm-12">
-                                <h2>Quản lý khóa học</h2>
-                                <ul class="breadcrumb p-l-0 p-b-0 ">
-                                    <li class="breadcrumb-item"><a href="/partner"><i class="fas fa-home"></i></a>
-                                    </li>
-                                    <li class="breadcrumb-item">Trang chủ</li>
-                                    <li class="breadcrumb-item active">Quản lý khóa học</li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6 col-md-4 col-sm-12 text-right">
-                                <button class="btn btn-primary btn-round btn-simple float-right hidden-xs m-l-10"
-                                    data-toggle="modal" data-target="#largeModal">Thêm
-                                    mớii</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- content-->
-        <div class="row clearfix">
-            <% if(list != null){ let i=1; %>
-            <% list.forEach(function(ele){ %>
-            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                <div class="card">
-                    <div class="header">
-                        <h2><strong> Ngày khai giảng </strong><small><%= ele.ngayKhaiGiang %></small></h2>
-                        <ul class="header-dropdown">
-                            <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle"
-                                    data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i
-                                        class="fas fa-ellipsis-h"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-right js-sweetalert">
-                                    <li>
-                                        <a href="javascript:void(0);" data-toggle="modal"
-                                            data-target="#xem<%=i%>">Xem thông tin</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" data-toggle="modal"
-                                            data-target="#dk<%=i%>">Xem đơn đăng ký</a>
-                                    </li>
-                                    <li><a href="javascript:void(0);">Cập nhật</a></li>
-                                    <% if(ele.trangThai != 1){ %>
-                                    <li><a href="javascript:void(0);" data-type="ajax-loader"
-                                            onclick="openCourse('<%= ele._id%>')">Mở khóa
-                                            học</a></li>
-                                    <% } %>
-                                    <li><a href="javascript:void(0);" class="boxs-close" data-toggle="modal"
-                                            data-target="#xoa<%=i%>">Xóa</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="body">
-                        <h6 class="m-b-15"><%= ele.tenKH %>
-                            <% if(ele.trangThai == 1){ %>f
-                            <span class="badge badge-success float-right">
-                                Mở
-                            </span>
-                            <% } else if(ele.trangThai == 0){ %>
-                            <span class="badge badge-warning float-right">
-                                Chờ
-                            </span>
-                            <% } else if(ele.trangThai == -1){ %>
-                                <span class="badge badge-danger float-right">
-                                    Đóng
-                                </span>
-                                <% } %>  
+<div class="content-i">
+    <div class="content-box">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="element-wrapper">
+                    <div>
+                        <h6 class="element-header">
+                            Quản lý khóa học
                         </h6>
-                        <img class="img-fluid" src="/public/uploads/<%= ele.banner%>" alt="">
-                        <%= ele.gioiThieu.slice(0,100) %>
-                        <div class="row">
-                            <div class="col-7">
-                                <h6>Học phí: <%= ele.hocPhi%> VNĐ</h6>
+                    </div>
+                    <div class="element-box">
+                        <div class="col-lg-6 col-md-4 col-sm-12 text-right float-right">
+                            <button class="mr-2 mb-2 btn btn-primary" data-target=".bd-example-modal-lg"
+                                data-toggle="modal"> Thêm</button>
+                            <div aria-hidden="true" aria-labelledby="myLargeModalLabel"
+                                class="modal fade bd-example-modal-lg" role="dialog" tabindex="-1">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                Thêm mới khóa học
+                                            </h5>
+                                            <button aria-label="Close" class="close" data-dismiss="modal"
+                                                type="button"><span aria-hidden="true"> &times;</span></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="form-group">
+                                                    <label class="float-left" for="">Tên khóa học</label><input class="form-control"
+                                                        placeholder="Nhập tên" name="tenKH" type="text">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label  class="float-left" for="">Giới thiệu</label> <textarea rows="4"
+                                                        class="form-control no-resize" placeholder="Giới thiệu khóa học"
+                                                        name="gioiThieu"></textarea>
+                                                </div>
+                                                <label  class="float-left" for="">Nội dung khóa học</label>
+                                                <div class="form-group">
+                                                 
+                                                    <textarea name="noiDung"
+                                                        id="them" placeholder="Nội dung khóa học"></textarea>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label  class="float-left" for=""> Học phí</label>
+                                                            <input type="number" class="form-control"
+                                                                placeholder="Học phí khóa học" name="hocPhi" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label  class="float-left" for="">Lĩnh vực</label>
+                                                            <select class="form-control show-tick" name="idLV">
+                                                                <% if(linhVuc){ %>
+                                                                <% linhVuc.forEach(function(ele){ %>
+                                                                <option value="<%=ele._id%>"><%= ele.ten %></option>
+                                                                <%}) %>
+                                                                <% } %>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label  class="float-left" for=""> Ngày khai giảng</label>
+                                                            <input type="text" class="form-control form-control-sm"
+                                                                id="datepicker" name="ngayKhaiGiang">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label  class="float-left" for="">Ảnh </label>
+                                                            <div class="col-sm-12">
+                                                                <input type="file" class="form-control form-control-sm"
+                                                                    name="banner">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                        <button class="btn btn-primary" type="button">
+                                                               Thêm</button>
+                                                    <button class="btn btn-secondary" data-dismiss="modal"
+                                                        type="button">
+                                                        Hủy</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <% i++; }) %>
-            <% } %>
-        </div>
-    </div>
-</section>
-<!-- Large Size  -->
-<% if(list != null){ let i=1; %>
-<% list.forEach(function(ele){ %>
-<div class="modal fade" id="xem<%= i%>" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="card">
-                    <div class="header">
-                        <h2><strong>Thông tin khóa học</strong></h2>
-                    </div>
-                    <div class="body">
-                        <div class="col-lg-12 col-md-12">
-                            <div class="card">
-                                <div class="body widget-user">
-                                    <div class="row">
-                                        <div class="col-2"><img class="rounded-circle"
-                                                src="/public/uploads/<%= ele.banner%>" alt=""></div>
-                                        <div class="col-10">
-                                            <div class="wid-u-info" style="margin-left: 0 !important;">
-                                                <h5><%= ele.tenKH %></h5>
-                                                <p class="text-muted m-b-0"><i class="fas fa-calendar pr-2"></i>
-                                                    Ngày khai giảng: <%= ele.ngayKhaiGiang %></p>
-                                                <p class="text-muted m-b-0"><i class="fas fa-dollar-sign pr-2"></i>Học
-                                                    phí: <%= ele.hocPhi %> VNĐ</p>
-                                                <p class="text-muted m-b-0">
-                                                    <% if(ele.trangThai == 0){ %>
-                                                    <i class="fas fa-toggle-off pr-2"></i>  Trạng thái: Chờ
-                                                    <% }else if(ele.trangThai==-1){ %>
-                                                        <i class="fas fa-toggle-off pr-2"></i> Trạng thái: Đóng
-                                                    <% } else{%>
-                                                        <i class="fas fa-toggle-on pr-2"></i> Trạng thái: Mở
-                                                            <% } %>  
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <h5 class="m-b-0">Giới thiệu :</h5>
-                                            <p><%= ele.gioiThieu%></p>
-                                        </div>
-                                        <div class="col-12">
-                                            <h5 class="m-b-0">Nội dung :</h5>
-                                            <p class="fr-view"><%- ele.noiDung%></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger btn-simple btn-round waves-effect"
-                            data-dismiss="modal">Thoát</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<% i++; }) %>
-<% } %>
-<!-- them khoa hoc -->
-<div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="card">
-                    <div class="header">
-                        <h2><strong>Thêm mới khóa học</strong></h2>
-                    </div>
-                    <div class="body">
-                        <form action="/partner/khoa-hoc" method="post" enctype="multipart/form-data">
-                            <h2 class="card-inside-title">Tên </h2>
-                            <div class="row clearfix">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="tenKH"
-                                            placeholder="Tên khóa học" />
-                                    </div>
-                                </div>
-                            </div>
-                            <h2 class="card-inside-title">Giới thiệu</h2>
-                            <div class="row clearfix">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <textarea rows="4" class="form-control no-resize"
-                                                placeholder="Giới thiệu khóa học" name="gioiThieu"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="table-responsive">
+                            <table id="listKH" class="table m-b-0 table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Tên </th>
+                                        <th>Học phí</th>
+                                        <th>Trạng thái</th>
+                                        <th>Xử lý</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                            </div>
-                            <h2 class="card-inside-title">Nội dung khóa học </h2>
-                            <div class="row clearfix">
-                                <div class="col-sm-12">
-                                    <div class="form-line">
-                                        <textarea name="noiDung" id="myEditor"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <h2 class="card-inside-title">Học phí </h2>
-                            <div class="row clearfix">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <input type="number" class="form-control" placeholder="Học phí khóa học"
-                                            name="hocPhi" />
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="hidden" value="<%= user[0]._id %>" name="idDV">
-                            <h2 class="card-inside-title">Lĩnh vực </h2>
-                            <div class="row clearfix">
-                                <div class="col-sm-12">
-                                    <select class="form-control show-tick" name="idLV">
-                                        <% if(linhVuc){ %>
-                                        <% linhVuc.forEach(function(ele){ %>
-                                        <option value="<%=ele._id%>"><%= ele.ten %></option>
-                                        <%}) %>
-                                        <% } %>
-                                    </select>
-                                </div>
-                            </div>
-                            <h2 class="card-inside-title">Ngày khai giảng </h2>
-                            <div class="row clearfix">
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control form-control-sm" id="datepicker"
-                                        name="ngayKhaiGiang">
-                                </div>
-                            </div>
-                            <h2 class="card-inside-title">Ảnh </h2>
-                            <div class="row clearfix">
-                                <div class="col-sm-12">
-                                    <input type="file" class="form-control form-control-sm" name="banner">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-default btn-round waves-effect">Xác nhận</button>
-                                <button type="button" class="btn btn-danger btn-simple btn-round waves-effect"
-                                    data-dismiss="modal">Hủy</button>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-</div>
-<% if(list != null){ let i=1; %>
-<% list.forEach(function(ele){ %>
-<!-- xoa -->
-<div class="modal fade" id="xoa<%= i%>" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="title" id="largeModalLabel">Xác nhận xóa dữ liệu</h4>
-            </div>
-            <div class="modal-body">Bạn có đống ý xóa khóa học "<%= ele.tenKH%>" ?</div>
-            <div class="modal-footer">
-                <button onclick="deleteKH('<%=ele._id%>')" class="btn btn-default btn-round waves-effect">Đồng
-                    ý</button>
-                <button type="button" class="btn btn-danger btn-simple btn-round waves-effect"
-                    data-dismiss="modal">hỦY</button>
-            </div>
-        </div>
-    </div>
-</div>
-<% i++; }) %>
-<% } %>
-<!--  xem dang ky -->
-<% if(list != null){ let i=1; %>
-<% list.forEach(function(ele){ %>
-
-<div class="modal fade" id="dk<%= i%>" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="title" id="largeModalLabel">Danh sách đăng ký</h4>
-            </div>
-            <div class="modal-body">
-                <div class="card">
-                    <div class="body">
-                        <div class="col-lg-12 col-md-12">
-                            <div class="card">
-                                <div class="body widget-user">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="body project_report">
-                                                <div class="table-responsive">
-                                                    <table class="table m-b-0 table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>STT</th>
-                                                                <th>Ten </th>
-                                                                <th>Ngay dang ky</th>
-                                                                <th>Trạng thái</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <% if(ele.dk !== null ){%>
-                                                            <% let i=1; %>
-                                                            <% ele.dk.forEach(function(val){%>
-                                                            <tr>
-                                                                <td>
-                                                                    <span><%= i %></span>
-                                                                </td>
-                                                                <td class="">
-                                                                    <h6><a href="#"><%= val.hoTen %></a></h6>
-                                                                </td>
-                                                                <td>
-                                                                    <%= val.ngayDK%>
-                                                                </td>
-                                                                <td>
-                                                                    <span class="badge badge-info">Cho</span>
-                                                                </td>
-                                                            </tr>
-                                                            <% i++; })%>
-                                                            <% } else{%>
-                                                                <tr>Trống</tr>
-                                                            <% }%>
-                                                        </tbody>
-                                                    </table>
+                                    <% let i=1; %>
+                                    <% listKH.forEach(function(val){%>
+                                    <tr>
+                                        <td>
+                                            <span><%= i %></span>
+                                        </td>
+                                        <td><%= val.tenKH %></td>
+                                        <td><%= val.hocPhi %></td>
+                                        <td>
+                                         <% if(val.trangThai == 0){%>
+                                            Đang khóa
+                                         <% } else{%>
+                                            Đang mở
+                                         <% }%>
+                                        </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    <i class="fa fa-cog" aria-hidden="true"></i>
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="#" data-target="#info<%= i%>"
+                                                        data-toggle="modal"><i class="fa fa-info-circle"
+                                                            aria-hidden="true"></i>Chi tiết</a>
+                                                    <a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o"
+                                                            aria-hidden="true"></i>Cập nhật</a>
+                                                    <a class="dropdown-item" href="#" data-target="#delete<%= i%>"
+                                                        data-toggle="modal"><i class="fa fa-trash-o"
+                                                            aria-hidden="true"></i>Xóa</a>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                            <div aria-hidden="true" aria-labelledby="exampleModalLabel"
+                                                class="modal fade" id="info<%= i%>" role="dialog" tabindex="-1">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                                Thông tin khóa học
+                                                            </h5>
+                                                            <button aria-label="Close" class="close"
+                                                                data-dismiss="modal" type="button"><span
+                                                                    aria-hidden="true"> &times;</span></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="card">
+                                                                <div class="body">
+                                                                    <div class="col-lg-12 col-md-12">
+                                                                        <div class="card">
+                                                                            <div class="body widget-user">
+                                                                                <div class="row">
+                                                                                    <div class="col-2"><img
+                                                                                            class="rounded-circle"
+                                                                                            src="/public/uploads/<%= val.banner%>"
+                                                                                            alt=""></div>
+                                                                                    <div class="col-10">
+                                                                                        <div class="wid-u-info"
+                                                                                            style="margin-left: 0 !important;">
+                                                                                            <h5><%= val.tenKH %></h5>
+                                                                                            <p class="text-muted m-b-0">
+                                                                                                <i
+                                                                                                    class="fa fa-calendar pr-2"></i>
+                                                                                                Ngày khai giảng:
+                                                                                                <%= val.ngayKhaiGiang %>
+                                                                                            </p>
+                                                                                            <p class="text-muted m-b-0">
+                                                                                                <i
+                                                                                                    class="fa fa-dollar-sign pr-2"></i>Học
+                                                                                                phí: <%= val.hocPhi %>
+                                                                                                VNĐ</p>
+                                                                                            <p class="text-muted m-b-0">
+                                                                                                <% if(val.trangThai == 0){ %>
+                                                                                                <i
+                                                                                                    class="fa fa-toggle-off pr-2"></i>
+                                                                                                Trạng thái: Chờ
+                                                                                                <% }else if(val.trangThai==-1){ %>
+                                                                                                <i
+                                                                                                    class="fa fa-toggle-off pr-2"></i>
+                                                                                                Trạng thái: Đóng
+                                                                                                <% } else{%>
+                                                                                                <i
+                                                                                                    class="fa fa-toggle-on pr-2"></i>
+                                                                                                Trạng thái: Mở
+                                                                                                <% } %>
+                                                                                            </p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <hr>
+                                                                                <div class="row">
+                                                                                    <div class="col-12">
+                                                                                        <h5 class="m-b-0">Giới thiệu :
+                                                                                        </h5>
+                                                                                        <p><%= val.gioiThieu%></p>
+                                                                                    </div>
+                                                                                    <div class="col-12">
+                                                                                        <h5 class="m-b-0">Nội dung :
+                                                                                        </h5>
+                                                                                        <p class="fr-view">
+                                                                                            <%- val.noiDung%></p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-secondary"
+                                                                        data-dismiss="modal" type="button">
+                                                                        Đóng</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div aria-hidden="true" aria-labelledby="exampleModalLabel"
+                                                class="modal fade" id="delete<%= i%>" role="dialog" tabindex="-1">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                                Xóa khóa học
+                                                            </h5>
+                                                            <button aria-label="Close" class="close"
+                                                                data-dismiss="modal" type="button"><span
+                                                                    aria-hidden="true"> &times;</span></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Bạn có muốn xóa khóa học ' <%= val.tenKH %>'</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-secondary" type="button">
+                                                                Xác nhận</button>
+                                                            <button class="btn btn-secondary" data-dismiss="modal"
+                                                                type="button">
+                                                                Hủy</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <% i++; })%>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="modal-footer">
-                                <button type="button" class="btn btn-danger btn-simple btn-round waves-effect"
-                                    data-dismiss="modal">Thoát</button>
-                            </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
-<% i++; }) %>
-<% } %>

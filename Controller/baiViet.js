@@ -3,24 +3,11 @@ const modelLV = require('../Model/LinhVuc');
 const dateFormat = require('dateformat');
 const mongoose = require('mongoose');
 const modelBL=require('./binhLuan');
+const modelDT=require('../Model/tinDaoTao');
 module.exports = {
     loadPage: async (req, res) => {
         if (req.isAuthenticated()) {
-            let listCate = await modelLV.model.find();
-            modelBV.model.aggregate(
-                [
-                    {
-                        $lookup: {
-                            from: 'linhVuc',
-                            localField: 'idLV',
-                            foreignField: '_id',
-                            as: 'lv'
-                        }
-                    }
-                ], (err, list) => {
-                    if (err) throw err;
-                    res.render('admin', { user: req.user, list: list, cate: listCate, path: 'BaiViet', count: req.session.count, mess: req.session.mess });
-                });
+            res.render('admin', { user: req.user, path: 'BaiViet' });
         }
         else
             res.redirect('/logIn');
