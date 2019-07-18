@@ -89,7 +89,7 @@ module.exports = {
         let caoDang=await modelDT.model.find({danhMuc:3}).sort({ngayTao:-1}).limit(1);
         let daiHoc=await modelDT.model.find({danhMuc:4}).sort({ngayTao:1}).limit(4);
         let daoTao=await modelDT.model.find({danhMuc:5}).sort({ngayTao:-1}).limit(2);
-        let duHoc=await modelDT.model.find({danhMuc:6}).sort({ngayTao:-1}).limit(4);
+        let duHoc=await modelDT.model.find({danhMuc:6}).sort({ngayTao:-1}).limit(4); 
         res.render('tuyenSinh', { listLV ,nganHan,trungCap,caoDang,daiHoc,duHoc,daoTao});
     },
     loadBaiVietByLV: async (req, res) => {
