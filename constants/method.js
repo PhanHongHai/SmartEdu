@@ -1,67 +1,28 @@
-var inputnumber = 'Giá trị nhập vào không phải là số';
-function FormatNumber(str) {
-    var strTemp = GetNumber(str);
-    if (strTemp.length <= 3)
-        return strTemp;
-    strResult = "";
-    for (var i = 0; i < strTemp.length; i++)
-        strTemp = strTemp.replace(",", "");
-    var m = strTemp.lastIndexOf(".");
-    if (m == -1) {
-        for (var i = strTemp.length; i >= 0; i--) {
-            if (strResult.length > 0 && (strTemp.length - i - 1) % 3 == 0)
-                strResult = "," + strResult;
-            strResult = strTemp.substring(i, i + 1) + strResult;
-        }
-    } else {
-        var strphannguyen = strTemp.substring(0, strTemp.lastIndexOf("."));
-        var strphanthapphan = strTemp.substring(strTemp.lastIndexOf("."),
-            strTemp.length);
-        var tam = 0;
-        for (var i = strphannguyen.length; i >= 0; i--) {
+export const convertURL = (str) => {
+    // Chuyển hết sang chữ thường
+    str = str.toLowerCase();
 
-            if (strResult.length > 0 && tam == 4) {
-                strResult = "," + strResult;
-                tam = 1;
-            }
+    // xóa dấu
+    str = str.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, 'a');
+    str = str.replace(/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/g, 'e');
+    str = str.replace(/(ì|í|ị|ỉ|ĩ)/g, 'i');
+    str = str.replace(/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/g, 'o');
+    str = str.replace(/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/g, 'u');
+    str = str.replace(/(ỳ|ý|ỵ|ỷ|ỹ)/g, 'y');
+    str = str.replace(/(đ)/g, 'd');
 
-            strResult = strphannguyen.substring(i, i + 1) + strResult;
-            tam = tam + 1;
-        }
-        strResult = strResult + strphanthapphan;
-    }
-    return strResult;
-}
+    // Xóa ký tự đặc biệt
+    str = str.replace(/([^0-9a-z-\s])/g, '');
 
-function GetNumber(str) {
-    var count = 0;
-    for (var i = 0; i < str.length; i++) {
-        var temp = str.substring(i, i + 1);
-        if (!(temp == "," || temp == "." || (temp >= 0 && temp <= 9))) {
-            alert(inputnumber);
-            return str.substring(0, i);
-        }
-        if (temp == " ")
-            return str.substring(0, i);
-        if (temp == ".") {
-            if (count > 0)
-                return str.substring(0, ipubl_date);
-            count++;
-        }
-    }
+    // Xóa khoảng trắng thay bằng ký tự -
+    str = str.replace(/(\s+)/g, '-');
+
+    // xóa phần dự - ở đầu
+    str = str.replace(/^-+/g, '');
+
+    // xóa phần dư - ở cuối
+    str = str.replace(/-+$/g, '');
+
+    // return
     return str;
-}
-
-function IsNumberInt(str) {
-    for (var i = 0; i < str.length; i++) {
-        var temp = str.substring(i, i + 1);
-        if (!(temp == "." || (temp >= 0 && temp <= 9))) {
-            alert(inputnumber);
-            return str.substring(0, i);
-        }
-        if (temp == ",") {
-            return str.substring(0, i);
-        }
-    }
-    return str;
-}
+};

@@ -92,23 +92,22 @@ $(document).ready(function () {
       // instead of a settings object
     ]
   });
-  $('.').slick({
-    slidesToShow: 1,
+  $('.bannerTS').slick({
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 1000,
     infinite: false,
     speed: 300,
     arrows:false,
-    dots:true,
+    dots:false,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-          infinite: true,
-          dots: true
+          infinite: true
         }
       },
       {

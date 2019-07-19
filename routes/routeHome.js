@@ -22,7 +22,12 @@ router.use(bodyParser.json({ limit: '50mb' }));
 
 
 router.get('/',ctrlHome.loadIndex)
-router.get('/tuyen-sinh',ctrlHome.loadTuyenSinh)
+router.get('/dao-tao',ctrlHome.loadTuyenSinh);
+router.get('/dao-tao/:idDT',(req,res) => {
+    res.render('ChiTietDanhMucDT',{id:req.params.idDT});
+});
+router.get('dao-tao/getlist/:idDT',ctrlHome.getListDT);
+router.get('/dao-tao/chi-tiet/*.:idDT',ctrlHome.loadDetailTinDT);
 router.get('/tin-tuc/chi-tiet/:idBV',ctrlHome.detailBV);
 router.get('/khoa-hoc/chi-tiet/:idKH',ctrlHome.detailKH);
 router.get('/khoa-hoc/linh-vuc/getList/:idLV',ctrlKH.getListKH);

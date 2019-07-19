@@ -90,7 +90,15 @@ module.exports = {
         let daiHoc=await modelDT.model.find({danhMuc:4}).sort({ngayTao:1}).limit(4);
         let daoTao=await modelDT.model.find({danhMuc:5}).sort({ngayTao:-1}).limit(2);
         let duHoc=await modelDT.model.find({danhMuc:6}).sort({ngayTao:-1}).limit(4); 
-        res.render('tuyenSinh', { listLV ,nganHan,trungCap,caoDang,daiHoc,duHoc,daoTao});
+        let tinNB=await modelDT.model.find({}).sort({ngayTao:-1}).limit(4);
+        res.render('tuyenSinh', { listLV ,nganHan,trungCap,caoDang,daiHoc,duHoc,daoTao,tinNB});
+    },
+    loadDetailTinDT:async (req,res) => {
+        let id=mongoose.Types.ObjectId(req.params.idDT);
+        let data=await modelDT.model.find({_id:id});
+        let tinLQ=await modelDT.model.find({_id:{$ne:id}}).sort({ngayTao:-1}).limit(3);
+        let binhLuan = await modelBL.model.find({ idBV: id }).sort({ thoiGian: -1 }).limit(4);
+        res.render('ChiTietTuyenSinh',{data,tinLQ,binhLuan});
     },
     loadBaiVietByLV: async (req, res) => {
         let listLV = await modelLV.model.find();
@@ -99,6 +107,10 @@ module.exports = {
     loadKhoaHocByLV: async (req, res) => {
         let listLV = await modelLV.model.find();
         res.render('ChiTietKhoaHocByLV', { listLV, idLV: req.params.idLV });
+    },
+    getListDT:async (req,res) => {
+        let data=await modelDT.model.find({danhMuc:req.params.idDT});
+        res.status(200).send(data);
     },
     detailBV: async (req, res) => {
         let id = mongoose.Types.ObjectId(req.params.idBV);

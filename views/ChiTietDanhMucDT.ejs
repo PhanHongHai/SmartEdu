@@ -1,0 +1,189 @@
+<%
+    let cate=[
+        {link:'/dao-tao/ngan-han',name:'Đào tạo ngắn hạn',id:1}, {link:'/dao-tao/trung-cap',name:'Đào tạo trung cấp',id:2},
+        {link:'/dao-tao/cao-dang',name:'Đào tạo cao đẳng',id:3}, {link:'/dao-tao/dai-hoc',name:'Đào tạo đại học',id:4},
+        {link:'/dao-tao/xuat-khau-du-hoc',name:'Du học XKLD',id:6}
+    ];
+
+  let convertURL=function(str){
+    str = str.toLowerCase();
+
+    // xóa dấu
+    str = str.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, 'a');
+    str = str.replace(/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/g, 'e');
+    str = str.replace(/(ì|í|ị|ỉ|ĩ)/g, 'i');
+    str = str.replace(/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/g, 'o');
+    str = str.replace(/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/g, 'u');
+    str = str.replace(/(ỳ|ý|ỵ|ỷ|ỹ)/g, 'y');
+    str = str.replace(/(đ)/g, 'd');
+
+    // Xóa ký tự đặc biệt
+    str = str.replace(/([^0-9a-z-\s])/g, '');
+
+    // Xóa khoảng trắng thay bằng ký tự -
+    str = str.replace(/(\s+)/g, '-');
+
+    // xóa phần dự - ở đầu
+    str = str.replace(/^-+/g, '');
+
+    // xóa phần dư - ở cuối
+    str = str.replace(/-+$/g, '');
+
+    // return
+    return str;
+  };
+
+%>
+
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<% include ../component/home/head %>
+
+<body class="">
+    <div id="wrapper" class="clearfix">
+        <!-- preloader -->
+        <% include ../component/home/header %>
+        <!-- Start main-content -->
+        <div class="main-content">
+            <section class="inner-header divider parallax layer-overlay overlay-dark-5"
+                data-bg-img="/public/images/banner1.jpg">
+                <div class="container pt-70 pb-20">
+                    <!-- Section Content -->
+                    <div class="section-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="title text-white">Danh sách bài viết</h2>
+                                <ol class="breadcrumb text-left text-black mt-10">
+                                    <li class="text-white"><a href="/">Trang chủ</a></li>
+                                    <li class="text-white"><a href="/dao-tao">Đào tạo</a></li>
+                                    <li class="active text-gray-silver"></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="news">
+                <div class="container">
+                    <div class="section-content">
+                        <div class="row listDT">
+                            <input type="hidden" name="idDT" value="<%= id %>">
+                            <div class="col-sm-6 col-md-3">
+                                <article class="post clearfix mb-30 bg-lighter">
+                                    <div class="entry-header">
+                                        <div class="post-thumb thumb">
+                                            <img src="http://placehold.it/330x225" alt=""
+                                                class="img-responsive img-fullwidth">
+                                        </div>
+                                        <div
+                                            class="entry-date media-left text-center flip bg-theme-colored border-top-theme-color-2-3px pt-5 pr-15 pb-5 pl-15">
+                                            <ul>
+                                                <li class="font-16 text-white font-weight-600">28</li>
+                                                <li class="font-12 text-white text-uppercase">Feb</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="entry-content p-15 pt-10 pb-10">
+                                        <div class="entry-meta media no-bg no-border mt-0 mb-10">
+                                            <div class="media-body pl-0">
+                                                <div class="event-content pull-left flip">
+                                                    <h4
+                                                        class="entry-title text-white text-uppercase font-weight-600 m-0 mt-5">
+                                                        <a href="#">Post title here</a></h4>
+                                                    <span class="mb-10 text-gray-darkgray mr-10 font-13"><i
+                                                            class="fa fa-commenting-o mr-5 text-theme-colored"></i> 214
+                                                        Comments</span>
+                                                    <span class="mb-10 text-gray-darkgray mr-10 font-13"><i
+                                                            class="fa fa-heart-o mr-5 text-theme-colored"></i> 895
+                                                        Likes</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="mt-5">Lorem ipsum dolor sit amet, consectetur adipisi cing elit.
+                                            Molestias eius illum libero dolor nobis deleniti<a
+                                                class="text-theme-color-2 font-12 ml-5" href="#"> View Details</a></p>
+                                    </div>
+                                </article>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <% include ../component/home/footer %>
+            <% include ../component/home/script %>
+            <script>
+                $(document).ready(function () {
+                    function showListDT(data) {
+                        var html = "";
+                        $.each(data, function (index, ele) {
+                            html += "<div class='row mb-15'>";
+                            html += "<div class='col-sm-6 col-md-4'>";
+                            html += `<div class="thumb"> <img alt="featured project" src="/public/uploads/${ele.banner}"></div>`;
+                            html += "</div> <div class='col-sm-6 col-md-8'>";
+                            html += `<h4 class="line-bottom mt-0 mt-sm-20">${ele.tenKH}</h4>`;
+                            html += "<ul class='review_text list-inline'>";
+                            html += `<li><h4 class="mt-0"><span class="text-theme-color-2">Học phí :</span> ${ele.hocPhi} VNĐ</h4></li>`;
+                            html += "</ul>";
+                            html += `<p class="fr-view">${ele.gioiThieu.slice(0, 65)}</p>`;
+                            html += `<a class='btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10' href='/khoa-hoc/chi-tiet/${ele._id}'>Xem chi tiết</a>`;
+                            html += "</div>";
+                            html += "</div>";
+                        });
+                        return html;
+                    };
+
+                    $('.section-content').pagination({
+                        totalNumber: function (done) {
+                            var id = $('#idDT').val();
+                            $.ajax({
+                                type: 'GET',
+                                url: '/dao-tao/getList/' + id,
+                                success: function (res) {
+                                    console.log(res.total);
+                                    done(res.total);
+                                }
+                            });
+                        },
+                        dataSource: function (done) {
+                            var id = $('#idDT').val();
+                            $.ajax({
+                                type: 'GET',
+                                url: '/dao-tao/getList/' + id,
+                                success: function (res) {
+                                    done(res.list);
+                                }
+                            });
+                        },
+                        pageSize: 5,
+                        showNavigator: false,
+                        autoHidePrevious: true,
+                        autoHideNext: true,
+                        className: '',
+                        classPrefix: 'pagination theme-colored xs-pull-center m-0',
+                        ajax: {
+                            beforeSend: function () {
+
+                            }
+                        },
+                        callback: function (data, pagination) {
+                            // template method of yourself
+                            var html = showListDT(data);
+                            $('.listDT').html(html);
+                        }
+                    });
+                })
+            </script>
+        </div>
+        <!-- end wrapper -->
+
+        <!-- Footer Scripts -->
+
+
+</body>
+
+</html>

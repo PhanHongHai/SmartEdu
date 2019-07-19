@@ -3436,6 +3436,12 @@ table.no-border td {
 .post .entry-title {
   margin-top: 0;
 }
+.post .entry-content-dt {
+  position: relative;
+  background: #f8f8f8;
+  padding: 15px;
+  height: 150px;
+}
 .post .entry-content {
   position: relative;
   background: #f8f8f8;

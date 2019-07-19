@@ -1,0 +1,226 @@
+<%
+    let cate=[
+        {link:'/dao-tao/ngan-han',name:'Đào tạo ngắn hạn',id:1}, {link:'/dao-tao/trung-cap',name:'Đào tạo trung cấp',id:2},
+        {link:'/dao-tao/cao-dang',name:'Đào tạo cao đẳng',id:3}, {link:'/dao-tao/dai-hoc',name:'Đào tạo đại học',id:4},
+        {link:'/dao-tao/xuat-khau-du-hoc',name:'Du học XKLD',id:6}
+    ];
+
+  let convertURL=function(str){
+    str = str.toLowerCase();
+
+    // xóa dấu
+    str = str.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, 'a');
+    str = str.replace(/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/g, 'e');
+    str = str.replace(/(ì|í|ị|ỉ|ĩ)/g, 'i');
+    str = str.replace(/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/g, 'o');
+    str = str.replace(/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/g, 'u');
+    str = str.replace(/(ỳ|ý|ỵ|ỷ|ỹ)/g, 'y');
+    str = str.replace(/(đ)/g, 'd');
+
+    // Xóa ký tự đặc biệt
+    str = str.replace(/([^0-9a-z-\s])/g, '');
+
+    // Xóa khoảng trắng thay bằng ký tự -
+    str = str.replace(/(\s+)/g, '-');
+
+    // xóa phần dự - ở đầu
+    str = str.replace(/^-+/g, '');
+
+    // xóa phần dư - ở cuối
+    str = str.replace(/-+$/g, '');
+
+    // return
+    return str;
+  };
+
+%>
+
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<% include ../component/home/head %>
+
+<body class="">
+    <div id="wrapper" class="clearfix">
+        <!-- preloader -->
+        <% include ../component/home/header %>
+        <!-- Start main-content -->
+        <div class="main-content">
+            <section class="inner-header divider parallax layer-overlay overlay-dark-5"
+                data-bg-img="/public/images/banner1.jpg">
+                <div class="container pt-70 pb-20">
+                    <!-- Section Content -->
+                    <div class="section-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="title text-white">Chi tiết bài viết tuyển sinh</h2>
+                                <ol class="breadcrumb text-left text-black mt-10">
+                                    <li><a href="/">Trang chủ</a></li>
+                                    <li><a href="#">Đào tạo</a></li>
+                                    <li class="active text-gray-silver"></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Blog -->
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 blog-pull-right">
+                            <div class="blog-posts single-post">
+                                <article class="post clearfix mb-0">
+                                    <% if(data !== null){ %>
+                                    <% data.forEach(function(ele){ %>
+                                    <div class="entry-header">
+                                        <div class="post-thumb thumb"> <img src="/public/uploads/<%= ele.banner %>"
+                                                alt="" class="img-responsive img-fullwidth"> </div>
+                                    </div>
+                                    <div class="entry-title pt-10 pl-15">
+                                        <h4><a class="text-uppercase" href="#"><%= ele.tenBV %></a></h4>
+                                    </div>
+                                    <div class="entry-meta pl-15">
+                                        <ul class="list-inline">
+                                            <li>Ngày đăng: <span class="text-theme-color-2"><%= ele.ngayTao %></span>
+                                            </li>
+                                            <li>Danh mục: <span class="text-theme-color-2">
+                                                    <% if(ele.danhMuc == 1){ %>
+                                                    Đào tạo ngắn hạn
+                                                    <%} else if(ele.danhMuc == 2){ %>
+                                                    Đào tạo hệ trung cấp
+                                                    <% } else if(ele.danhMuc == 3){ %>
+                                                    Đào tạo hệ cao đẳng
+                                                    <% }else if(ele.danhMuc == 4){ %>
+                                                    Đào tạo hệ đại học
+                                                    <% } else { %>
+                                                    Du học, xuất khẩu lao động
+                                                    <% } %>
+                                                </span>
+                                            </li>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="entry-content mt-10 fr-view">
+                                        <%- ele.noiDung %>
+                                    </div>
+                                </article>
+                                <div class="comments-area">
+                                    <h5 class="comments-title">Bình luận</h5>
+                                    <ul class="comment-list">
+                                        <% if(binhLuan != null){ %>
+                                        <% binhLuan.forEach(function(ele){ %>
+                                        <li>
+                                            <div class="media comment-author"> <a class="media-left pull-left flip"
+                                                    href="#"><img class="img-thumbnail" src="/public/images/profile.jpg"
+                                                        alt=""></a>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading comment-heading "
+                                                        style="display: inline-block;"><%= ele.ten %>:</h5>
+                                                    <div class="comment-date"
+                                                        style="font-size: 13px;display: inline-block;">
+                                                        <%= ele.thoiGian%></div>
+                                                    <div style="font-size: 12px;"><%= ele.email%></div>
+                                                    <p
+                                                        style="background-color: #e6e2e2;border-radius: 10px;padding: 2%;">
+                                                        <%= ele.noiDung%></p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <%})} %>
+                                    </ul>
+                                </div>
+                                <div class="comment-box">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h5>Để lại bình luận</h5>
+                                            <div class="row">
+                                                <form id="formBL" action="" method="POST">
+                                                    <div class="col-sm-6 pt-0 pb-0">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" id="ten" name="ten"
+                                                                placeholder="Nhập tên">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="email" class="form-control" name="email"
+                                                                id="email" placeholder="Nhập email">
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" id="id" value="<%= ele._id %>">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <textarea class="form-control" id="noiDung" name="noiDung"
+                                                                placeholder="Nhập nội dung" rows="7"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <a style="cursor: pointer;" id="binhLuan"
+                                                                class="btn btn-dark btn-flat pull-right m-0"
+                                                                data-loading-text="Please wait...">Gửi</a>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% })} %>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-3">
+                            <div class="sidebar sidebar-left mt-sm-30">
+
+                                <div class="widget">
+                                    <h5 class="widget-title line-bottom">Danh mục</h5>
+                                    <div class="services-list">
+                                        <ul class="list list-border angle-double-right">
+                                            <% if(cate.length !== 0){ %>
+                                            <% cate.forEach(function(ele){ %>
+                                            <% if(ele.id == data[0].danhMuc ){%>
+                                            <li class="active"><a href="<%= cate.link%>"><%= ele.name %></a></li>
+                                            <% } else{%>
+                                                <li><a href="<%= cate.link%>"><%= ele.name %></a></li>
+                                            <% }%>
+                                            <% })} %>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="widget">
+                                    <h5 class="widget-title line-bottom">Tin liên quan</h5>
+                                    <div class="latest-posts">
+                                        <% if(tinLQ !== null){ %>
+                                        <% tinLQ.forEach(function(ele){ %>
+                                        <article class="post media-post clearfix pb-0 mb-10">
+                                            <a class="post-thumb"
+                                                href="/dao-tao/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"><img
+                                                    src="/public/uploads/<%= ele.banner %>" alt=""></a>
+                                            <div class="post-right">
+                                                <h5 class="post-title mt-0"><a
+                                                        href="/dao-tao/chi-tiet/<%= ele._id %>"><%= ele.tenBV %></a>
+                                                </h5>
+                                            </div>
+                                        </article>
+                                        <% })} %>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <% include ../component/home/footer %>
+            <% include ../component/home/script %>
+
+        </div>
+        <!-- end wrapper -->
+
+        <!-- Footer Scripts -->
+
+
+</body>
+
+</html>
