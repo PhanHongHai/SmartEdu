@@ -26,7 +26,7 @@ router.get('/dao-tao',ctrlHome.loadTuyenSinh);
 router.get('/dao-tao/:idDT',(req,res) => {
     res.render('ChiTietDanhMucDT',{id:req.params.idDT});
 });
-router.get('dao-tao/getlist/:idDT',ctrlHome.getListDT);
+router.get('/dao-tao/getlist/:idDT',ctrlHome.getListDT);
 router.get('/dao-tao/chi-tiet/*.:idDT',ctrlHome.loadDetailTinDT);
 router.get('/tin-tuc/chi-tiet/:idBV',ctrlHome.detailBV);
 router.get('/khoa-hoc/chi-tiet/:idKH',ctrlHome.detailKH);
@@ -36,4 +36,10 @@ router.get('/bai-viet/linh-vuc/:idLV',ctrlHome.loadBaiVietByLV);
 router.get('/bai-viet/linh-vuc/getList/:idLV',ctrlBV.getListBV);
 router.post('/bai-viet/binh-luan',ctrlHome.binhLuan);
 router.post('/don-dang-ky',ctrlHome.dangKy);
+router.get('/lien-he',(req,res) => {
+    res.render('LienHe');
+});
+router.get('/ve-chung-toi',(req,res) => {
+    res.render('About');
+})
 module.exports = router;

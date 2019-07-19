@@ -69,45 +69,7 @@
                 <div class="container">
                     <div class="section-content">
                         <div class="row listDT">
-                            <input type="hidden" name="idDT" value="<%= id %>">
-                            <div class="col-sm-6 col-md-3">
-                                <article class="post clearfix mb-30 bg-lighter">
-                                    <div class="entry-header">
-                                        <div class="post-thumb thumb">
-                                            <img src="http://placehold.it/330x225" alt=""
-                                                class="img-responsive img-fullwidth">
-                                        </div>
-                                        <div
-                                            class="entry-date media-left text-center flip bg-theme-colored border-top-theme-color-2-3px pt-5 pr-15 pb-5 pl-15">
-                                            <ul>
-                                                <li class="font-16 text-white font-weight-600">28</li>
-                                                <li class="font-12 text-white text-uppercase">Feb</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="entry-content p-15 pt-10 pb-10">
-                                        <div class="entry-meta media no-bg no-border mt-0 mb-10">
-                                            <div class="media-body pl-0">
-                                                <div class="event-content pull-left flip">
-                                                    <h4
-                                                        class="entry-title text-white text-uppercase font-weight-600 m-0 mt-5">
-                                                        <a href="#">Post title here</a></h4>
-                                                    <span class="mb-10 text-gray-darkgray mr-10 font-13"><i
-                                                            class="fa fa-commenting-o mr-5 text-theme-colored"></i> 214
-                                                        Comments</span>
-                                                    <span class="mb-10 text-gray-darkgray mr-10 font-13"><i
-                                                            class="fa fa-heart-o mr-5 text-theme-colored"></i> 895
-                                                        Likes</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="mt-5">Lorem ipsum dolor sit amet, consectetur adipisi cing elit.
-                                            Molestias eius illum libero dolor nobis deleniti<a
-                                                class="text-theme-color-2 font-12 ml-5" href="#"> View Details</a></p>
-                                    </div>
-                                </article>
-                            </div>
-
+                            <input type="hidden" id="idDT" name="idDT" value="<%= id %>">
                         </div>
                     </div>
                 </div>
@@ -118,21 +80,52 @@
             <% include ../component/home/script %>
             <script>
                 $(document).ready(function () {
+                    function convertURL(str) {
+                        str = str.toLowerCase();
+
+                        // xóa dấu
+                        str = str.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, 'a');
+                        str = str.replace(/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/g, 'e');
+                        str = str.replace(/(ì|í|ị|ỉ|ĩ)/g, 'i');
+                        str = str.replace(/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/g, 'o');
+                        str = str.replace(/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/g, 'u');
+                        str = str.replace(/(ỳ|ý|ỵ|ỷ|ỹ)/g, 'y');
+                        str = str.replace(/(đ)/g, 'd');
+
+                        // Xóa ký tự đặc biệt
+                        str = str.replace(/([^0-9a-z-\s])/g, '');
+
+                        // Xóa khoảng trắng thay bằng ký tự -
+                        str = str.replace(/(\s+)/g, '-');
+
+                        // xóa phần dự - ở đầu
+                        str = str.replace(/^-+/g, '');
+
+                        // xóa phần dư - ở cuối
+                        str = str.replace(/-+$/g, '');
+
+                        // return
+                        return str;
+                    };
                     function showListDT(data) {
                         var html = "";
                         $.each(data, function (index, ele) {
-                            html += "<div class='row mb-15'>";
-                            html += "<div class='col-sm-6 col-md-4'>";
-                            html += `<div class="thumb"> <img alt="featured project" src="/public/uploads/${ele.banner}"></div>`;
-                            html += "</div> <div class='col-sm-6 col-md-8'>";
-                            html += `<h4 class="line-bottom mt-0 mt-sm-20">${ele.tenKH}</h4>`;
-                            html += "<ul class='review_text list-inline'>";
-                            html += `<li><h4 class="mt-0"><span class="text-theme-color-2">Học phí :</span> ${ele.hocPhi} VNĐ</h4></li>`;
-                            html += "</ul>";
-                            html += `<p class="fr-view">${ele.gioiThieu.slice(0, 65)}</p>`;
-                            html += `<a class='btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10' href='/khoa-hoc/chi-tiet/${ele._id}'>Xem chi tiết</a>`;
-                            html += "</div>";
-                            html += "</div>";
+                            html += `<div class="col-sm-6 col-md-3">`;
+                            html += `<article class="post clearfix mb-30 bg-lighter">`;
+                            html += `<div class="entry-header">`;
+                            html += `<div class="post-thumb thumb">`;
+                            html += `<img src="/public/uploads/${ele.banner}" alt="" class="img-responsive img-fullwidth" style="height: 170px;"></div>`;
+                            html += `</div>`;
+                            html += `<div class="entry-content p-15 pt-10 pb-10 content-dt">`;
+                            html += `<div class="entry-meta media no-bg no-border mt-0 mb-10">`;
+                            html += `<div class="media-body pl-0">`;
+                            html += `<div class="event-content pull-left flip">`;
+                            html += ` <h5 class="entry-title text-white text-uppercase font-weight-600 m-0 mt-5">`;
+                            html += ` <a href="/dao-tao/chi-tiet/${convertURL(ele.tenBV)}.${ele._id}" style="text-align: justify;">${ele.tenBV}</a></h5>`;
+                            html += ` <span class="mb-10 text-gray-darkgray mr-10 font-13"><i class="fa fa-clock text-theme-color-2 mr-5"></i>${ele.ngayTao}</span>`;
+                            html += ` </div> </div> </div>`;
+                            html += ` <span style="text-align: justify;font-size:13px;"> <p class="mt-5">${ele.noiDung.slice(0, 100)}...<a class="text-theme-color-2 font-12 ml-5" href="/dao-tao/chi-tiet/${convertURL(ele.tenBV)}.${ele._id}"> Xem thêm</a></p>`;
+                            html += `   </div></article></div>`;
                         });
                         return html;
                     };
@@ -142,7 +135,7 @@
                             var id = $('#idDT').val();
                             $.ajax({
                                 type: 'GET',
-                                url: '/dao-tao/getList/' + id,
+                                url: '/dao-tao/getlist/' + id,
                                 success: function (res) {
                                     console.log(res.total);
                                     done(res.total);
@@ -153,13 +146,14 @@
                             var id = $('#idDT').val();
                             $.ajax({
                                 type: 'GET',
-                                url: '/dao-tao/getList/' + id,
+                                url: '/dao-tao/getlist/' + id,
                                 success: function (res) {
+                                    console.log("hello");
                                     done(res.list);
                                 }
                             });
                         },
-                        pageSize: 5,
+                        pageSize: 12,
                         showNavigator: false,
                         autoHidePrevious: true,
                         autoHideNext: true,

@@ -109,8 +109,10 @@ module.exports = {
         res.render('ChiTietKhoaHocByLV', { listLV, idLV: req.params.idLV });
     },
     getListDT:async (req,res) => {
-        let data=await modelDT.model.find({danhMuc:req.params.idDT});
-        res.status(200).send(data);
+        let list=await modelDT.model.find({danhMuc:req.params.idDT});
+        let count=await modelDT.model.find({danhMuc:req.params.idDT}).countDocuments();
+        let total=count/12;
+        res.status(200).send({list,total});
     },
     detailBV: async (req, res) => {
         let id = mongoose.Types.ObjectId(req.params.idBV);

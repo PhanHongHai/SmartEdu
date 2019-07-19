@@ -1,8 +1,8 @@
 <%
     let cate=[
-        {link:'/dao-tao/ngan-han',name:'Đào tạo ngắn hạn',id:1}, {link:'/dao-tao/trung-cap',name:'Đào tạo trung cấp',id:2},
-        {link:'/dao-tao/cao-dang',name:'Đào tạo cao đẳng',id:3}, {link:'/dao-tao/dai-hoc',name:'Đào tạo đại học',id:4},
-        {link:'/dao-tao/xuat-khau-du-hoc',name:'Du học XKLD',id:6}
+        {link:'/dao-tao/1',name:'Đào tạo ngắn hạn',id:1}, {link:'/dao-tao/2',name:'Đào tạo trung cấp',id:2},
+        {link:'/dao-tao/3',name:'Đào tạo cao đẳng',id:3}, {link:'/dao-tao/4',name:'Đào tạo đại học',id:4},
+        {link:'/dao-tao/6',name:'Du học XKLD',id:6}
     ];
 
   let convertURL=function(str){
@@ -178,9 +178,9 @@
                                             <% if(cate.length !== 0){ %>
                                             <% cate.forEach(function(ele){ %>
                                             <% if(ele.id == data[0].danhMuc ){%>
-                                            <li class="active"><a href="<%= cate.link%>"><%= ele.name %></a></li>
+                                            <li class="active"><a href="<%= ele.link%>"><%= ele.name %></a></li>
                                             <% } else{%>
-                                                <li><a href="<%= cate.link%>"><%= ele.name %></a></li>
+                                                <li><a href="<%= ele.link%>"><%= ele.name %></a></li>
                                             <% }%>
                                             <% })} %>
                                         </ul>

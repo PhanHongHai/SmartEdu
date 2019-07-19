@@ -363,7 +363,7 @@
                 <h6 class="letter-space-4 text-gray-darkgray text-uppercase mt-0 mb-0">Tổng quan</h6>
                 <h2 class="text-uppercase font-weight-600 mt-0 font-28 line-bottom">Cổng thông tin Giáo dục Hướng nghiệp
                   Việt</h2>
-                <h4 class="text-theme-colored">
+                <h4 class="text-theme-colored" style="font-family: sans-serif;text-align: justify;">
                   Văn bằng, chứng chỉ là một công cụ định lượng kiến thức; thông qua văn bằng, chứng chỉ có thể biết
                   được người đó có trình độ nào, chuyên ngành đào tạo là gì, xếp loại ra sao… Chúng ta vẫn phải sử dụng
                   công cụ định lượng này để làm tiêu chuẩn lựa chọn nhân tài.
@@ -371,7 +371,7 @@
                   tin trái chiều và chưa kiểm soát chặt chẽ. Chúng tôi có tham vọng đưa người tìm việc và nhà tuyển dụng
                   trực tiếp thấy nhau ở khoảng cách gần hơn. để làm được điều đó chúng tôi cần sự hỗ trợ đóng góp từ mọi
                   người. </h4>
-                <p>Mục tiêu đào tạo và giáo dục của chúng tôi là chuyển biến nhân sự của doanh nghiệp trở thành nguồn
+                <p style="font-family: sans-serif;text-align: justify;">Mục tiêu đào tạo và giáo dục của chúng tôi là chuyển biến nhân sự của doanh nghiệp trở thành nguồn
                   tài nguyên quan trọng nhất bằng cách thay đổi ý thức và tư duy sao cho bản thân nhân viên tự mình suy
                   nghĩ, tự đặt ra mục tiêu, tự hành động để tạo ra được sự tin tưởng lớn nhất….</p>
               </div>
@@ -397,7 +397,7 @@
               <small class="text-white">Học viên truy cập tại hệ thống để xem hình thức xét tuyển, điều kiện nhập học, du học, tham gia các kì thi tại đây. Học viện RIAM chúng tôi luôn lắng nghe và hỗ trợ 24/7/365.</small>
             </div>
             <div class="col-md-12">
-              <a href="https://www.riam.vn/register/www.riam.edu.vn" class="btn btn-border hvr-bounce-to-right" style="margin:auto;width:15%;display:block;margin-top:2%;">Đăng ký ngay <i class="fa fa-arrow-circle-right pl-3"></i></a>
+              <a href="https://www.riam.vn/register/www.riam.edu.vn" class="btn btn-border hvr-bounce-to-right" style="margin:auto;width:150px;display:block;margin-top:2%;">Đăng ký ngay <i class="fa fa-arrow-circle-right pl-3"></i></a>
             </div>
           
           </div>
@@ -436,12 +436,14 @@
                   <div class="media-body pl-15">
                     <div class="event-content pull-left flip">
                       <h4 class="entry-title text-white text-uppercase m-0 mt-5"><a
-                          href="/tin-tuc/chi-tiet/<%= ele._id %>"><%= ele.tieuDe %></a></h4>
+                          href="/tin-tuc/chi-tiet/<%= ele._id %>" style="font-family: sans-serif;text-align: justify;"><%= ele.tieuDe %></a></h4>
 
                     </div>
                   </div>
                 </div>
-                <p class="mt-10 fr-view"><%- ele.noiDung.slice(30,150)%>...</p>
+                <span style="font-family: sans-serif;text-align: justify;">
+                    <p class="mt-10 fr-view" style="font-family: sans-serif;"><%- ele.noiDung.slice(30,170)%>...</p>
+                </span>  
                 <a href="/tin-tuc/chi-tiet/<%= ele._id %>" class="btn btn-info">Xem thêm<i
                     class="fas fa-chevron-circle-down" style="padding-left: 13%;"></i></a>
                 <div class="clearfix"></div>

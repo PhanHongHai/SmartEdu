@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<% include ../component/home/head %>
+
+<body class="">
+  <div id="wrapper" class="clearfix">
+    <!-- preloader -->
+    <% include ../component/home/header %>
+    <!-- Start main-content -->
+    <div class="main-content">
+
+            <section class="divider layer-overlay overlay-white-9" data-bg-img="images/bg/bg15.jpg">
+                <div class="container">
+                  <div class="row pt-30">
+                    <div class="col-md-8">
+                      <h3 class="line-bottom mt-0 mb-20">HỌC VIÊN ĐIỀN ĐẦY ĐỦ THÔNG TIN TẠI ĐÂY</h3>
+                      <!-- Contact Form -->
+                      <form id="contact_form" name="contact_form" class="form-transparent" action="" method="post">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="form_name">Họ tên <small>*</small></label>
+                              <input name="form_name" class="form-control  text-black" type="text" placeholder="Nhập tên" required="">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="form_email">Email <small>*</small></label>
+                              <input name="form_email" class="form-control required email text-black" type="email" placeholder="Nhập email">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="form_name">Tiêu đề <small>*</small></label>
+                              <input name="form_subject" class="form-control required  text-black" type="text" placeholder="Nhập tiêu đề">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="form_phone">Số điện thoại</label>
+                              <input name="form_phone" class="form-control  text-black" type="text" placeholder="Nhập sđt">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="form_name">Nội dung</label>
+                          <textarea name="form_message" class="form-control required  text-black" rows="5" placeholder="Nhập nội dung"></textarea>
+                        </div>
+                        <div class="form-group">
+                          <input name="form_botcheck" class="form-control" type="hidden" value="" />
+                          <button type="submit" class="btn btn-dark btn-theme-colored btn-flat mr-5" data-loading-text="Please wait...">Gửi</button>
+                          <button type="reset" class="btn btn-default btn-flat btn-theme-colored">Làm lại</button>
+                        </div>
+                      </form>
+                      <!-- Contact Form Validation-->
+                      <script type="text/javascript">
+                        $("#contact_form").validate({
+                          submitHandler: function(form) {
+                            var form_btn = $(form).find('button[type="submit"]');
+                            var form_result_div = '#form-result';
+                            $(form_result_div).remove();
+                            form_btn.before('<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>');
+                            var form_btn_old_msg = form_btn.html();
+                            form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
+                            $(form).ajaxSubmit({
+                              dataType:  'json',
+                              success: function(data) {
+                                if( data.status == 'true' ) {
+                                  $(form).find('.form-control').val('');
+                                }
+                                form_btn.prop('disabled', false).html(form_btn_old_msg);
+                                $(form_result_div).html(data.message).fadeIn('slow');
+                                setTimeout(function(){ $(form_result_div).fadeOut('slow') }, 6000);
+                              }
+                            });
+                          }
+                        });
+                      </script>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                          <div class="left media bg-black-333 p-25 mb-20"> <a class="media-left pull-left" href="#"> <i class="fas fa-map-marker-alt  text-theme-color-2"></i></a>
+                            <div class="media-body"> <strong class="text-white">ĐỊA CHỈ</strong>
+                              <p class="text-white">181, Lê Đức Thọ, phường 17, quận Gò Vấp, TP.HCM</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-12 text-white">
+                          <div class=" left media bg-black-333 p-25 mb-20"> <a class="media-left pull-left" href="#"> <i class="fa fa-phone text-theme-color-2"></i></a>
+                            <div class="media-body"> <strong class="text-white">SỐ ĐIỆN THOẠI</strong>
+                              <p>0936 201 222 – 0916 001 078</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-12 text-white">
+                          <div class=" left media bg-black-333 p-25 mb-20"> <a class="media-left pull-left" href="#"> <i class="far fa-envelope text-theme-color-2"></i></a>
+                            <div class="media-body"> <strong class="text-white">E-MAIL</strong>
+                              <p>hocvalam24h@gmail.com</p>
+                            </div>
+                          </div>
+                        </div>
+                      
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+   
+
+      <!-- end main-content -->
+    </div>
+
+    <!-- Footer -->
+    <% include ../component/home/footer %>
+    <% include ../component/home/script %>
+  <!--
+    <a class="scrollToTop" href="#"><i class="fas fa-angle-up"></i></a>
+    -->
+  </div>
+  <!-- end wrapper -->
+
+  <!-- Footer Scripts -->
+
+  <!--Start of Tawk.to Script-->
+
+  <!--End of Tawk.to Script-->
+</body>
+
+</html>

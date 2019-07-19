@@ -79,7 +79,74 @@
 
     <!-- Footer Scripts -->
 
+    <script>
+        $(document).ready(function () {
+            function showListBV(data) {
+                var html = "";
+                $.each(data, function (index, ele) {
+                    html += "<article class='post clearfix mb-30 pb-30'>";
+                    html += " <div class='entry-content border-1px p-20 pr-10'>";
+                    html += " <div class='entry-meta media mt-0 no-bg no-border'>";
+                    html += "    <div class='entry-date media-left text-center flip bg-theme-colored pt-5 pr-15 pb-5 pl-15'>";
+                    html += "   <ul>";
+                    html += ` <li class='font-16 text-white font-weight-600'>${ele.ngayTao}</li>`;
+                    html += "</ul>";
+                    html += "  </div>";
+                    html += " <div class='media-body pl-15'>";
+                    html += "  <div class='event-content pull-left flip'>";
+                    html += "<h4 class='entry-title text-white text-uppercase m-0 mt-5'>";
+                    html += `<a href="/tin-tuc/chi-tiet/${ele._id}">${ele.tieuDe}</a></h4>`;
+                    html += "</div></div></div>";
+                    html += `<p class="mt-10 fr-view">${ele.noiDung.slice(30, 250)}</p>`;
+                    html += `<a href='/tin-tuc/chi-tiet/${ele._id}' class='btn btn-info'>Đọc thêm<i class="fas fa-info-circle pl-5"></i></a>`;
+                    html += "<div class='clearfix'></div>";
+                    html += "</div> </article>";
+                });
+                return html;
+            };
+            $('.blog-posts').pagination({
+                totalNumber: function (done) {
+                    var id = $('#idLV').val();
+                    $.ajax({
+                        type: 'GET',
+                        url: '/bai-viet/linh-vuc/getList/' + id,
+                        success: function (res) {
+                            console.log(res.total);
+                            done(res.total);
+                        }
+                    });
+                },
+                dataSource: function (done) {
+                    var id = $('#idLV').val();
+                    $.ajax({
+                        type: 'GET',
+                        url: '/bai-viet/linh-vuc/getList/' + id,
+                        success: function (res) {
+                            console.log(res.list);
+                            done(res.list);
+                        }
+                    });
+                },
+                pageSize: 5,
+                showNavigator: false,
+                autoHidePrevious: true,
+                autoHideNext: true,
+                className: 'pagination theme-colored xs-pull-center m-0',
+                classPrefix: 'email-list',
+                ajax: {
+                    beforeSend: function () {
 
+                    }
+                },
+                callback: function (data, pagination) {
+                    // template method of yourself
+                    var html = showListBV(data);
+                    $('.listBV').html(html);
+                }
+            });
+
+        });
+    </script>
 </body>
 
 </html>
