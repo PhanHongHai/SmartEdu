@@ -87,16 +87,20 @@
                                             </li>
                                             <li>Danh mục: <span class="text-theme-color-2">
                                                     <% if(ele.danhMuc == 1){ %>
-                                                    Đào tạo ngắn hạn
-                                                    <%} else if(ele.danhMuc == 2){ %>
-                                                    Đào tạo hệ trung cấp
-                                                    <% } else if(ele.danhMuc == 3){ %>
-                                                    Đào tạo hệ cao đẳng
-                                                    <% }else if(ele.danhMuc == 4){ %>
-                                                    Đào tạo hệ đại học
-                                                    <% } else { %>
-                                                    Du học, xuất khẩu lao động
-                                                    <% } %>
+                                                        Đào tạo ngắn hạn
+                                                        <%} else if(ele.danhMuc == 2){ %>
+                                                        Đào tạo hệ trung cấp
+                                                        <% } else if(ele.danhMuc == 3){ %>
+                                                        Đào tạo hệ cao đẳng
+                                                        <% }else if(ele.danhMuc == 4){ %>
+                                                        Đào tạo hệ đại học
+                                                        <% } else if(ele.danhMuc == 5) { %>
+                                                        Nội dung đào tạo
+                                                        <% } else if(ele.danhMuc == 6) { %>
+                                                        Du học, xuất khẩu lao động
+                                                        <% } else { %>
+                                                        Thông báo
+                                                        <% } %>
                                                 </span>
                                             </li>
 
