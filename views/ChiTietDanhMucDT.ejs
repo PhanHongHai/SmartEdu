@@ -34,7 +34,36 @@
   };
 
 %>
+<%
+  var listMenu=[
+    {link:'/',name:'Trang chủ'},{link:'/dao-tao',name:'Đào tạo'},
+    {
+      link:'/tuyen-sinh',name:'Tuyển sinh',
+      subMenu:[
+      {
+        link:'/tuyen-sinh/1',name:'Ngắn hạn'
+      },
+      {
+        link:'/tuyen-sinh/2',name:'Trung cấp'
+      },
+      {
+        link:'/tuyen-sinh/3',name:'Cao đẳng'
+      },
+      {
+        link:'/tuyen-sinh/4',name:'Đại học'
+      },
+      {
+        link:'/tuyen-sinh/6',name:'Du học xuất khẩu lao động'
+      }
+      ]
+    },
+    
+    {link:'/bai-viet/linh-vuc/5d21a5a28ae8350a5088f73f',name:'Tin tức'},
+    {link:'/thong-bao',name:'Thông báo'},
+  ];
 
+
+%>
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -43,22 +72,18 @@
 <body class="">
     <div id="wrapper" class="clearfix">
         <!-- preloader -->
-        <% include ../component/home/header %>
+       <%- include('../component/home/header',{listMenu}) %>
         <!-- Start main-content -->
         <div class="main-content">
             <section class="inner-header divider parallax layer-overlay overlay-dark-5"
                 data-bg-img="/public/images/banner1.jpg">
                 <div class="container pt-70 pb-20">
                     <!-- Section Content -->
-                    <div class="section-content">
+                    <div class="section-content1">
                         <div class="row">
                             <div class="col-md-12">
-                                <h2 class="title text-white">Danh sách bài viết</h2>
-                                <ol class="breadcrumb text-left text-black mt-10">
-                                    <li class="text-white"><a href="/">Trang chủ</a></li>
-                                    <li class="text-white"><a href="/dao-tao">Đào tạo</a></li>
-                                    <li class="active text-gray-silver"></li>
-                                </ol>
+                                <h2 class="title text-white"><%= title %></h2>
+                               
                             </div>
                         </div>
                     </div>
@@ -121,7 +146,7 @@
                             html += `<div class="media-body pl-0">`;
                             html += `<div class="event-content pull-left flip">`;
                             html += ` <h5 class="entry-title text-white text-uppercase font-weight-600 m-0 mt-5">`;
-                            html += ` <a href="/dao-tao/chi-tiet/${convertURL(ele.tenBV)}.${ele._id}" style="text-align: justify;">${ele.tenBV}</a></h5>`;
+                            html += ` <a href="/tuyen-sinh/chi-tiet/${convertURL(ele.tenBV)}.${ele._id}" style="text-align: justify;">${ele.tenBV}</a></h5>`;
                             html += ` <span class="mb-10 text-gray-darkgray mr-10 font-13"><i class="fa fa-clock text-theme-color-2 mr-5"></i>${ele.ngayTao}</span>`;
                             html += ` </div> </div> </div>`;
                             html += ` <span style="text-align: justify;font-size:13px;"> <p class="mt-5">${ele.noiDung.slice(0, 100)}...<a class="text-theme-color-2 font-12 ml-5" href="/dao-tao/chi-tiet/${convertURL(ele.tenBV)}.${ele._id}"> Xem thêm</a></p>`;

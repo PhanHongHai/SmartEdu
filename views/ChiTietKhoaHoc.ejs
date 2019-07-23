@@ -1,3 +1,33 @@
+<%
+  var listMenu=[
+    {link:'/',name:'Trang chủ'},{link:'/dao-tao',name:'Đào tạo'},
+    {
+      link:'/tuyen-sinh',name:'Tuyển sinh',
+      subMenu:[
+      {
+        link:'/tuyen-sinh/1',name:'Ngắn hạn'
+      },
+      {
+        link:'/tuyen-sinh/2',name:'Trung cấp'
+      },
+      {
+        link:'/tuyen-sinh/3',name:'Cao đẳng'
+      },
+      {
+        link:'/tuyen-sinh/4',name:'Đại học'
+      },
+      {
+        link:'/tuyen-sinh/6',name:'Du học xuất khẩu lao động'
+      }
+      ]
+    },
+    
+    {link:'/bai-viet/linh-vuc/5d21a5a28ae8350a5088f73f',name:'Tin tức'},
+    {link:'/thong-bao',name:'Thông báo'},
+  ];
+
+
+%>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <% include ../component/home/head %>
@@ -5,7 +35,7 @@
 <body class="">
     <div id="wrapper" class="clearfix">
         <!-- preloader -->
-        <% include ../component/home/header %>
+       <%- include('../component/home/header',{listMenu}) %>
         <!-- Start main-content -->
         <div class="main-content">
 
@@ -33,14 +63,16 @@
                         <div class="col-md-8 blog-pull-right">
                             <% if(detail !== null){%>
                             <% detail.forEach(function(ele){%>  
-                            <div class="single-service">
+                            <div class="single-service post">
                                 <img src="/public/uploads/<%=ele.banner%>" alt="" width="100%" height="350px">
                                 <h3 class="text-theme-colored line-bottom text-theme-colored"><%=ele.tenKH%>
                                 </h3>
                                 <h4 class="mt-0"><span class="text-theme-color-2">Hoc phi :</span> <%=ele.hocPhi%> VND </h4>
                                 <h4 class="mt-0"><span class="text-theme-color-2">Ngay khai giang :</span> <%=ele.ngayKhaiGiang%>  </h4>
-                              
-                                 <%-ele.noiDung%>
+                                <div class="entry-content mt-10 fr-view" style="text-align: justify;">
+                                    <%- ele.noiDung %>
+                                </div>
+                                
                            
                                  <h4 class="line-bottom mt-20 mb-20 text-theme-colored">Đăng ký tại đây</h4>
                                  <!--

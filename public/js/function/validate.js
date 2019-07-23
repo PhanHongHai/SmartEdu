@@ -228,5 +228,58 @@ $(document).ready(function () {
                 maxlength: 'Nhập tối đa 300 ký tự'
             }
         }
-    })
+    });
+    // comment
+    $('#lienHe').validate({
+        rules: {
+            hoTen: {
+                required: true,
+                minlength: 5,
+                maxlength: 30
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            content: {
+                required: true,
+                maxlength: 300
+            },
+            phone: {
+                digits: true,
+                minlength: 10,
+                maxlength: 11,
+            },
+            title: {
+                required: true,
+                minlength: 5,
+                maxlength: 100
+            }
+        },
+        messages: {
+            hoTen: {
+                required: 'Vui lòng nhập tên',
+                minlength: 'Nhập tối thiểu 5 ký tự',
+                maxlength: 'Nhập tối đa 50 ký tự'
+            },
+            email: {
+                required: 'Vui lòng nhập email',
+                email: 'Email không xác định'
+            },
+            content: {
+                required: 'Vui lòng nhập nội dung',
+                maxlength: 'Nhập tối đa 300 ký tự'
+            },
+            phone: {
+                minlength: 'Nhập tối thiểu 10 ký tự',
+                digits: 'Ký tự phải là số',
+                maxlength: 'Nhập tối đa 11 ký tự',
+            },
+            title: {
+                required: 'Vui lòng nhập tiêu đề',
+                maxlength: 'Nhập tối đa 300 ký tự',
+                minlength: 'Nhập tối thiểu 5 ký tự'
+            }
+        }
+    });
 })

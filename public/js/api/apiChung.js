@@ -12,7 +12,6 @@ $(document).ready(function () {
                 hoTen,
                 idKH: id
             };
-            console.log(data);
             axios.post('/don-dang-ky', data)
                 .then((res) => {
                     if (res.data.mess == 1) {
@@ -82,6 +81,57 @@ $(document).ready(function () {
         }
         e.preventDefault();
         return false;
+    });
+    var addTT = new FroalaEditor('#noiDungAddTT', {
+        language: 'vi',
+        heightMin: 100,
+        heightMax: 500,
+        imageUploadURL: 'upload',
+        imageUploadMethod: 'POST',
+        imageUploadParams: {
+            id: 'my_editor'
+        }
+    });
+    var updateTT = new FroalaEditor('#noiDungCN', {
+        language: 'vi',
+        heightMin: 100,
+        heightMax: 500,
+        imageUploadURL: 'upload',
+        imageUploadMethod: 'POST',
+        imageUploadParams: {
+            id: 'my_editor'
+        }
+    });
+    $('#lienHe').on('submit',function(e){
+        e.preventDefault();
+         
+        let hoTen=$('#hoTen').val();
+        let email=$('#email').val();
+        let title=$('#title').val();
+        let phone=$('#phone').val();
+        let content=$('#content').val();
+        let data={hoTen,email,title,phone,content};
+        axios.post('/lien-he',data)
+        .then((res) => {
+            if(res.data.mess == 1){
+                swal("Chúc mừng", "Đã gửi thành công !", "success");
+                $('#hoTen').val('');
+                $('#email').val('');
+                $('#title').val('');
+                $('#phone').val('');
+                $('#content').val('');
+            }
+            else{
+                swal("Thông báo", "Gửi thất bại !", "error");
+            }
+        })
+        .catch((err) => {
+            if(err){
+                console.log(err);
+                swal("Thông báo", "Xin nhập lại thông tin !", "error");
+            } 
+         
+        })
     });
 
 })

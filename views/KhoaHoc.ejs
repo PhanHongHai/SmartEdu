@@ -1,0 +1,249 @@
+<%
+  let convertURL=function(str){
+    str = str.toLowerCase();
+
+    // xóa dấu
+    str = str.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, 'a');
+    str = str.replace(/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/g, 'e');
+    str = str.replace(/(ì|í|ị|ỉ|ĩ)/g, 'i');
+    str = str.replace(/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/g, 'o');
+    str = str.replace(/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/g, 'u');
+    str = str.replace(/(ỳ|ý|ỵ|ỷ|ỹ)/g, 'y');
+    str = str.replace(/(đ)/g, 'd');
+
+    // Xóa ký tự đặc biệt
+    str = str.replace(/([^0-9a-z-\s])/g, '');
+
+    // Xóa khoảng trắng thay bằng ký tự -
+    str = str.replace(/(\s+)/g, '-');
+
+    // xóa phần dự - ở đầu
+    str = str.replace(/^-+/g, '');
+
+    // xóa phần dư - ở cuối
+    str = str.replace(/-+$/g, '');
+
+    // return
+    return str;
+  };
+
+%>
+<%
+  var listMenu=[
+    {link:'/',name:'Trang chủ'},{link:'/tuyen-sinh',name:'Đào tạo'},
+    {
+      link:'/tuyen-sinh',name:'Tuyển sinh',
+      subMenu:[
+      {
+        link:'/tuyen-sinh/1',name:'Ngắn hạn'
+      },
+      {
+        link:'/tuyen-sinh/2',name:'Trung cấp'
+      },
+      {
+        link:'/tuyen-sinh/3',name:'Cao đẳng'
+      },
+      {
+        link:'/tuyen-sinh/4',name:'Đại học'
+      },
+      {
+        link:'/tuyen-sinh/6',name:'Du học xuất khẩu lao động'
+      }
+      ]
+    },
+    
+    {link:'/bai-viet/linh-vuc/5d21a5a28ae8350a5088f73f',name:'Tin tức'},
+    {link:'/thong-bao',name:'Thông báo'},
+  ];
+
+
+%>
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<% include ../component/home/head %>
+
+<body class="">
+    <div id="wrapper" class="clearfix">
+        <!-- preloader -->
+        <%- include('../component/home/header',{listMenu}) %>
+        <!-- Start main-content -->
+        <div class="main-content">
+
+            <section class="inner-header divider parallax layer-overlay overlay-dark-5"
+                data-bg-img="/public/images/bnn.jpg">
+                <div class="container pt-70 pb-20">
+                    <!-- Section Content -->
+                    <div class="section-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="title text-white">Danh sách khóa học</h2>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 blog-pull-right">
+                            <div class="col-md-12">
+                                <h4 class="widget-title title-dots mt-30"><span><a class="text-white"
+                                            href="/tuyen-sinh/4">Khóa học nổi bật</a></span></h4>
+                            </div>
+                            <div id="khNew" style="margin-top: 10%;">
+                                <% if(khNew.length !=0){ %>
+                                <% khNew.forEach(function(ele){%>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="service-block bg-white">
+                                        <div class="thumb"> <img alt="featured project"
+                                                src="/public/uploads/<%= ele.banner %>" class="img-fullwidth">
+                                            <h4 class="text-white mt-0 mb-0"><span
+                                                    class="price">$<%= ele.hocPhi %></span></h4>
+                                        </div>
+                                        <div class="content text-left flip p-25 pt-0">
+                                            <h4 class="line-bottom mb-10"><%= ele.tenKH %></h4>
+                                            <p style="font-size: 13px;"><%= ele.gioiThieu.slice(0,100) %>...</p>
+
+                                            <small
+                                                style="display:block;font-size: 10px; color: red;"><%= ele.ctv[0].tenDV%></small>
+                                            <a href="/khoa-hoc/chi-tiet/<%= convertURL(ele.tenKH)%>.<%= ele._id %>"
+                                                class="btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10"
+                                                href="page-courses-accounting-technologies.html">Xem thêm</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% })}%>
+                            </div>
+                            <div class="col-md-12">
+                                <h4 class="widget-title title-dots mt-30"><span><a class="text-white"
+                                            href="/tuyen-sinh/4"> Khóa học mới nhất</a></span></h4>
+                            </div>
+                            <div id="khNB" style="margin-top: 13%;">
+                                <% if(khNew.length !=0){ %>
+                                <% khNew.forEach(function(ele){%>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="service-block bg-white">
+                                        <div class="thumb"> <img alt="featured project"
+                                                src="/public/uploads/<%= ele.banner %>" class="img-fullwidth">
+                                            <h4 class="text-white mt-0 mb-0"><span
+                                                    class="price">$<%= ele.hocPhi %></span></h4>
+                                        </div>
+                                        <div class="content text-left flip p-25 pt-0">
+                                            <h4 class="line-bottom mb-10"><%= ele.tenKH %></h4>
+                                            <p style="font-size: 13px;"><%= ele.gioiThieu.slice(0,100) %>...</p>
+
+                                            <small
+                                                style="display:block;font-size: 10px; color: red;"><%= ele.ctv[0].tenDV%></small>
+                                            <a href="/khoa-hoc/<%= convertURL(ele.tenKH)%>.<%= ele._id %>"
+                                                class="btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10"
+                                                href="page-courses-accounting-technologies.html">Xem thêm</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% })}%>
+
+                            </div>
+                            
+
+                        </div>
+                        <div class="col-sm-12 col-md-3">
+                            <div class="sidebar sidebar-left mt-sm-30">
+                                <div class="widget">
+                                    <h5 class="widget-title line-bottom">Tìm kiếm <span class="text-theme-color-2">Khóa
+                                            Học</span></h5>
+                                    <div class="search-form">
+                                        <form method="POST">
+                                            <div class="input-group">
+                                                <input type="text" placeholder="Nhập từ khóa"
+                                                    class="form-control search-input" name="keyWord">
+                                                <span class="input-group-btn">
+                                                    <button type="submit" class="btn search-button"><i
+                                                            class="fa fa-search"></i></button>
+                                                </span>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="widget">
+                                    <h5 class="widget-title line-bottom">Khóa học <span class="text-theme-color-2">Lĩnh
+                                            vực</span></h5>
+                                    <div class="categories">
+                                        <ul class="list list-border angle-double-right">
+                                            <% if(listLV.length !=0){%>
+                                            <% listLV.forEach(function(ele){%>
+                                            <li><a href="/khoa-hoc/linh-vuc/<%=ele._id%>"><%=ele.ten%></a></li>
+                                            <% }) %>
+                                            <% }%>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="widget">
+                                    <h5 class="widget-title line-bottom">Đơn vị -<span
+                                            class="text-theme-color-2"> Đối tác</span></h5>
+                                    <div class="latest-posts">
+                                        <article class="post media-post clearfix pb-0 mb-10">
+                                            <a class="post-thumb" href="#"><img src="http://placehold.it/75x75"
+                                                    alt=""></a>
+                                            <div class="post-right">
+                                                <h5 class="post-title mt-0"><a href="#">Sustainable Construction</a>
+                                                </h5>
+                                                <p>Lorem ipsum dolor sit amet adipisicing elit...</p>
+                                            </div>
+                                        </article>
+                                        <article class="post media-post clearfix pb-0 mb-10">
+                                            <a class="post-thumb" href="#"><img src="http://placehold.it/75x75"
+                                                    alt=""></a>
+                                            <div class="post-right">
+                                                <h5 class="post-title mt-0"><a href="#">Industrial Coatings</a></h5>
+                                                <p>Lorem ipsum dolor sit amet adipisicing elit...</p>
+                                            </div>
+                                        </article>
+                                        <article class="post media-post clearfix pb-0 mb-10">
+                                            <a class="post-thumb" href="#"><img src="http://placehold.it/75x75"
+                                                    alt=""></a>
+                                            <div class="post-right">
+                                                <h5 class="post-title mt-0"><a href="#">Storefront Installations</a>
+                                                </h5>
+                                                <p>Lorem ipsum dolor sit amet adipisicing elit...</p>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <!-- end main-content -->
+        </div>
+
+        <!-- Footer -->
+        <% include ../component/home/footer %>
+        <% include ../component/home/script %>
+
+    </div>
+    <!-- end wrapper -->
+
+    <!-- Footer Scripts -->
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || , Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/5d2d8c3fbfcb827ab0cbfdab/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

@@ -8,8 +8,10 @@ const modelDK = require('../Model/DonDangKy');
 const modelBL = require('../Model/BinhLuan');
 const modelDV = require('../Model/Partner');
 const modelDT = require('../Model/tinDaoTao');
+const modelLH = require('../Model/LienHe');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
+
 const config = require('../constants/config');
 
 const option = {
@@ -80,33 +82,111 @@ module.exports = {
         let countDK = await modelDK.model.find().countDocuments();
         let countKH = await modelKH.model.find({ trangThai: 1 }).countDocuments();
         let countBL = await modelBL.model.find().countDocuments();
-        res.render('home', { listBV, listLV, listKH, countDV, countDK, countBL, countKH, user: req.user });
+        res.render('home', { listBV, listLV, listKH, countDV, countDK, countBL, countKH, user: req.user,stt:0 });
     },
     loadTuyenSinh:async (req,res) => {
         let listLV = await modelLV.model.find({}).limit(5);
-        let nganHan=await modelDT.model.find({danhMuc:1});
+        let nganHan=await modelDT.model.find({danhMuc:1}).limit(5);
         let trungCap=await modelDT.model.find({danhMuc:2}).sort({ngayTao:-1}).limit(1);
         let caoDang=await modelDT.model.find({danhMuc:3}).sort({ngayTao:-1}).limit(1);
         let daiHoc=await modelDT.model.find({danhMuc:4}).sort({ngayTao:1}).limit(4);
         let daoTao=await modelDT.model.find({danhMuc:5}).sort({ngayTao:-1}).limit(2);
         let duHoc=await modelDT.model.find({danhMuc:6}).sort({ngayTao:-1}).limit(4); 
-        let tinNB=await modelDT.model.find({}).sort({ngayTao:-1}).limit(4);
-        res.render('tuyenSinh', { listLV ,nganHan,trungCap,caoDang,daiHoc,duHoc,daoTao,tinNB});
+        let tinNB=await modelDT.model.find({}).sort({ngayTao:-1}).limit(5);
+        let tb=await modelDT.model.find({danhMuc:7}).sort({ngayTao:-1}).limit(5);
+        res.render('tuyenSinh', { listLV ,nganHan,trungCap,caoDang,daiHoc,duHoc,daoTao,tinNB,tb,stt:2});
+    },
+    loadKhoaHoc:async (req,res) => {
+        let listLV=await modelLV.model.find({});
+        let listKH=await modelKH.model.aggregate([
+            {
+                $lookup:{
+                    from:'linhVuc',
+                    localField:'idLV',
+                    foreignField:'_id',
+                    as:'lv'
+                }
+            },
+            {
+                $lookup:{
+                    from:'congTacVien',
+                    localField:'idDV',
+                    foreignField:'_id',
+                    as:'ctv'
+                }
+            },
+            {
+                $sort:{ngayKhaiGiang:1}
+            },
+            {
+                $limit:8
+            }
+        ]);
+        let khNew=await modelKH.model.aggregate([
+            {
+                $lookup:{
+                    from:'linhVuc',
+                    localField:'idLV',
+                    foreignField:'_id',
+                    as:'lv'
+                }
+            },
+            {
+                $lookup:{
+                    from:'congTacVien',
+                    localField:'idDV',
+                    foreignField:'_id',
+                    as:'ctv'
+                }
+            },
+            {
+                $sort:{ngayKhaiGiang:-1}
+            },
+            {
+                $limit:8
+            }
+        ]);
+        let khNB=await modelKH.model.aggregate([
+            {
+                $lookup:{
+                    from:'linhVuc',
+                    localField:'idLV',
+                    foreignField:'_id',
+                    as:'lv'
+                }
+            },
+            {
+                $lookup:{
+                    from:'congTacVien',
+                    localField:'idDV',
+                    foreignField:'_id',
+                    as:'ctv'
+                }
+            },
+            {
+                $sort:{ngayKhaiGiang:1}
+            },
+            {
+                $limit:8
+            }
+        ])
+    
+        res.render('KhoaHoc',{listLV,listKH,khNew,khNB,stt:3});
     },
     loadDetailTinDT:async (req,res) => {
         let id=mongoose.Types.ObjectId(req.params.idDT);
         let data=await modelDT.model.find({_id:id});
         let tinLQ=await modelDT.model.find({_id:{$ne:id}}).sort({ngayTao:-1}).limit(3);
         let binhLuan = await modelBL.model.find({ idBV: id }).sort({ thoiGian: -1 }).limit(4);
-        res.render('ChiTietTuyenSinh',{data,tinLQ,binhLuan});
+        res.render('ChiTietTuyenSinh',{data,tinLQ,binhLuan,stt:2});
     },
     loadBaiVietByLV: async (req, res) => {
         let listLV = await modelLV.model.find();
-        res.render('ChiTietLinhVuc', { listLV, idLV: req.params.idLV });
+        res.render('ChiTietLinhVuc', { listLV, idLV: req.params.idLV,stt:4 });
     },
     loadKhoaHocByLV: async (req, res) => {
         let listLV = await modelLV.model.find();
-        res.render('ChiTietKhoaHocByLV', { listLV, idLV: req.params.idLV });
+        res.render('ChiTietKhoaHocByLV', { listLV, idLV: req.params.idLV,stt:3});
     },
     getListDT:async (req,res) => {
         let list=await modelDT.model.find({danhMuc:req.params.idDT});
@@ -147,7 +227,7 @@ module.exports = {
                 $limit: 4
             }
         ]);
-        res.render('ChiTietBaiViet', { listLV, tinLQ, detail, binhLuan });
+        res.render('ChiTietBaiViet', { listLV, tinLQ, detail, binhLuan,stt:4 });
     },
     detailKH: async (req, res) => {
         let id = mongoose.Types.ObjectId(req.params.idKH);
@@ -198,7 +278,7 @@ module.exports = {
                 $limit: 4
             }
         ]);
-        res.render('ChiTietKhoaHoc', { listLV, khLQ, detail });
+        res.render('ChiTietKhoaHoc', { listLV, khLQ, detail ,stt:3});
     },
     dangKy: async (req, res) => {
         let id = mongoose.Types.ObjectId(req.body.idKH);
@@ -249,5 +329,16 @@ module.exports = {
         }
         else
             res.status(500).send({ mess: 0 });
+    },
+    lienHe:async (req,res) => {
+        let lh=new modelLH(req.body);
+        lh.save((err) => {
+            if(err){
+                console.log(err);
+                res.status(500).send({mess:0});
+            } 
+            else
+                res.status(201).send({mess:1});
+        })
     }
 }

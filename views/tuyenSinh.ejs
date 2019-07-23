@@ -28,7 +28,36 @@
   };
 
 %>
+<%
+  var listMenu=[
+    {link:'/',name:'Trang chủ'},{link:'/tuyen-sinh',name:'Đào tạo'},
+    {
+      link:'/tuyen-sinh',name:'Tuyển sinh',
+      subMenu:[
+      {
+        link:'/tuyen-sinh/1',name:'Ngắn hạn'
+      },
+      {
+        link:'/tuyen-sinh/2',name:'Trung cấp'
+      },
+      {
+        link:'/tuyen-sinh/3',name:'Cao đẳng'
+      },
+      {
+        link:'/tuyen-sinh/4',name:'Đại học'
+      },
+      {
+        link:'/tuyen-sinh/6',name:'Du học xuất khẩu lao động'
+      }
+      ]
+    },
+    
+    {link:'/bai-viet/linh-vuc/5d21a5a28ae8350a5088f73f',name:'Tin tức'},
+    {link:'/thong-bao',name:'Thông báo'},
+  ];
 
+
+%>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <% include ../component/home/head %>
@@ -36,29 +65,18 @@
 <body class="">
   <div id="wrapper" class="clearfix">
     <!-- preloader -->
-    <% include ../component/home/header %>
+    <%- include('../component/home/header',{listMenu}) %>
     <!-- Start main-content -->
     <div class="main-content">
 
-      <!-- Section: home -->
-      <section id="home" class="divider">
-        <div class="container-fluid p-0">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="bannerTS">
-                <% if(tinNB.length != 0){ %>
-                <% tinNB.forEach(function(ele,i){%>
-                <div class="item">
-                  <div class="featured-blog" >
-                    <img class="img-fluid" src="/public/uploads/<%= ele.banner %>" alt="" style="width:635px;height:340px;">
-                    <div class="featured-blog-details"  >
-                      <h3 class="text-white mb-5" style="background-color: #353232a6;"><%= ele.tenBV %></h3>
-                      <a href="/dao-tao/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>" class="btn btn-theme-colored btn-sm mt-5">Đọc thêm</a>
-                    </div>
-                  </div>
-                </div>
-                <% }) %>
-                <% }%>
+      <section class="inner-header divider parallax layer-overlay overlay-dark-5" data-bg-img="/public/images/bnn1.jpg">
+        <div class="container pt-70 pb-20">
+          <!-- Section Content -->
+          <div class="section-content">
+            <div class="row">
+              <div class="col-md-12">
+                <h2 class="title text-white">Danh mục tuyển sinh</h2>
+
               </div>
             </div>
           </div>
@@ -71,7 +89,8 @@
             <div class="col-md-9">
               <div class="row">
                 <div class="col-md-12">
-                  <h4 class="widget-title title-dots"><span>Nội dung đào tạo</span></h4>
+                  <h4 class="widget-title title-dots"><span><a class="text-white" href="/dao-tao">Nội dung đào
+                        tạo</a></span></h4>
                 </div>
                 <div class="ndDaoTao">
                   <% if(daoTao.length !=0){%>
@@ -86,13 +105,13 @@
                       <div class="clearfix"></div>
                       <div class="entry-content-dt">
                         <h5 class="entry-title text-uppercase mt-0"><a
-                            href="/dao-tao/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"><%= ele.tenBV %></a>
+                            href="/tuyen-sinh/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"><%= ele.tenBV %></a>
                         </h5>
                         <ul class="list-inline font-12 mb-20 mt-10">
                           <li><i class="fa fa-calendar text-theme-color-2 mr-5"></i> <%= ele.ngayTao %> </li>
                         </ul>
 
-                        <a href="/dao-tao/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"
+                        <a href="/tuyen-sinh/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"
                           class="btn btn-default btn-theme-colored hvr-sweep-to-right"> Đọc thêm <i
                             class="fa fa-arrow-circle-right"></i></a>
                         <div class="clearfix"></div>
@@ -105,7 +124,8 @@
               <hr>
               <div class="row">
                 <div class="col-md-12">
-                  <h4 class="widget-title title-dots mt-30"><span>Tuyển sinh ngắn hạn</span></h4>
+                  <h4 class="widget-title title-dots mt-30"><span><a class="text-white" href="/tuyen-sinh/1"> Tuyển sinh
+                        ngắn hạn </a></span></h4>
                 </div>
                 <% if(nganHan.length !=0 ){%>
                 <% nganHan.forEach(function(ele,i){%>
@@ -120,13 +140,13 @@
                     <div class="clearfix"></div>
                     <div class="entry-content-dt">
                       <h5 class="entry-title text-uppercase mt-0"><a
-                          href="/dao-tao/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"><%= ele.tenBV %></a>
+                          href="/tuyen-sinh/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"><%= ele.tenBV %></a>
                       </h5>
                       <ul class="list-inline font-12 mb-20 mt-10">
                         <li><i class="fa fa-calendar text-theme-color-2 mr-5"></i> <%= ele.ngayTao %> </li>
                       </ul>
 
-                      <a href="/dao-tao/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"
+                      <a href="/tuyen-sinh/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"
                         class="btn btn-default btn-theme-colored hvr-sweep-to-right"> Đọc thêm <i
                           class="fa fa-arrow-circle-right"></i></a>
                       <div class="clearfix"></div>
@@ -139,7 +159,8 @@
               <hr>
               <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6">
-                  <h4 class="widget-title title-dots mt-30"><span>Tuyển sinh trung cấp</span></h4>
+                  <h4 class="widget-title title-dots mt-30"><span><a class="text-white" href="/tuyen-sinh/2">Tuyển sinh
+                        trung cấp</a> </span></h4>
                   <% if(trungCap.length !=0){ %>
                   <% trungCap.forEach(function(ele,i){ %>
                   <article class="post mb-30">
@@ -151,13 +172,13 @@
                     <div class="clearfix"></div>
                     <div class="entry-content-dt">
                       <h5 class="entry-title text-uppercase mt-0"><a
-                          href="/dao-tao/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"></a><%= ele.tenBV %></a>
+                          href="/tuyen-sinh/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"></a><%= ele.tenBV %></a>
                       </h5>
                       <ul class="list-inline font-12 mb-20 mt-10">
                         <li><i class="fa fa-calendar text-theme-color-2 mr-5"></i> <%= ele.ngayTao %> </li>
                       </ul>
 
-                      <a href="/dao-tao/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"
+                      <a href="/tuyen-sinh/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"
                         class="btn btn-default btn-theme-colored hvr-sweep-to-right"> Đọc thêm <i
                           class="fa fa-arrow-circle-right"></i></a>
                       <div class="clearfix"></div>
@@ -166,7 +187,8 @@
                   <%}) } %>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6">
-                  <h4 class="widget-title title-dots mt-30"><span>Tuyển sinh cao đẳng</span></h4>
+                  <h4 class="widget-title title-dots mt-30"><span><a class="text-white" href="/tuyen-sinh/3">Tuyển sinh
+                        cao đẳng</a> </span></h4>
                   <% if(caoDang.length !=0){ %>
                   <% caoDang.forEach(function(ele,i){ %>
                   <article class="post mb-30">
@@ -178,13 +200,13 @@
                     <div class="clearfix"></div>
                     <div class="entry-content-dt">
                       <h5 class="entry-title text-uppercase mt-0"><a
-                          href="/dao-tao/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"><%= ele.tenBV %></a>
+                          href="/tuyen-sinh/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"><%= ele.tenBV %></a>
                       </h5>
                       <ul class="list-inline font-12 mb-20 mt-10">
                         <li><i class="fa fa-calendar text-theme-color-2 mr-5"></i> <%= ele.ngayTao %> </li>
                       </ul>
 
-                      <a href="/dao-tao/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"
+                      <a href="/tuyen-sinh/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"
                         class="btn btn-default btn-theme-colored hvr-sweep-to-right"> Đọc thêm <i
                           class="fa fa-arrow-circle-right"></i></a>
                       <div class="clearfix"></div>
@@ -198,7 +220,8 @@
               <hr>
               <div class="row">
                 <div class="col-md-12">
-                  <h4 class="widget-title title-dots mt-30"><span>Tuyển sinh hệ đại học</span></h4>
+                  <h4 class="widget-title title-dots mt-30"><span><a class="text-white" href="/tuyen-sinh/4"> Tuyển sinh
+                        hệ đại học</a></span></h4>
                 </div>
                 <% if(daiHoc.length != 0){ %>
                 <% daiHoc.forEach(function(ele,i){%>
@@ -213,11 +236,13 @@
                     <div class="clearfix"></div>
                     <div class="entry-content-dt">
                       <h5 class="entry-title text-uppercase mt-0"><a class="font-13"
-                          href="/dao-tao/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"><%= ele.tenBV%></a>
+                          href="/tuyen-sinh/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"><%= ele.tenBV%></a>
                       </h5>
                       <p class="post-date mb-0 font-12"><i
                           class="fa fa-calendar text-theme-color-2 mr-5"></i><%= ele.ngayTao%></p>
+              
                     </div>
+
                   </article>
                   <div class="clearfix"></div>
                 </div>
@@ -227,7 +252,8 @@
               <hr>
               <div class="row">
                 <div class="col-md-12">
-                  <h4 class="widget-title title-dots mt-30"><span>Du học xuất khẩu lao động</span></h4>
+                  <h4 class="widget-title title-dots mt-30"><span><a class="text-white" href="/tuyen-sinh/6">Du học xuất
+                        khẩu lao động</a> </span></h4>
                 </div>
                 <% if(duHoc.length != 0){ %>
                 <% duHoc.forEach(function(ele,i){%>
@@ -242,11 +268,11 @@
                     <div class="clearfix"></div>
                     <div class="entry-content-dt">
                       <h5 class="entry-title text-uppercase mt-0"><a class="font-13"
-                          href="/dao-tao/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"><%= ele.tenBV%></a>
+                          href="/tuyen-sinh/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"><%= ele.tenBV%></a>
                       </h5>
                       <p class="post-date mb-0 font-12"><i
                           class="fa fa-calendar text-theme-color-2 mr-5"></i><%= ele.ngayTao%></p>
-
+                     
                     </div>
                     <div class="clearfix"></div>
                   </article>
@@ -272,28 +298,24 @@
                 </div>
                 <div class="widget">
                   <h5 class="widget-title title-dots small"><span>Thông báo mới</span></h5>
-                  <div class="latest-posts">
+                  <div class="latest-posts" id="ndTB">
+                    <% if(tb.length !=0){%>
+                    <% tb.forEach(function(ele){%>
                     <article class="post media-post clearfix pb-0 mb-5">
-                      <a class="post-thumb" href="#"><img src="http://placehold.it/70x70" alt=""></a>
+                      <a class="post-thumb" href="#"><img src="/public/uploads/<%= ele.banner%>" width="70px"
+                          height="70px" alt=""></a>
                       <div class="post-right">
-                        <h5 class="post-title mt-0"><a href="#">Sustainable Construction</a></h5>
-                        <p>Lorem ipsum dolor sit amet adipisicing elit...</p>
+                        <h5 class="post-title mt-0"><a
+                            href="/tuyen-sinh/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"><%= ele.tenBV %></a>
+                        </h5>
+                        <p class="post-date mb-0 font-12"><i
+                            class="fa fa-calendar text-theme-color-2 mr-5"></i><%= ele.ngayTao%></p>
                       </div>
                     </article>
-                    <article class="post media-post clearfix pb-0 mb-5">
-                      <a class="post-thumb" href="#"><img src="http://placehold.it/70x70" alt=""></a>
-                      <div class="post-right">
-                        <h5 class="post-title mt-0"><a href="#">Industrial Coatings</a></h5>
-                        <p>Lorem ipsum dolor sit amet adipisicing elit...</p>
-                      </div>
-                    </article>
-                    <article class="post media-post clearfix pb-0 mb-10">
-                      <a class="post-thumb" href="#"><img src="http://placehold.it/70x70" alt=""></a>
-                      <div class="post-right">
-                        <h5 class="post-title mt-0"><a href="#">Storefront Installations</a></h5>
-                        <p>Lorem ipsum dolor sit amet adipisicing elit...</p>
-                      </div>
-                    </article>
+                    <% })%>
+                    <% }%>
+
+
                   </div>
                 </div>
                 <div class="widget">
@@ -301,18 +323,17 @@
                 </div>
                 <div class="widget">
                   <h5 class="widget-title title-dots small"><span>Tin nổi bật</span></h5>
-                  <div class="latest-posts">
-                    <% if(tinNB.length != 0){ %>
-                    <% tinNB.forEach(function(ele,i){%>
+                  <div class="latest-posts" id="tsNB" <% if(tinNB.length != 0){ %> <% tinNB.forEach(function(ele,i){%>
                     <article class="post media-post clearfix pb-0 mb-5">
-                      <a class="post-thumb" href="/dao-tao/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"><img
-                          src="/public/uploads/<%= ele.banner%>" width="70px" height="70px" alt=""></a>
-                      <div class="post-right">
-                        <h5 class="post-title mt-0"><a href="/dao-tao/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"><%= ele.tenBV %>></a>
-                        </h5>
-                        <p class="post-date mb-0 font-12"><i
-                            class="fa fa-calendar text-theme-color-2 mr-5"></i><%= ele.ngayTao%></p>
-                      </div>
+                    <a class="post-thumb" href="/tuyen-sinh/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"><img
+                        src="/public/uploads/<%= ele.banner%>" width="70px" height="70px" alt=""></a>
+                    <div class="post-right" style="text-align: justify;">
+                      <h5 class="post-title mt-0"><a
+                          href="/tuyen-sinh/chi-tiet/<%= convertURL(ele.tenBV) %>.<%= ele._id %>"><%= ele.tenBV %></a>
+                      </h5>
+                      <p class="post-date mb-0 font-12"><i
+                          class="fa fa-calendar text-theme-color-2 mr-5"></i><%= ele.ngayTao%></p>
+                    </div>
                     </article>
                     <% }) %>
                     <% }%>
@@ -342,7 +363,7 @@
 
   <!--Start of Tawk.to Script-->
   <script type="text/javascript">
-    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    var Tawk_API = Tawk_API || , Tawk_LoadStart = new Date();
     (function () {
       var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
       s1.async = true;

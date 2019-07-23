@@ -984,7 +984,7 @@ var THEMEMASCOT = {};
         TM_menuzord: function() {
             $("#menuzord").menuzord({
                 align: "left",
-                effect: "slide",
+                effect: "toggle",
                 animation: "none",
                 indicatorFirstLevel: "<i class='fa fa-angle-down'></i>",
                 indicatorSecondLevel: "<i class='fa fa-angle-right'></i>"

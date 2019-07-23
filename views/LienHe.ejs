@@ -1,3 +1,33 @@
+<%
+  var listMenu=[
+    {link:'/',name:'Trang chủ'},{link:'/dao-tao',name:'Đào tạo'},
+    {
+      link:'/tuyen-sinh',name:'Tuyển sinh',
+      subMenu:[
+      {
+        link:'/tuyen-sinh/1',name:'Ngắn hạn'
+      },
+      {
+        link:'/tuyen-sinh/2',name:'Trung cấp'
+      },
+      {
+        link:'/tuyen-sinh/3',name:'Cao đẳng'
+      },
+      {
+        link:'/tuyen-sinh/4',name:'Đại học'
+      },
+      {
+        link:'/tuyen-sinh/6',name:'Du học xuất khẩu lao động'
+      }
+      ]
+    },
+    
+    {link:'/bai-viet/linh-vuc/5d21a5a28ae8350a5088f73f',name:'Tin tức'},
+    {link:'/thong-bao',name:'Thông báo'},
+  ];
+
+
+%>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <% include ../component/home/head %>
@@ -5,7 +35,7 @@
 <body class="">
   <div id="wrapper" class="clearfix">
     <!-- preloader -->
-    <% include ../component/home/header %>
+   <%- include('../component/home/header',{listMenu}) %>
     <!-- Start main-content -->
     <div class="main-content">
 
@@ -15,69 +45,45 @@
                     <div class="col-md-8">
                       <h3 class="line-bottom mt-0 mb-20">HỌC VIÊN ĐIỀN ĐẦY ĐỦ THÔNG TIN TẠI ĐÂY</h3>
                       <!-- Contact Form -->
-                      <form id="contact_form" name="contact_form" class="form-transparent" action="" method="post">
+                      <form id="lienHe" name="contact_form" class="form-transparent">
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label for="form_name">Họ tên <small>*</small></label>
-                              <input name="form_name" class="form-control  text-black" type="text" placeholder="Nhập tên" required="">
+                              <label >Họ tên <small>*</small></label>
+                              <input name="hoTen" class="form-control  text-black" type="text" id="hoTen" placeholder="Nhập tên" >
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label for="form_email">Email <small>*</small></label>
-                              <input name="form_email" class="form-control required email text-black" type="email" placeholder="Nhập email">
+                              <label >Email <small>*</small></label>
+                              <input name="email" class="form-control required email text-black" id="email" type="email" placeholder="Nhập email">
                             </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label for="form_name">Tiêu đề <small>*</small></label>
-                              <input name="form_subject" class="form-control required  text-black" type="text" placeholder="Nhập tiêu đề">
+                              <label >Tiêu đề <small>*</small></label>
+                              <input name="title" class="form-control required  text-black" id="title" type="text" placeholder="Nhập tiêu đề">
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label for="form_phone">Số điện thoại</label>
-                              <input name="form_phone" class="form-control  text-black" type="text" placeholder="Nhập sđt">
+                              <label >Số điện thoại</label>
+                              <input name="phone" class="form-control  text-black" id="phone" type="number" placeholder="Nhập sđt">
                             </div>
                           </div>
                         </div>
                         <div class="form-group">
-                          <label for="form_name">Nội dung</label>
-                          <textarea name="form_message" class="form-control required  text-black" rows="5" placeholder="Nhập nội dung"></textarea>
+                          <label >Nội dung</label>
+                          <textarea name="content" class="form-control required  text-black" id="content" rows="5" placeholder="Nhập nội dung"></textarea>
                         </div>
                         <div class="form-group">
-                          <input name="form_botcheck" class="form-control" type="hidden" value="" />
-                          <button type="submit" class="btn btn-dark btn-theme-colored btn-flat mr-5" data-loading-text="Please wait...">Gửi</button>
+                          <button type="submit" class="btn btn-dark btn-theme-colored btn-flat mr-5"  data-loading-text="<i class='fa fa-spinner fa-spin '></i> Đang gửi">Gửi</button>
                           <button type="reset" class="btn btn-default btn-flat btn-theme-colored">Làm lại</button>
                         </div>
                       </form>
-                      <!-- Contact Form Validation-->
-                      <script type="text/javascript">
-                        $("#contact_form").validate({
-                          submitHandler: function(form) {
-                            var form_btn = $(form).find('button[type="submit"]');
-                            var form_result_div = '#form-result';
-                            $(form_result_div).remove();
-                            form_btn.before('<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>');
-                            var form_btn_old_msg = form_btn.html();
-                            form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
-                            $(form).ajaxSubmit({
-                              dataType:  'json',
-                              success: function(data) {
-                                if( data.status == 'true' ) {
-                                  $(form).find('.form-control').val('');
-                                }
-                                form_btn.prop('disabled', false).html(form_btn_old_msg);
-                                $(form_result_div).html(data.message).fadeIn('slow');
-                                setTimeout(function(){ $(form_result_div).fadeOut('slow') }, 6000);
-                              }
-                            });
-                          }
-                        });
-                      </script>
+                   
                     </div>
                     <div class="col-md-4">
                       <div class="row">

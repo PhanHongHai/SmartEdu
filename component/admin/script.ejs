@@ -1,13 +1,14 @@
 <script src="/public/js/jquery.min.js"></script>
 <script src="/public/admin/lib/popper.js/dist/umd/popper.min.js"></script>
 
-
+<script type="text/javascript" src="/public/admin/lib/datatable/datatables.min.js"></script>
 <script src="/public/admin/lib/select2/dist/js/select2.full.min.js"></script>
 <script src="/public/js/jquery-ui.js"></script>
 <script src="/public/js/axios.js"></script>
+<script src="/public/js/api/apiAdmin.js"></script>
+<script src="/public/js/api/apiChung.js"></script>
 <script src="/public/admin/lib/dropzone/dist/dropzone.js"></script>
 <script src="/public/lib/sweetalert/sweetalert.min.js"></script>
-<script src="/public/admin/lib/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="/public/admin/flo/js/froala_editor.pkgd.min.js"></script>
 <script src="/public/admin/flo/plugins/image.min.js"></script>
 <script src="/public/admin/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
@@ -26,3 +27,24 @@
 <script src="/public/admin/js/demo_customizer.js?version=4.4.0"></script>
 <script src="/public/js/jquery.validate.min.js"></script>
 <script src="/public/js/main.js?version=4.4.0"></script>
+<script>
+    $(document).ready(function () {
+        $('#listTT').DataTable({
+            "language": {
+                "lengthMenu": "Hiện _MENU_ trên tổng trang",
+                "zeroRecords": "Không tìm thấy",
+                "info": "Trang_PAGE_ / _PAGES_",
+                "infoEmpty": "Không có dữ liệu",
+                "infoFiltered": "(Lọc từ _MAX_ tổng dữ liệu)",
+                "search": "Tìm kiếm :",
+                "paginate": {
+                    "first": "Đầu",
+                    "last": "Cuối",
+                    "next": ">",
+                    "previous": "<"
+                },
+            }
+
+        });
+    });
+</script>

@@ -1,3 +1,33 @@
+<%
+  var listMenu=[
+    {link:'/',name:'Trang chủ'},{link:'/dao-tao',name:'Đào tạo'},
+    {
+      link:'/tuyen-sinh',name:'Tuyển sinh',
+      subMenu:[
+      {
+        link:'/tuyen-sinh/1',name:'Ngắn hạn'
+      },
+      {
+        link:'/tuyen-sinh/2',name:'Trung cấp'
+      },
+      {
+        link:'/tuyen-sinh/3',name:'Cao đẳng'
+      },
+      {
+        link:'/tuyen-sinh/4',name:'Đại học'
+      },
+      {
+        link:'/tuyen-sinh/6',name:'Du học xuất khẩu lao động'
+      }
+      ]
+    },
+    
+    {link:'/bai-viet/linh-vuc/5d21a5a28ae8350a5088f73f',name:'Tin tức'},
+    {link:'/thong-bao',name:'Thông báo'},
+  ];
+
+
+%>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <% include ../component/home/head %>
@@ -5,7 +35,7 @@
 <body class="">
     <div id="wrapper" class="clearfix">
         <!-- preloader -->
-        <% include ../component/home/header %>
+        <%- include('../component/home/header',{listMenu}) %>
         <!-- Start main-content -->
         <div class="main-content">
 
@@ -48,12 +78,21 @@
                                 <div class="widget">
                                     <h5 class="widget-title line-bottom">Lĩnh vực <span class="text-theme-color-2">Khóa
                                             học</span></h5>
-                                    <ul class="list-divider list-border list check">
-                                        <% if(listLV != null){ %>
-                                        <% listLV.forEach(function(ele){ %>
-                                        <li><a href="/khoa-hoc/linh-vuc/<%= ele._id %>"><%= ele.ten %></a></li>
-                                        <% })} %>
-                                    </ul>
+
+                                    <div class="services-list">
+                                        <ul class="list list-border angle-double-right">
+                                            <% if(listLV.length !== 0){ %>
+                                            <% listLV.forEach(function(ele){ %>
+                                            <% if(ele.id == idLV ){%>
+                                            <li class="active"><a
+                                                    href="/khoa-hoc/linh-vuc/<%= ele._id %>"><%= ele.ten %></a></li>
+                                            <% } else{%>
+                                            <li><a href="/khoa-hoc/linh-vuc/<%= ele._id %>"><%= ele.ten %></a></li>
+                                            <% }%>
+                                            <% })} %>
+                                        </ul>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -79,6 +118,33 @@
 
     <script>
         $(document).ready(function () {
+            function convertURL(str) {
+                        str = str.toLowerCase();
+
+                        // xóa dấu
+                        str = str.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, 'a');
+                        str = str.replace(/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/g, 'e');
+                        str = str.replace(/(ì|í|ị|ỉ|ĩ)/g, 'i');
+                        str = str.replace(/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/g, 'o');
+                        str = str.replace(/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/g, 'u');
+                        str = str.replace(/(ỳ|ý|ỵ|ỷ|ỹ)/g, 'y');
+                        str = str.replace(/(đ)/g, 'd');
+
+                        // Xóa ký tự đặc biệt
+                        str = str.replace(/([^0-9a-z-\s])/g, '');
+
+                        // Xóa khoảng trắng thay bằng ký tự -
+                        str = str.replace(/(\s+)/g, '-');
+
+                        // xóa phần dự - ở đầu
+                        str = str.replace(/^-+/g, '');
+
+                        // xóa phần dư - ở cuối
+                        str = str.replace(/-+$/g, '');
+
+                        // return
+                        return str;
+                    };
             function showListKH(data) {
                 var html = "";
                 $.each(data, function (index, ele) {
@@ -91,7 +157,7 @@
                     html += `<li><h4 class="mt-0"><span class="text-theme-color-2">Học phí :</span> ${ele.hocPhi} VNĐ</h4></li>`;
                     html += "</ul>";
                     html += `<p class="fr-view">${ele.gioiThieu.slice(0, 65)}</p>`;
-                    html += `<a class='btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10' href='/khoa-hoc/chi-tiet/${ele._id}'>Xem chi tiết</a>`;
+                    html += `<a class='btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10' href='/khoa-hoc/chi-tiet/${convertURL(ele.tenKH)}.${ele._id}'>Xem chi tiết</a>`;
                     html += "</div>";
                     html += "</div>";
                 });

@@ -49,7 +49,7 @@ var method={
     },
     deleteBV:(id) => {
         return new Promise((resolve,reject) => {
-            model.findOneAndDelete(id,(err) => {
+            model.findByIdAndRemove(id,(err) => {
                 if(err) return reject(err);
                 return resolve(1);
             });

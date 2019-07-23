@@ -78,15 +78,22 @@ router.route('/admin/khoa-hoc')
 router.route('/admin/khoa-hoc/loadUpdate/:idKH')
     .post(upload.single('banner'), ctrlKH.updateKH)
 router.get('/admin/khoa-hoc/delete/:idKH', ctrlKH.deleteKH);
-router.post('/change-course',ctrlKH.thayDoiKhoaHoc)
-router.get('/cancel-course/:idQ',ctrlKH.huyYeuCau)
+router.post('/change-course', ctrlKH.thayDoiKhoaHoc)
+router.get('/cancel-course/:idQ', ctrlKH.huyYeuCau)
 // tin tuc
-router.route('/admin/bai-viet')
+router.route('/admin/tin-tuc')
     .get(ctrlBV.loadPage)
-    .post(upload.single('banner'), ctrlBV.addBV)
+    .post(upload.single('banner'), ctrlBV.addTT)
+router.route('/admin/tin-tuc/:idTT')
+    .post(upload.single('banner'), ctrlBV.updateBV1)
+    .put(upload.single('banner'), ctrlBV.updateBV)
+    .delete(ctrlBV.deleteBV)
+
+
+
 router.route('/admin/bai-viet/loadUpdate/:idBV')
-    .get(ctrlBV.loadUpdate)
-    .post(upload.single('banner'), ctrlBV.updateBV)
+            .get(ctrlBV.loadUpdate)
+            .post(upload.single('banner'), ctrlBV.updateBV)
 router.get('/admin/bai-viet/delete/:idBV', ctrlBV.deleteBV);
 
 router.post('/admin/upload', (req, res) => {
@@ -112,7 +119,7 @@ if (!fs.existsSync(filesDir)) {
     fs.mkdirSync(filesDir);
 };
 /// thong bao
-router.post('/thong-bao',)
+router.post('/thong-bao')
 /// linh vuc
 router.route('/admin/linh-vuc')
     .get(ctrlLV.loadPage)

@@ -1,3 +1,34 @@
+<%
+  var listMenu=[
+    {link:'/',name:'Trang chủ'},{link:'/dao-tao',name:'Đào tạo'},
+    {
+      link:'/tuyen-sinh',name:'Tuyển sinh',
+      subMenu:[
+      {
+        link:'/tuyen-sinh/1',name:'Ngắn hạn'
+      },
+      {
+        link:'/tuyen-sinh/2',name:'Trung cấp'
+      },
+      {
+        link:'/tuyen-sinh/3',name:'Cao đẳng'
+      },
+      {
+        link:'/tuyen-sinh/4',name:'Đại học'
+      },
+      {
+        link:'/tuyen-sinh/6',name:'Du học xuất khẩu lao động'
+      }
+      ]
+    },
+    
+    {link:'/bai-viet/linh-vuc/5d21a5a28ae8350a5088f73f',name:'Tin tức'},
+    {link:'/thong-bao',name:'Thông báo'},
+  ];
+
+
+%>
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <% include ../component/home/head %>
@@ -5,7 +36,7 @@
 <body class="">
   <div id="wrapper" class="clearfix">
     <!-- preloader -->
-    <% include ../component/home/header %>
+    <%- include('../component/home/header',{listMenu}) %>
     <!-- Start main-content -->
     <div class="main-content">
 
@@ -144,7 +175,8 @@
                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="1400" data-splitin="none"
                     data-splitout="none" data-responsive_offset="on"
                     style="z-index: 5; white-space: nowrap; letter-spacing:1px;"><a
-                      class="btn btn-default btn-circled btn-transparent pl-20 pr-20" href="https://www.riam.vn/register/www.riam.edu.vn">Đăng ký ngay</a>
+                      class="btn btn-default btn-circled btn-transparent pl-20 pr-20"
+                      href="https://www.riam.vn/register/www.riam.edu.vn">Đăng ký ngay</a>
                   </div>
                 </li>
 
@@ -371,7 +403,8 @@
                   tin trái chiều và chưa kiểm soát chặt chẽ. Chúng tôi có tham vọng đưa người tìm việc và nhà tuyển dụng
                   trực tiếp thấy nhau ở khoảng cách gần hơn. để làm được điều đó chúng tôi cần sự hỗ trợ đóng góp từ mọi
                   người. </h4>
-                <p style="font-family: sans-serif;text-align: justify;">Mục tiêu đào tạo và giáo dục của chúng tôi là chuyển biến nhân sự của doanh nghiệp trở thành nguồn
+                <p style="font-family: sans-serif;text-align: justify;">Mục tiêu đào tạo và giáo dục của chúng tôi là
+                  chuyển biến nhân sự của doanh nghiệp trở thành nguồn
                   tài nguyên quan trọng nhất bằng cách thay đổi ý thức và tư duy sao cho bản thân nhân viên tự mình suy
                   nghĩ, tự đặt ra mục tiêu, tự hành động để tạo ra được sự tin tưởng lớn nhất….</p>
               </div>
@@ -382,79 +415,84 @@
           </div>
         </div>
       </section>
-      <section class="divider parallax" data-bg-img="/public/images/bg5.jpg"
-      data-parallax-ratio="0.7">
+      <section class="divider parallax" data-bg-img="/public/images/bg5.jpg" data-parallax-ratio="0.7">
         <div class="container">
           <div class="row">
             <div class="col-md-6">
               <img src="/public/images/lopkhaigiang.jpg" alt="" class="img-fluid">
-              <h4 class="text-white">Thủ tục xét duyệt hồ sơ nhanh chóng, xét duyệt online trước khi đăng kí khóa học.</h4>
-              <small class="text-white">Học viên truy cập tại hệ thống để xem hình thức xét tuyển, điều kiện nhập học, du học, tham gia các kì thi tại đây. Học viện RIAM chúng tôi luôn lắng nghe và hỗ trợ 24/7/365.</small>
+              <h4 class="text-white">Thủ tục xét duyệt hồ sơ nhanh chóng, xét duyệt online trước khi đăng kí khóa học.
+              </h4>
+              <small class="text-white">Học viên truy cập tại hệ thống để xem hình thức xét tuyển, điều kiện nhập học,
+                du học, tham gia các kì thi tại đây. Học viện RIAM chúng tôi luôn lắng nghe và hỗ trợ 24/7/365.</small>
             </div>
             <div class="col-md-6">
               <img src="/public/images/hoso.jpg" alt="" class="img-fluid">
-              <h4 class="text-white">Thủ tục xét duyệt hồ sơ nhanh chóng, xét duyệt online trước khi đăng kí khóa học.</h4>
-              <small class="text-white">Học viên truy cập tại hệ thống để xem hình thức xét tuyển, điều kiện nhập học, du học, tham gia các kì thi tại đây. Học viện RIAM chúng tôi luôn lắng nghe và hỗ trợ 24/7/365.</small>
+              <h4 class="text-white">Thủ tục xét duyệt hồ sơ nhanh chóng, xét duyệt online trước khi đăng kí khóa học.
+              </h4>
+              <small class="text-white">Học viên truy cập tại hệ thống để xem hình thức xét tuyển, điều kiện nhập học,
+                du học, tham gia các kì thi tại đây. Học viện RIAM chúng tôi luôn lắng nghe và hỗ trợ 24/7/365.</small>
             </div>
             <div class="col-md-12">
-              <a href="https://www.riam.vn/register/www.riam.edu.vn" class="btn btn-border hvr-bounce-to-right" style="margin:auto;width:150px;display:block;margin-top:2%;">Đăng ký ngay <i class="fa fa-arrow-circle-right pl-3"></i></a>
+              <a href="https://www.riam.vn/register/www.riam.edu.vn" class="btn btn-border hvr-bounce-to-right"
+                style="margin:auto;width:150px;display:block;margin-top:2%;">Đăng ký ngay <i
+                  class="fa fa-arrow-circle-right pl-3"></i></a>
             </div>
-          
+
           </div>
         </div>
       </section>
-   <!-- Section: blog -->
-   <section id="blog" class="bg-lighter">
-    <div class="container">
-      <div class="section-title mb-10">
-        <div class="row">
-          <div class="col-md-12">
-            <h2 class="mt-0 text-uppercase font-28 line-bottom line-height-1">Bài viết <span
-                class="text-theme-color-2 font-weight-400">Nổi bật</span></h2>
-          </div>
-        </div>
-      </div>
-      <div class="section-content">
-        <div class="row">
-          <% if(listBV !== null){ %>
-          <% listBV.forEach(function(ele){ %>
-          <div class="col-xs-12 col-sm-6 col-md-4 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
-            <article class="post clearfix mb-sm-30">
-              <div class="entry-header">
-                <div class="post-thumb thumb">
-                  <img src="/public/uploads/<%= ele.banner %>" alt="" class="img-responsive img-fullwidth">
-                </div>
+      <!-- Section: blog -->
+      <section id="blog" class="bg-lighter">
+        <div class="container">
+          <div class="section-title mb-10">
+            <div class="row">
+              <div class="col-md-12">
+                <h2 class="mt-0 text-uppercase font-28 line-bottom line-height-1">Bài viết <span
+                    class="text-theme-color-2 font-weight-400">Nổi bật</span></h2>
               </div>
-              <div class="entry-content p-20 pr-10 bg-white">
-                <div class="entry-meta media mt-0 no-bg no-border">
-                  <div class="entry-date media-left text-center flip bg-theme-colored pt-5 pr-15 pb-5 pl-15">
-                    <p class="font-16 text-white font-weight-600 border-bottom"><%= ele.ngayTao.slice(0,11) %></p>
-                    <p class="font-12 text-white text-uppercase"><%= ele.ngayTao.slice(11,ele.ngayTao.length) %></p>
-                    <p class="font-16 text-white text-uppercase"><i class="far fa-comment-dots"
-                        style="padding-right: 4%;"></i><%= ele.numberCM-1 %></p>
-                  </div>
-                  <div class="media-body pl-15">
-                    <div class="event-content pull-left flip">
-                      <h4 class="entry-title text-white text-uppercase m-0 mt-5"><a
-                          href="/tin-tuc/chi-tiet/<%= ele._id %>" style="font-family: sans-serif;text-align: justify;"><%= ele.tieuDe %></a></h4>
-
+            </div>
+          </div>
+          <div class="section-content">
+            <div class="row">
+              <% if(listBV !== null){ %>
+              <% listBV.forEach(function(ele){ %>
+              <div class="col-xs-12 col-sm-6 col-md-4 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
+                <article class="post clearfix mb-sm-30">
+                  <div class="entry-header">
+                    <div class="post-thumb thumb">
+                      <img src="/public/uploads/<%= ele.banner %>" alt="" class="img-responsive img-fullwidth" style="    height: 240px;">
                     </div>
                   </div>
-                </div>
-                <span style="font-family: sans-serif;text-align: justify;">
-                    <p class="mt-10 fr-view" style="font-family: sans-serif;"><%- ele.noiDung.slice(30,170)%>...</p>
-                </span>  
-                <a href="/tin-tuc/chi-tiet/<%= ele._id %>" class="btn btn-info">Xem thêm<i
-                    class="fas fa-chevron-circle-down" style="padding-left: 13%;"></i></a>
-                <div class="clearfix"></div>
+                  <div class="entry-content p-20 pr-10 bg-white" style="height: 250px;display: block;">
+                    <div class="entry-meta media mt-0 no-bg no-border">
+                      <div class="entry-date media-left text-center flip bg-theme-colored pt-5 pr-15 pb-5 pl-15">
+                        <p class="font-16 text-white font-weight-600 border-bottom"><%= ele.ngayTao.slice(0,11) %></p>
+                        <p class="font-12 text-white text-uppercase"><%= ele.ngayTao.slice(11,ele.ngayTao.length) %></p>
+                        <p class="font-16 text-white text-uppercase"><i class="far fa-comment-dots"
+                            style="padding-right: 4%;"></i><%= ele.numberCM-1 %></p>
+                      </div>
+                      <div class="media-body pl-15">
+                        <div class="event-content pull-left flip">
+                          <h4 class="entry-title text-white text-uppercase m-0 mt-5"><a
+                              href="/tin-tuc/chi-tiet/<%= ele._id %>"
+                              style="font-family: sans-serif;text-align: justify;"><%= ele.tieuDe %></a></h4>
+
+                        </div>
+                      </div>
+                    </div>
+                    <span style="font-family: sans-serif;text-align: justify;margin-top:4%;display: block;" class="fr-view">
+                    <%- ele.noiDung.slice(0,205)%>...
+                    </span>
+                    <a href="/tin-tuc/chi-tiet/<%= ele._id %>" style="color:brown;">Xem thêm</a>
+                    <div class="clearfix"></div>
+                  </div>
+                </article>
               </div>
-            </article>
+              <%})} %>
+            </div>
           </div>
-          <%})} %>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
       <!-- Section: COURSES -->
       <!--
@@ -472,7 +510,7 @@
             <div class="row">
               <div class="col-md-12">
                 <!-- Works Filter -->
-                <!--
+      <!--
                 <div class="portfolio-filter font-alt align-center">
                   <a href="#" class="active" data-filter="*">Tất cả</a>
                   <% if(listLV !== null){ %>
@@ -482,13 +520,13 @@
                 </div>
                 <!-- End Works Filter -->
 
-                <!-- Portfolio Gallery Grid -->
-                       <!--
+      <!-- Portfolio Gallery Grid -->
+      <!--
                 <div id="grid" class="gallery-isotope grid-4 gutter clearfix">
                   <% if(listKH !== null){ %>
                   <% listKH.forEach(function(ele){ %>
                   <!-- Portfolio Item Start -->
-                         <!--
+      <!--
                   <% if(ele.lv[0] !== null){ %>
                   <div class="gallery-item <%=ele.lv[0]._id%>">
                     <% } else{%>
@@ -516,11 +554,11 @@
                     </div>
 
                     <!-- Portfolio Item End -->
-                           <!--
+      <!--
                     <%})} %>
                   </div>
                   <!-- End Portfolio Gallery Grid -->
-                         <!--
+      <!--
                 </div>
               </div>
             </div>
@@ -528,7 +566,7 @@
       </section>
       // courses 
       <!-- Divider: testimonials -->
-     <section class="divider parallax layer-overlay overlay-theme-colored-9" data-background-ratio="0.5"
+      <section class="divider parallax layer-overlay overlay-theme-colored-9" data-background-ratio="0.5"
         data-bg-img="/public/images/banner.jpg">
         <div class="container pb-50">
           <div class="section-title">
@@ -558,7 +596,7 @@
           </div>
       </section>
 
-   
+
 
       <!-- end main-content -->
     </div>
@@ -566,7 +604,7 @@
     <!-- Footer -->
     <% include ../component/home/footer %>
     <% include ../component/home/script %>
-  <!--
+    <!--
     <a class="scrollToTop" href="#"><i class="fas fa-angle-up"></i></a>
     -->
   </div>

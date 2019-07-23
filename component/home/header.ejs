@@ -60,30 +60,32 @@
         <div class="header-nav-wrapper navbar-scrolltofixed bg-theme-colored border-bottom-theme-color-2-1px">
             <div class="container">
                 <nav id="menuzord" class="menuzord bg-theme-colored pull-left flip menuzord-responsive">
-                    <ul class="menuzord-menu onepage-nav">
-                        <li class="active"><a href="/">Trang chủ</a></li>
-                        <li>
-                            <a href="/dao-tao/5">Đào tạo</a>
-                         
-                        </li>
-                        <li>
-                            <a href="/dao-tao">Tuyển sinh</a>
+                    <ul class="menuzord-menu">
+                      <% listMenu.forEach(function(ele,i){%>
+                        <% if(i == stt){%>
+                        <li class="active">
+                            <a href="<%= ele.link%>"><%= ele.name %></a>
+                        <% if(ele.subMenu){ %>
                             <ul class="dropdown">
-                                    <li><a href="/dao-tao/1">Ngắn hạn</a>
-                                    </li>
-                                    </li>
-                                    <li><a href="/dao-tao/2">Trung cấp</a>
-                                    </li>
-                                    <li><a href="/dao-tao/3">Cao đẳng</a>
-                                    </li>
-                                    <li><a href="/dao-tao/4">Đại học</a>
-                                    </li>
-                                    <li><a href="/dao-tao/6">Du học xuất khẩu lao động</a>
-                                    </li>
-                                </ul>
+                                <% ele.subMenu.forEach(function(val){%>
+                                    <li><a href="<%= val.link%>"><%= val.name %></a></li>
+                                <% }) %>
+                            </ul>
+                        <% } %>
                         </li>
-                        <li><a href="/bai-viet/linh-vuc/5d21a5a28ae8350a5088f73f">Tin tức</a></li>
-                        <li><a href="/dao-tao/7">Thông báo</a></li>
+                        <% }else{%>
+                            <li>
+                                <a href="<%= ele.link%>"><%= ele.name %></a>
+                                <% if(ele.subMenu){ %>
+                                    <ul class="dropdown">
+                                        <% ele.subMenu.forEach(function(val){%>
+                                            <li><a href="<%= val.link%>"><%= val.name %></a></li>
+                                        <% }) %>
+                                    </ul>
+                                <% } %>
+                            </li>   
+                      <% }}) %>
+                      <% %>
                     </ul>
 
 

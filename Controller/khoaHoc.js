@@ -36,7 +36,6 @@ module.exports = {
             res.redirect('/login-partner');
     },
     loadPageIndex: async (req, res) => {
-        console.log(req.user);
         if (req.isAuthenticated() && (req.user.role == 1 || req.user.role == 0 )) {
             let listQ = await modelQ.model.aggregate([
                 {

@@ -1,3 +1,33 @@
+<%
+  var listMenu=[
+    {link:'/',name:'Trang chủ'},{link:'/dao-tao',name:'Đào tạo'},
+    {
+      link:'/tuyen-sinh',name:'Tuyển sinh',
+      subMenu:[
+      {
+        link:'/tuyen-sinh/1',name:'Ngắn hạn'
+      },
+      {
+        link:'/tuyen-sinh/2',name:'Trung cấp'
+      },
+      {
+        link:'/tuyen-sinh/3',name:'Cao đẳng'
+      },
+      {
+        link:'/tuyen-sinh/4',name:'Đại học'
+      },
+      {
+        link:'/tuyen-sinh/6',name:'Du học xuất khẩu lao động'
+      }
+      ]
+    },
+    
+    {link:'/bai-viet/linh-vuc/5d21a5a28ae8350a5088f73f',name:'Tin tức'},
+    {link:'/thong-bao',name:'Thông báo'},
+  ];
+
+
+%>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <% include ../component/home/head %>
@@ -5,7 +35,7 @@
 <body class="">
     <div id="wrapper" class="clearfix">
         <!-- preloader -->
-        <% include ../component/home/header %>
+        <%- include('../component/home/header',{listMenu}) %>
         <!-- Start main-content -->
         <div class="main-content">
             <section class="inner-header divider parallax layer-overlay overlay-dark-5"
@@ -116,14 +146,19 @@
 
                                 <div class="widget">
                                     <h5 class="widget-title line-bottom">Lĩnh vực</h5>
-                                    <div class="categories">
+                                    <div class="services-list">
                                         <ul class="list list-border angle-double-right">
-                                            <% if(listLV !== null){ %>
+                                            <% if(listLV.length !== 0){ %>
                                             <% listLV.forEach(function(ele){ %>
-                                            <li><a href="/bai-viet/linh-vuc/<%=ele._id %>"><%= ele.ten %></a></li>
+                                            <% if(ele.ten === detail[0].lv[0].ten ){%>
+                                            <li class="active"><a href="/bai-viet/linh-vuc/<%=ele._id %>"><%= ele.ten %></a></li>
+                                            <% } else{%>
+                                                <li><a href="/bai-viet/linh-vuc/<%=ele._id %>"><%= ele.ten %></a></li>
+                                            <% }%>
                                             <% })} %>
                                         </ul>
                                     </div>
+                                 
                                 </div>
                                 <div class="widget">
                                     <h5 class="widget-title line-bottom">Tin liên quan</h5>
@@ -153,7 +188,7 @@
             <% include ../component/home/footer %>
             <% include ../component/home/script %>
 
-            <a class="scrollToTop" href="#"><i class="fas fa-angle-up"></i></a>
+           
         </div>
         <!-- end wrapper -->
 
